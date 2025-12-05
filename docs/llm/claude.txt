@@ -748,3 +748,153 @@ This should now build successfully!
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The project builds fine but when I run it 
+System.ArgumentException
+  HResult=0x80070057
+  Message=Property cannot be null or empty (Parameter 'InjectedProperty1')
+  Source=HelloDotnetTen.ClassLibrary1
+  StackTrace:
+   at HelloDotnetTen.ClassLibrary1.Class1..ctor(IOptions`1 options) in C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1.cs:line 17
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Program.<Main>$(String[] args) in C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs:line 15
+here is my appsettings.json
+```json
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+```
+
+
+The issue is that the `appsettings.json` file isn't being copied to the output directory or isn't being loaded by the Host. Let me check your `Program.cs` and the `.csproj` file.
+
+Looking at your `HelloDotnetTen.Console.csproj`, I don't see the `appsettings.json` file being included. You need to ensure it's copied to the output directory.
+
+Here's the fix - update your `HelloDotnetTen.Console.csproj`:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HelloDotnetTen.ClassLibrary1\HelloDotnetTen.ClassLibrary1.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
+```
+
+**What this does:**
+- The `<None Update="appsettings.json">` section tells MSBuild to copy the `appsettings.json` file to the output directory when you build
+- `PreserveNewest` means it will only copy if the file is newer than the one already in the output directory
+
+After making this change:
+1. Run `dotnet clean`
+2. Run `dotnet build`
+3. Run your application
+
+The configuration should now load properly and your application should run without the `ArgumentException`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

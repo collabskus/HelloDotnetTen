@@ -15,4 +15,10 @@
     <ProjectReference Include="..\HelloDotnetTen.ClassLibrary1\HelloDotnetTen.ClassLibrary1.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
