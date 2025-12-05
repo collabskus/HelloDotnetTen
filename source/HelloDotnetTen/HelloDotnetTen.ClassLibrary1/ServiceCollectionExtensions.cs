@@ -13,8 +13,8 @@ public static class ServiceCollectionExtensions
     {
         // 1. Bind Options
         // We look for sections named "Class1" and "Class2" in the root config
-        services.Configure<Class1Options>(configuration.GetSection(Class1Options.SectionName));
-        services.Configure<Class2Options>(configuration.GetSection(Class2Options.SectionName));
+        services.Configure<Class1Options>(options => configuration.GetSection(Class1Options.SectionName).Bind(options));
+        services.Configure<Class2Options>(options => configuration.GetSection(Class2Options.SectionName).Bind(options));
 
         // 2. Register Services
         // We register interfaces, allowing the implementation to change without breaking consumers
