@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/05/2025 16:12:57
+Generated: 12/05/2025 16:18:55
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -362,8 +362,8 @@ MODIFIED: 12/05/2025 15:54:49
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\HelloDotnetTen.Console.csproj
-SIZE: 0.48 KB
-MODIFIED: 12/05/2025 15:22:18
+SIZE: 0.62 KB
+MODIFIED: 12/05/2025 16:17:27
 ================================================================================
 
 <Project Sdk="Microsoft.NET.Sdk">
@@ -383,8 +383,13 @@ MODIFIED: 12/05/2025 15:22:18
     <ProjectReference Include="..\HelloDotnetTen.ClassLibrary1\HelloDotnetTen.ClassLibrary1.csproj" />
   </ItemGroup>
 
-</Project>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
+</Project>
 
 
 ================================================================================
@@ -429,7 +434,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/05/2025 16:12:57
+EXPORT COMPLETED: 12/05/2025 16:18:55
 Total Files Exported: 15
 Output File: .\docs\llm\dump.txt
 ===============================================================================
