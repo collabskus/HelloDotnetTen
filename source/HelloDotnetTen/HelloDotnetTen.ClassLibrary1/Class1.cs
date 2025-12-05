@@ -1,14 +1,16 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace HelloDotnetTen.ClassLibrary1;
 
 public class Class1 : IClass1
 {
+    private static readonly ActivitySource ActivitySource = new("HelloDotnetTen.ClassLibrary1");
+    
     private readonly Class1Options _options;
     private readonly ILogger<Class1> _logger;
 
-    // Inject both IOptions and ILogger through the constructor
     public Class1(IOptions<Class1Options> options, ILogger<Class1> logger)
     {
         _options = options.Value;
@@ -25,8 +27,14 @@ public class Class1 : IClass1
 
     public int GetLengthOfInjectedProperty()
     {
+        using var activity = ActivitySource.StartActivity("GetLengthOfInjectedProperty");
+        
         _logger.LogDebug("Getting length of InjectedProperty1");
         var length = _options.InjectedProperty1.Length;
+        
+        activity?.SetTag("property.length", length);
+        activity?.SetTag("property.value", _options.InjectedProperty1);
+        
         _logger.LogInformation("InjectedProperty1 length is {Length}", length);
         return length;
     }
