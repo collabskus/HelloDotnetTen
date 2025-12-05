@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/05/2025 15:47:13
+Generated: 12/05/2025 15:56:22
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -17,6 +17,7 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
 +---docs
 |   \---llm
 |           dump.txt
+|           gemini.txt
 |           
 \---source
     \---HelloDotnetTen
@@ -27,11 +28,17 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
         |   
         +---HelloDotnetTen.ClassLibrary1
         |       Class1.cs
+        |       Class1Options.cs
         |       Class2.cs
+        |       Class2Options.cs
         |       ClassLibrary1Settings.cs
         |       HelloDotnetTen.ClassLibrary1.csproj
+        |       IClass1.cs
+        |       IClass2.cs
+        |       ServiceCollectionExtensions.cs
         |       
         \---HelloDotnetTen.Console
+                appsettings.json
                 HelloDotnetTen.Console.csproj
                 Program.cs
                 
@@ -124,48 +131,100 @@ MODIFIED: 12/05/2025 15:17:04
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1.cs
-SIZE: 0.46 KB
-MODIFIED: 12/05/2025 15:27:51
+SIZE: 0.67 KB
+MODIFIED: 12/05/2025 15:53:01
 ================================================================================
 
-namespace HelloDotnetTen.ClassLibrary1
+using Microsoft.Extensions.Options;
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public class Class1 : IClass1
 {
-    public class Class1
+    private readonly Class1Options _options;
+
+    // Standard Options Pattern injection.
+    // The DI container handles finding the right instance.
+    public Class1(IOptions<Class1Options> options)
     {
-        private readonly string injectedProperty1;
-        public Class1(ClassLibrary1Settings settings)
+        _options = options.Value;
+
+        if (string.IsNullOrEmpty(_options.InjectedProperty1))
         {
-            this.injectedProperty1 = settings.InjectedProperty1 ?? throw new ArgumentNullException(nameof(settings.InjectedProperty1));
+            throw new ArgumentException("Property cannot be null or empty", nameof(_options.InjectedProperty1));
         }
-        public int GetLengthOfInjectedProperty1()
-        {
-            return injectedProperty1.Length;
-        }
+    }
+
+    public int GetLengthOfInjectedProperty()
+    {
+        return _options.InjectedProperty1.Length;
     }
 }
 
 
 
 ================================================================================
-FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2.cs
-SIZE: 0.47 KB
-MODIFIED: 12/05/2025 15:28:50
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1Options.cs
+SIZE: 0.3 KB
+MODIFIED: 12/05/2025 15:52:28
 ================================================================================
 
-namespace HelloDotnetTen.ClassLibrary1
+namespace HelloDotnetTen.ClassLibrary1;
+
+// Specific options for Class 1. 
+// This prevents "God Object" settings where unrelated configs reside in one class.
+public class Class1Options
 {
-    public class Class2
+    public const string SectionName = "Class1";
+    public required string InjectedProperty1 { get; set; }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2.cs
+SIZE: 0.57 KB
+MODIFIED: 12/05/2025 15:53:14
+================================================================================
+
+using Microsoft.Extensions.Options;
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public class Class2 : IClass2
+{
+    private readonly Class2Options _options;
+
+    public Class2(IOptions<Class2Options> options)
     {
-        private readonly string myInjectedProperty1;
-        public Class2(ClassLibrary1Settings settings)
+        _options = options.Value;
+
+        if (string.IsNullOrEmpty(_options.InjectedProperty1))
         {
-            this.myInjectedProperty1 = settings.InjectedProperty1 ?? throw new ArgumentNullException(nameof(settings.InjectedProperty1));
-        }
-        public int GetLengthOfInjectedProperty1()
-        {
-            return myInjectedProperty1.Length;
+            throw new ArgumentException("Property cannot be null or empty", nameof(_options.InjectedProperty1));
         }
     }
+
+    public int GetLengthOfInjectedProperty()
+    {
+        return _options.InjectedProperty1.Length;
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2Options.cs
+SIZE: 0.18 KB
+MODIFIED: 12/05/2025 15:52:45
+================================================================================
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public class Class2Options
+{
+    public const string SectionName = "Class2";
+    public required string InjectedProperty1 { get; set; }
 }
 
 
@@ -204,6 +263,94 @@ MODIFIED: 12/05/2025 15:19:30
 
 
 ================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass1.cs
+SIZE: 0.12 KB
+MODIFIED: 12/05/2025 15:51:47
+================================================================================
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public interface IClass1
+{
+    int GetLengthOfInjectedProperty();
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass2.cs
+SIZE: 0.12 KB
+MODIFIED: 12/05/2025 15:52:09
+================================================================================
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public interface IClass2
+{
+    int GetLengthOfInjectedProperty();
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ServiceCollectionExtensions.cs
+SIZE: 1.06 KB
+MODIFIED: 12/05/2025 15:53:39
+================================================================================
+
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public static class ServiceCollectionExtensions
+{
+    /// <summary>
+    /// Registers the library services and binds configuration automatically.
+    /// This encapsulates the library's complexity from the consumer.
+    /// </summary>
+    public static IServiceCollection AddHelloDotnetLibrary(this IServiceCollection services, IConfiguration configuration)
+    {
+        // 1. Bind Options
+        // We look for sections named "Class1" and "Class2" in the root config
+        services.Configure<Class1Options>(configuration.GetSection(Class1Options.SectionName));
+        services.Configure<Class2Options>(configuration.GetSection(Class2Options.SectionName));
+
+        // 2. Register Services
+        // We register interfaces, allowing the implementation to change without breaking consumers
+        services.AddSingleton<IClass1, Class1>();
+        services.AddSingleton<IClass2, Class2>();
+
+        return services;
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 15:54:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\HelloDotnetTen.Console.csproj
 SIZE: 0.48 KB
 MODIFIED: 12/05/2025 15:22:18
@@ -232,44 +379,29 @@ MODIFIED: 12/05/2025 15:22:18
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
-SIZE: 1.31 KB
-MODIFIED: 12/05/2025 15:30:53
+SIZE: 0.75 KB
+MODIFIED: 12/05/2025 15:54:10
 ================================================================================
 
 using HelloDotnetTen.ClassLibrary1;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-// Bind two different config sections (one per class)
-builder.Services.Configure<ClassLibrary1Settings>("Class1", builder.Configuration.GetSection("ClassLibrary1"));
-builder.Services.Configure<ClassLibrary1Settings>("Class2", builder.Configuration.GetSection("ClassLibrary2"));
-
-// Register Class1 using named options
-builder.Services.AddSingleton<Class1>(sp =>
-{
-    var opts = sp.GetRequiredService<Microsoft.Extensions.Options.IOptionsMonitor<ClassLibrary1Settings>>();
-    // Pull the named instance
-    var settings = opts.Get("Class1");
-    return new Class1(settings);
-});
-
-// Register Class2 using named options
-builder.Services.AddSingleton<Class2>(sp =>
-{
-    var opts = sp.GetRequiredService<Microsoft.Extensions.Options.IOptionsMonitor<ClassLibrary1Settings>>();
-    var settings = opts.Get("Class2");
-    return new Class2(settings);
-});
+// ARCHITECTURAL FIX:
+// The consumer no longer knows how to construct Class1 or Class2.
+// It simply says "I want to use this library" and passes the configuration root.
+builder.Services.AddHelloDotnetLibrary(builder.Configuration);
 
 var app = builder.Build();
 
-var c1 = app.Services.GetRequiredService<Class1>();
-var c2 = app.Services.GetRequiredService<Class2>();
+// We resolve the Interfaces, not the concrete types
+var c1 = app.Services.GetRequiredService<IClass1>();
+var c2 = app.Services.GetRequiredService<IClass2>();
 
-Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty1()}");
-Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty1()}");
+Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
+Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
 
 
 
@@ -287,7 +419,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/05/2025 15:47:13
-Total Files Exported: 9
+EXPORT COMPLETED: 12/05/2025 15:56:23
+Total Files Exported: 15
 Output File: .\docs\llm\dump.txt
 ===============================================================================
