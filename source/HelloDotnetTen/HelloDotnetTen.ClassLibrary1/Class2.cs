@@ -1,10 +1,13 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace HelloDotnetTen.ClassLibrary1;
 
 public class Class2 : IClass2
 {
+    private static readonly ActivitySource ActivitySource = new("HelloDotnetTen.ClassLibrary1");
+    
     private readonly Class2Options _options;
     private readonly ILogger<Class2> _logger;
 
@@ -24,8 +27,14 @@ public class Class2 : IClass2
 
     public int GetLengthOfInjectedProperty()
     {
+        using var activity = ActivitySource.StartActivity("GetLengthOfInjectedProperty");
+        
         _logger.LogDebug("Getting length of InjectedProperty1");
         var length = _options.InjectedProperty1.Length;
+        
+        activity?.SetTag("property.length", length);
+        activity?.SetTag("property.value", _options.InjectedProperty1);
+        
         _logger.LogInformation("InjectedProperty1 length is {Length}", length);
         return length;
     }

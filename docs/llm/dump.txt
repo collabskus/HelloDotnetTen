@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/05/2025 16:31:50
+Generated: 12/05/2025 16:33:06
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -49,7 +49,10 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
             \---obj
                 \---Debug
                     \---net10.0
+                        |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+                        |   HelloDotnetTen.Console.AssemblyInfoInputs.cache
                         |   HelloDotnetTen.Console.csproj.AssemblyReference.cache
+                        |   HelloDotnetTen.Console.GeneratedMSBuildEditorConfig.editorconfig
                         |   HelloDotnetTen.Console.GlobalUsings.g.cs
                         |   
                         +---ref
@@ -509,7 +512,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/05/2025 16:31:50
+EXPORT COMPLETED: 12/05/2025 16:33:06
 Total Files Exported: 15
 Output File: .\docs\llm\dump.txt
 ===============================================================================
