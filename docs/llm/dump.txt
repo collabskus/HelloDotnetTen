@@ -1,1 +1,198 @@
-Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet --info; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet clean; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet restore; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet build; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet outdated; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git clean -dfx; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; .\export.ps1; Get-Date -Format "yyyy-MM-dd HH:mm:ss";
+﻿
+===============================================================================
+PROJECT EXPORT
+Generated: 12/05/2025 15:42:26
+Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
+===============================================================================
+
+DIRECTORY STRUCTURE:
+===================
+
+Folder PATH listing
+Volume serial number is 9892-5BAD
+C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
+|   .gitignore
+|   export.ps1
+|   
++---docs
+|   \---llm
+|           dump.txt
+|           
+\---source
+    \---HelloDotnetTen
+        |   Directory.Build.props
+        |   Directory.Build.targets
+        |   Directory.Packages.props
+        |   HelloDotnetTen.slnx
+        |   
+        +---HelloDotnetTen.ClassLibrary1
+        |       Class1.cs
+        |       Class2.cs
+        |       ClassLibrary1Settings.cs
+        |       HelloDotnetTen.ClassLibrary1.csproj
+        |       
+        \---HelloDotnetTen.Console
+                HelloDotnetTen.Console.csproj
+                Program.cs
+                
+
+
+FILE CONTENTS:
+==============
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1.cs
+SIZE: 0.46 KB
+MODIFIED: 12/05/2025 15:27:51
+================================================================================
+
+namespace HelloDotnetTen.ClassLibrary1
+{
+    public class Class1
+    {
+        private readonly string injectedProperty1;
+        public Class1(ClassLibrary1Settings settings)
+        {
+            this.injectedProperty1 = settings.InjectedProperty1 ?? throw new ArgumentNullException(nameof(settings.InjectedProperty1));
+        }
+        public int GetLengthOfInjectedProperty1()
+        {
+            return injectedProperty1.Length;
+        }
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2.cs
+SIZE: 0.47 KB
+MODIFIED: 12/05/2025 15:28:50
+================================================================================
+
+namespace HelloDotnetTen.ClassLibrary1
+{
+    public class Class2
+    {
+        private readonly string myInjectedProperty1;
+        public Class2(ClassLibrary1Settings settings)
+        {
+            this.myInjectedProperty1 = settings.InjectedProperty1 ?? throw new ArgumentNullException(nameof(settings.InjectedProperty1));
+        }
+        public int GetLengthOfInjectedProperty1()
+        {
+            return myInjectedProperty1.Length;
+        }
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ClassLibrary1Settings.cs
+SIZE: 0.15 KB
+MODIFIED: 12/05/2025 15:26:51
+================================================================================
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public sealed class ClassLibrary1Settings
+{
+    public required string InjectedProperty1 { get; init; }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\HelloDotnetTen.ClassLibrary1.csproj
+SIZE: 0.21 KB
+MODIFIED: 12/05/2025 15:19:30
+================================================================================
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\HelloDotnetTen.Console.csproj
+SIZE: 0.48 KB
+MODIFIED: 12/05/2025 15:22:18
+================================================================================
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HelloDotnetTen.ClassLibrary1\HelloDotnetTen.ClassLibrary1.csproj" />
+  </ItemGroup>
+
+</Project>
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
+SIZE: 1.31 KB
+MODIFIED: 12/05/2025 15:30:53
+================================================================================
+
+using HelloDotnetTen.ClassLibrary1;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+
+var builder = Host.CreateApplicationBuilder(args);
+
+// Bind two different config sections (one per class)
+builder.Services.Configure<ClassLibrary1Settings>("Class1", builder.Configuration.GetSection("ClassLibrary1"));
+builder.Services.Configure<ClassLibrary1Settings>("Class2", builder.Configuration.GetSection("ClassLibrary2"));
+
+// Register Class1 using named options
+builder.Services.AddSingleton<Class1>(sp =>
+{
+    var opts = sp.GetRequiredService<Microsoft.Extensions.Options.IOptionsMonitor<ClassLibrary1Settings>>();
+    // Pull the named instance
+    var settings = opts.Get("Class1");
+    return new Class1(settings);
+});
+
+// Register Class2 using named options
+builder.Services.AddSingleton<Class2>(sp =>
+{
+    var opts = sp.GetRequiredService<Microsoft.Extensions.Options.IOptionsMonitor<ClassLibrary1Settings>>();
+    var settings = opts.Get("Class2");
+    return new Class2(settings);
+});
+
+var app = builder.Build();
+
+var c1 = app.Services.GetRequiredService<Class1>();
+var c2 = app.Services.GetRequiredService<Class2>();
+
+Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty1()}");
+Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty1()}");
+
+
+
+===============================================================================
+EXPORT COMPLETED: 12/05/2025 15:42:26
+Total Files Exported: 6
+Output File: .\docs\llm\dump.txt
+===============================================================================

@@ -13,6 +13,8 @@ $IncludeExtensions = @(
     "*.xml",          # XML files
     "*.csproj",       # C# project files
     "*.sln",          # Solution files
+    "*.slnx"          # Solution X files
+    "*.props"         # Properties files  
     "*.config",       # Configuration files
     "*.cshtml",       # Razor views
     "*.razor",        # Razor components
