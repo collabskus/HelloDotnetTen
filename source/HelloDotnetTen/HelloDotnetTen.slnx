@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="HelloDotnetTen.ClassLibrary1/HelloDotnetTen.ClassLibrary1.csproj" />
   <Project Path="HelloDotnetTen.Console/HelloDotnetTen.Console.csproj" />
 </Solution>
