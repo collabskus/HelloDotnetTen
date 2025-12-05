@@ -1,15 +1,23 @@
-﻿namespace HelloDotnetTen.ClassLibrary1
+﻿using Microsoft.Extensions.Options;
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public class Class2 : IClass2
 {
-    public class Class2
+    private readonly Class2Options _options;
+
+    public Class2(IOptions<Class2Options> options)
     {
-        private readonly string myInjectedProperty1;
-        public Class2(ClassLibrary1Settings settings)
+        _options = options.Value;
+
+        if (string.IsNullOrEmpty(_options.InjectedProperty1))
         {
-            this.myInjectedProperty1 = settings.InjectedProperty1 ?? throw new ArgumentNullException(nameof(settings.InjectedProperty1));
+            throw new ArgumentException("Property cannot be null or empty", nameof(_options.InjectedProperty1));
         }
-        public int GetLengthOfInjectedProperty1()
-        {
-            return myInjectedProperty1.Length;
-        }
+    }
+
+    public int GetLengthOfInjectedProperty()
+    {
+        return _options.InjectedProperty1.Length;
     }
 }
