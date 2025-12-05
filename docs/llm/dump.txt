@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/05/2025 18:02:04
+Generated: 12/05/2025 18:06:51
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -397,8 +397,8 @@ MODIFIED: 12/05/2025 18:00:49
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\HelloDotnetTen.Console.csproj
-SIZE: 0.9 KB
-MODIFIED: 12/05/2025 16:31:21
+SIZE: 0.98 KB
+MODIFIED: 12/05/2025 18:03:25
 ================================================================================
 
 <Project Sdk="Microsoft.NET.Sdk">
@@ -412,6 +412,7 @@ MODIFIED: 12/05/2025 16:31:21
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" />
@@ -435,7 +436,7 @@ MODIFIED: 12/05/2025 16:31:21
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
 SIZE: 3.17 KB
-MODIFIED: 12/05/2025 18:00:29
+MODIFIED: 12/05/2025 18:06:30
 ================================================================================
 
 using HelloDotnetTen.ClassLibrary1;
@@ -489,7 +490,7 @@ builder.Services.AddOpenTelemetry()
                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
                 
                 // Prefer delta temporality (recommended by Uptrace)
-                metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
+                //metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
             });
     });
 
@@ -539,7 +540,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/05/2025 18:02:04
+EXPORT COMPLETED: 12/05/2025 18:06:52
 Total Files Exported: 15
 Output File: .\docs\llm\dump.txt
 ===============================================================================
