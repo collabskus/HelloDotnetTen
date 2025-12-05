@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/05/2025 15:42:26
+Generated: 12/05/2025 15:47:13
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -39,6 +39,88 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
 
 FILE CONTENTS:
 ==============
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\Directory.Build.props
+SIZE: 0.51 KB
+MODIFIED: 10/06/2025 15:32:23
+================================================================================
+
+<Project>
+  <!-- Common properties for all projects -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!-- Test project properties -->
+  <PropertyGroup Condition="$(MSBuildProjectName.Contains('.Tests'))">
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  
+  <!-- Note: Package versions are now managed in Directory.Packages.props -->
+</Project>
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\Directory.Packages.props
+SIZE: 3.33 KB
+MODIFIED: 12/05/2025 15:17:04
+================================================================================
+
+<Project>
+  <PropertyGroup>
+    <!-- Enable Central Package Management -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <!-- Optional: Enforce that all projects must use centrally managed versions -->
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- OpenTelemetry -->
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+    <PackageVersion Include="OpenTelemetry" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.14.0-beta.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Process" Version="1.14.0-beta.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.14.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.0" />
+    <PackageVersion Include="Npgsql" Version="10.0.0" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Build.Framework" Version="18.0.2" />
+    <PackageVersion Include="Microsoft.Build.Locator" Version="1.11.2" />
+    <PackageVersion Include="Microsoft.Build.Tasks.Core" Version="18.0.2" />
+    <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.0.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+    <!-- Testing -->
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.analyzers" Version="1.26.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="Humanizer.Core" Version="3.0.1" />
+    <PackageVersion Include="Microsoft.OpenApi" Version="2.3.5" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
+    <PackageVersion Include="System.CodeDom" Version="10.0.0" />
+    <PackageVersion Include="System.Configuration.ConfigurationManager" Version="10.0.0" />
+    <PackageVersion Include="System.Formats.Nrbf" Version="10.0.0" />
+    <PackageVersion Include="System.Resources.Extensions" Version="10.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.Pkcs" Version="10.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.0" />
+    <PackageVersion Include="System.Diagnostics.EventLog" Version="10.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="10.0.0" />
+  </ItemGroup>
+</Project>
+
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1.cs
@@ -191,8 +273,21 @@ Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty1()}");
 
 
 
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.slnx
+SIZE: 0.18 KB
+MODIFIED: 12/05/2025 15:22:18
+================================================================================
+
+<Solution>
+  <Project Path="HelloDotnetTen.ClassLibrary1/HelloDotnetTen.ClassLibrary1.csproj" />
+  <Project Path="HelloDotnetTen.Console/HelloDotnetTen.Console.csproj" />
+</Solution>
+
+
+
 ===============================================================================
-EXPORT COMPLETED: 12/05/2025 15:42:26
-Total Files Exported: 6
+EXPORT COMPLETED: 12/05/2025 15:47:13
+Total Files Exported: 9
 Output File: .\docs\llm\dump.txt
 ===============================================================================
