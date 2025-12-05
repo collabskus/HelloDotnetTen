@@ -13,3 +13,6 @@ else
 {
     Console.WriteLine("Production environment");
 }
+
+var app = builder.Build();
+
