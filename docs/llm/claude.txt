@@ -1498,3 +1498,303 @@ Now both Class1 and Class2 will emit traces that you can see in the console (or 
 
 
 
+Can you add support for this service provider without adding any nuget dependencies? 
+Use your best judgment about http vs grpc. I don't mind either. This is a learning project. 
+According to 
+https://uptrace.dev/get/opentelemetry-dotnet#already-using-otlp-exporter
+When using HTTP transport, you often need to specify the full URL for each signal type:
+    https://api.uptrace.dev/v1/traces
+    https://api.uptrace.dev/v1/logs
+    https://api.uptrace.dev/v1/metrics
+    Note: Most OpenTelemetry SDKs support both transports. Use HTTP unless you're already familiar with gRPC.
+Recommended Settings
+For performance and reliability, we recommend:
+    Use BatchSpanProcessor and BatchLogProcessor for batching spans and logs, reducing the number of export requests.
+    Enable gzip compression to reduce bandwidth usage.
+    Prefer delta metrics temporality (Uptrace converts cumulative metrics automatically).
+    Use Protobuf encoding instead of JSON (Protobuf is more efficient and widely supported).
+    Use HTTP transport for simplicity and fewer configuration issues (unless you're already familiar with gRPC).
+    Optionally, use the AWS X-Ray ID generator to produce trace IDs compatible with AWS X-Ray.
+Common Environment Variables
+You can use environment variables to configure resource attributes and propagators::
+OTEL_RESOURCE_ATTRIBUTES	Comma-separated resource attributes, e.g., service.name=myservice,service.version=1.0.0.
+OTEL_SERVICE_NAME=myservice	Sets the service.name attribute (overrides OTEL_RESOURCE_ATTRIBUTES).
+OTEL_PROPAGATORS	Comma-separated list of context propagators (default: tracecontext,baggage).
+Project specific settings 
+# Uncomment the appropriate protocol for your programming language.
+# Only for OTLP/gRPC.
+#export OTEL_EXPORTER_OTLP_ENDPOINT="https://otlp.uptrace.dev:4317"
+# Only for OTLP/HTTP.
+#export OTEL_EXPORTER_OTLP_ENDPOINT="https://otlp.uptrace.dev"
+
+# Pass Uptrace DSN in gRPC/HTTP headers.
+export OTEL_EXPORTER_OTLP_HEADERS="uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317"
+
+# Enable gzip compression.
+export OTEL_EXPORTER_OTLP_COMPRESSION=gzip
+
+# Enable exponential histograms.
+export OTEL_EXPORTER_OTLP_METRICS_DEFAULT_HISTOGRAM_AGGREGATION=BASE2_EXPONENTIAL_BUCKET_HISTOGRAM
+
+# Prefer delta temporality.
+export OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=DELTA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Great! You already have `OpenTelemetry.Exporter.OpenTelemetryProtocol` in your `Directory.Packages.props`, so no new NuGet packages needed. Let's configure it for Uptrace using HTTP (simpler and more reliable).
+
+**Update your `Program.cs`:**
+
+```csharp
+using HelloDotnetTen.ClassLibrary1;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+
+var builder = Host.CreateApplicationBuilder(args);
+
+// Configure OpenTelemetry Resource (identifies your service)
+var resourceBuilder = ResourceBuilder
+    .CreateDefault()
+    .AddService(
+        serviceName: "HelloDotnetTen.Console",
+        serviceVersion: "1.0.0");
+
+// Add OpenTelemetry Tracing
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing =>
+    {
+        tracing
+            .SetResourceBuilder(resourceBuilder)
+            .AddSource("HelloDotnetTen.*") // Capture traces from your app
+            .AddOtlpExporter(options =>
+            {
+                // HTTP endpoint for traces
+                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/traces");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+                // Add Uptrace DSN header
+                options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+            });
+    })
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .SetResourceBuilder(resourceBuilder)
+            .AddRuntimeInstrumentation() // .NET runtime metrics
+            .AddProcessInstrumentation() // Process metrics
+            .AddOtlpExporter((options, metricReaderOptions) =>
+            {
+                // HTTP endpoint for metrics
+                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/metrics");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+                // Add Uptrace DSN header
+                options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+                
+                // Prefer delta temporality (recommended by Uptrace)
+                metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
+            });
+    });
+
+// Add OpenTelemetry to Logging
+builder.Logging.AddOpenTelemetry(logging =>
+{
+    logging.SetResourceBuilder(resourceBuilder);
+    logging.AddOtlpExporter(options =>
+    {
+        // HTTP endpoint for logs
+        options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/logs");
+        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        
+        // Add Uptrace DSN header
+        options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+    });
+});
+
+// Register your library services
+builder.Services.AddHelloDotnetLibrary(builder.Configuration);
+
+var app = builder.Build();
+
+// Resolve and use services
+var c1 = app.Services.GetRequiredService<IClass1>();
+var c2 = app.Services.GetRequiredService<IClass2>();
+
+Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
+Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
+
+// Give time for telemetry to flush before app exits
+await Task.Delay(1000);
+```
+
+**Key configuration choices (following Uptrace recommendations):**
+
+1. ✅ **HTTP transport** - Using `HttpProtobuf` protocol (simpler, fewer issues)
+2. ✅ **Protobuf encoding** - More efficient than JSON
+3. ✅ **Separate endpoints** - Different URLs for traces, logs, and metrics
+4. ✅ **Delta temporality** - For metrics (Uptrace's recommendation)
+5. ✅ **Batch processors** - Already default in OpenTelemetry .NET SDK
+6. ✅ **Gzip compression** - Note: The SDK may handle this automatically, but if you want to ensure it's explicitly set, you'd need to configure the underlying HTTP client
+
+**Optional: Add compression explicitly via appsettings.json:**
+
+Update your `appsettings.json` to enable compression:
+
+```json
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+```
+
+**Note on the DSN:** I used the DSN from your example (`uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317`). You'll need to replace this with your actual Uptrace project DSN.
+
+**To get your DSN:**
+1. Sign up at https://uptrace.dev
+2. Create a project
+3. Copy your project's DSN
+
+Now when you run your app, it will send traces, metrics, and logs to Uptrace where you can visualize them! The `await Task.Delay(1000)` at the end gives the exporters time to flush data before the application exits.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
