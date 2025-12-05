@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/05/2025 17:43:22
+Generated: 12/05/2025 18:02:04
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -375,7 +375,7 @@ public static class ServiceCollectionExtensions
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\appsettings.json
 SIZE: 0.32 KB
-MODIFIED: 12/05/2025 15:54:49
+MODIFIED: 12/05/2025 18:00:49
 ================================================================================
 
 {
@@ -434,8 +434,8 @@ MODIFIED: 12/05/2025 16:31:21
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
-SIZE: 1.68 KB
-MODIFIED: 12/05/2025 16:30:55
+SIZE: 3.17 KB
+MODIFIED: 12/05/2025 18:00:29
 ================================================================================
 
 using HelloDotnetTen.ClassLibrary1;
@@ -452,7 +452,9 @@ var builder = Host.CreateApplicationBuilder(args);
 // Configure OpenTelemetry Resource (identifies your service)
 var resourceBuilder = ResourceBuilder
     .CreateDefault()
-    .AddService("HelloDotnetTen.Console");
+    .AddService(
+        serviceName: "HelloDotnetTen.Console",
+        serviceVersion: "1.0.0");
 
 // Add OpenTelemetry Tracing
 builder.Services.AddOpenTelemetry()
@@ -461,7 +463,15 @@ builder.Services.AddOpenTelemetry()
         tracing
             .SetResourceBuilder(resourceBuilder)
             .AddSource("HelloDotnetTen.*") // Capture traces from your app
-            .AddConsoleExporter(); // Export to console for demo
+            .AddOtlpExporter(options =>
+            {
+                // HTTP endpoint for traces
+                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/traces");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+                // Add Uptrace DSN header
+                options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+            });
     })
     .WithMetrics(metrics =>
     {
@@ -469,14 +479,33 @@ builder.Services.AddOpenTelemetry()
             .SetResourceBuilder(resourceBuilder)
             .AddRuntimeInstrumentation() // .NET runtime metrics
             .AddProcessInstrumentation() // Process metrics
-            .AddConsoleExporter(); // Export to console for demo
+            .AddOtlpExporter((options, metricReaderOptions) =>
+            {
+                // HTTP endpoint for metrics
+                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/metrics");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+                // Add Uptrace DSN header
+                options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+                
+                // Prefer delta temporality (recommended by Uptrace)
+                metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
+            });
     });
 
 // Add OpenTelemetry to Logging
 builder.Logging.AddOpenTelemetry(logging =>
 {
     logging.SetResourceBuilder(resourceBuilder);
-    logging.AddConsoleExporter();
+    logging.AddOtlpExporter(options =>
+    {
+        // HTTP endpoint for logs
+        options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/logs");
+        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        
+        // Add Uptrace DSN header
+        options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+    });
 });
 
 // Register your library services
@@ -490,6 +519,9 @@ var c2 = app.Services.GetRequiredService<IClass2>();
 
 Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
 Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
+
+// Give time for telemetry to flush before app exits
+await Task.Delay(1000);
 
 
 
@@ -507,7 +539,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/05/2025 17:43:22
+EXPORT COMPLETED: 12/05/2025 18:02:04
 Total Files Exported: 15
 Output File: .\docs\llm\dump.txt
 ===============================================================================
