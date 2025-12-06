@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/06/2025 15:28:56
+Generated: 12/06/2025 15:37:29
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -44,10 +44,6 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
         |   \---obj
         |       \---Debug
         |           \---net10.0
-        |               |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
-        |               |   HelloDotnetTen.ClassLibrary1.AssemblyInfo.cs
-        |               |   HelloDotnetTen.ClassLibrary1.AssemblyInfoInputs.cache
-        |               |   HelloDotnetTen.ClassLibrary1.GeneratedMSBuildEditorConfig.editorconfig
         |               |   HelloDotnetTen.ClassLibrary1.GlobalUsings.g.cs
         |               |   
         |               +---ref
@@ -551,8 +547,8 @@ MODIFIED: 12/05/2025 18:03:25
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
-SIZE: 3.17 KB
-MODIFIED: 12/05/2025 18:06:30
+SIZE: 3.27 KB
+MODIFIED: 12/06/2025 15:36:53
 ================================================================================
 
 using HelloDotnetTen.ClassLibrary1;
@@ -579,7 +575,7 @@ builder.Services.AddOpenTelemetry()
     {
         tracing
             .SetResourceBuilder(resourceBuilder)
-            .AddSource("HelloDotnetTen.*") // Capture traces from your app
+            .AddSource("HelloDotnetTen.ClassLibrary1") // Use exact name, not wildcard
             .AddOtlpExporter(options =>
             {
                 // HTTP endpoint for traces
@@ -594,6 +590,7 @@ builder.Services.AddOpenTelemetry()
     {
         metrics
             .SetResourceBuilder(resourceBuilder)
+            .AddMeter("HelloDotnetTen.ClassLibrary1") // Add your custom meter
             .AddRuntimeInstrumentation() // .NET runtime metrics
             .AddProcessInstrumentation() // Process metrics
             .AddOtlpExporter((options, metricReaderOptions) =>
@@ -606,7 +603,7 @@ builder.Services.AddOpenTelemetry()
                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
                 
                 // Prefer delta temporality (recommended by Uptrace)
-                //metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
+                metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
             });
     });
 
@@ -637,8 +634,8 @@ var c2 = app.Services.GetRequiredService<IClass2>();
 Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
 Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
 
-// Give time for telemetry to flush before app exits
-await Task.Delay(1000);
+// Give MORE time for telemetry to flush before app exits
+await Task.Delay(5000);
 
 
 
@@ -656,7 +653,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/06/2025 15:28:57
+EXPORT COMPLETED: 12/06/2025 15:37:29
 Total Files Exported: 15
 Output File: .\docs\llm\dump.txt
 ===============================================================================

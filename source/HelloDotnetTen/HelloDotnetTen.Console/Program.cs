@@ -17,19 +17,54 @@ var resourceBuilder = ResourceBuilder
         serviceVersion: "1.0.0");
 
 // Add OpenTelemetry Tracing
+// builder.Services.AddOpenTelemetry()
+//     .WithTracing(tracing =>
+//     {
+//         tracing
+//             .SetResourceBuilder(resourceBuilder)
+//             .AddSource("HelloDotnetTen.ClassLibrary1") // Use exact name, not wildcard
+//             .AddOtlpExporter(options =>
+//             {
+//                 // HTTP endpoint for traces
+//                 options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/traces");
+//                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+//                 // Add Uptrace DSN header
+//                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+//             });
+//     })
+//     .WithMetrics(metrics =>
+//     {
+//         metrics
+//             .SetResourceBuilder(resourceBuilder)
+//             .AddMeter("HelloDotnetTen.ClassLibrary1") // Add your custom meter
+//             .AddRuntimeInstrumentation() // .NET runtime metrics
+//             .AddProcessInstrumentation() // Process metrics
+//             .AddOtlpExporter((options, metricReaderOptions) =>
+//             {
+//                 // HTTP endpoint for metrics
+//                 options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/metrics");
+//                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+//                 // Add Uptrace DSN header
+//                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+                
+//                 // Prefer delta temporality (recommended by Uptrace)
+//                 metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
+//             });
+//     });
+
 builder.Services.AddOpenTelemetry()
     .WithTracing(tracing =>
     {
         tracing
             .SetResourceBuilder(resourceBuilder)
-            .AddSource("HelloDotnetTen.ClassLibrary1") // Use exact name, not wildcard
+            .AddSource("HelloDotnetTen.ClassLibrary1")
+            .AddConsoleExporter() // ADD THIS for debugging
             .AddOtlpExporter(options =>
             {
-                // HTTP endpoint for traces
                 options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/traces");
                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
-                
-                // Add Uptrace DSN header
                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
             });
     })
@@ -37,19 +72,15 @@ builder.Services.AddOpenTelemetry()
     {
         metrics
             .SetResourceBuilder(resourceBuilder)
-            .AddMeter("HelloDotnetTen.ClassLibrary1") // Add your custom meter
-            .AddRuntimeInstrumentation() // .NET runtime metrics
-            .AddProcessInstrumentation() // Process metrics
+            .AddMeter("HelloDotnetTen.ClassLibrary1")
+            .AddRuntimeInstrumentation()
+            .AddProcessInstrumentation()
+            .AddConsoleExporter() // ADD THIS for debugging
             .AddOtlpExporter((options, metricReaderOptions) =>
             {
-                // HTTP endpoint for metrics
                 options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/metrics");
                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
-                
-                // Add Uptrace DSN header
                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
-                
-                // Prefer delta temporality (recommended by Uptrace)
                 metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
             });
     });
