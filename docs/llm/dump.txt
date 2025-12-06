@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/06/2025 15:37:29
+Generated: 12/06/2025 15:38:38
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -28,26 +28,16 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
         |   HelloDotnetTen.slnx
         |   
         +---HelloDotnetTen.ClassLibrary1
-        |   |   Class1.cs
-        |   |   Class1Options.cs
-        |   |   Class2.cs
-        |   |   Class2Options.cs
-        |   |   ClassLibrary1Settings.cs
-        |   |   HelloDotnetTen.ClassLibrary1.csproj
-        |   |   IClass1.cs
-        |   |   IClass2.cs
-        |   |   ServiceCollectionExtensions.cs
-        |   |   
-        |   +---bin
-        |   |   \---Debug
-        |   |       \---net10.0
-        |   \---obj
-        |       \---Debug
-        |           \---net10.0
-        |               |   HelloDotnetTen.ClassLibrary1.GlobalUsings.g.cs
-        |               |   
-        |               +---ref
-        |               \---refint
+        |       Class1.cs
+        |       Class1Options.cs
+        |       Class2.cs
+        |       Class2Options.cs
+        |       ClassLibrary1Settings.cs
+        |       HelloDotnetTen.ClassLibrary1.csproj
+        |       IClass1.cs
+        |       IClass2.cs
+        |       ServiceCollectionExtensions.cs
+        |       
         \---HelloDotnetTen.Console
                 appsettings.json
                 HelloDotnetTen.Console.csproj
@@ -547,8 +537,8 @@ MODIFIED: 12/05/2025 18:03:25
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
-SIZE: 3.27 KB
-MODIFIED: 12/06/2025 15:36:53
+SIZE: 4.77 KB
+MODIFIED: 12/06/2025 15:38:22
 ================================================================================
 
 using HelloDotnetTen.ClassLibrary1;
@@ -570,19 +560,54 @@ var resourceBuilder = ResourceBuilder
         serviceVersion: "1.0.0");
 
 // Add OpenTelemetry Tracing
+// builder.Services.AddOpenTelemetry()
+//     .WithTracing(tracing =>
+//     {
+//         tracing
+//             .SetResourceBuilder(resourceBuilder)
+//             .AddSource("HelloDotnetTen.ClassLibrary1") // Use exact name, not wildcard
+//             .AddOtlpExporter(options =>
+//             {
+//                 // HTTP endpoint for traces
+//                 options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/traces");
+//                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+//                 // Add Uptrace DSN header
+//                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+//             });
+//     })
+//     .WithMetrics(metrics =>
+//     {
+//         metrics
+//             .SetResourceBuilder(resourceBuilder)
+//             .AddMeter("HelloDotnetTen.ClassLibrary1") // Add your custom meter
+//             .AddRuntimeInstrumentation() // .NET runtime metrics
+//             .AddProcessInstrumentation() // Process metrics
+//             .AddOtlpExporter((options, metricReaderOptions) =>
+//             {
+//                 // HTTP endpoint for metrics
+//                 options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/metrics");
+//                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+//                 // Add Uptrace DSN header
+//                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+                
+//                 // Prefer delta temporality (recommended by Uptrace)
+//                 metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
+//             });
+//     });
+
 builder.Services.AddOpenTelemetry()
     .WithTracing(tracing =>
     {
         tracing
             .SetResourceBuilder(resourceBuilder)
-            .AddSource("HelloDotnetTen.ClassLibrary1") // Use exact name, not wildcard
+            .AddSource("HelloDotnetTen.ClassLibrary1")
+            .AddConsoleExporter() // ADD THIS for debugging
             .AddOtlpExporter(options =>
             {
-                // HTTP endpoint for traces
                 options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/traces");
                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
-                
-                // Add Uptrace DSN header
                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
             });
     })
@@ -590,19 +615,15 @@ builder.Services.AddOpenTelemetry()
     {
         metrics
             .SetResourceBuilder(resourceBuilder)
-            .AddMeter("HelloDotnetTen.ClassLibrary1") // Add your custom meter
-            .AddRuntimeInstrumentation() // .NET runtime metrics
-            .AddProcessInstrumentation() // Process metrics
+            .AddMeter("HelloDotnetTen.ClassLibrary1")
+            .AddRuntimeInstrumentation()
+            .AddProcessInstrumentation()
+            .AddConsoleExporter() // ADD THIS for debugging
             .AddOtlpExporter((options, metricReaderOptions) =>
             {
-                // HTTP endpoint for metrics
                 options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/metrics");
                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
-                
-                // Add Uptrace DSN header
                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
-                
-                // Prefer delta temporality (recommended by Uptrace)
                 metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
             });
     });
@@ -653,7 +674,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/06/2025 15:37:29
+EXPORT COMPLETED: 12/06/2025 15:38:38
 Total Files Exported: 15
 Output File: .\docs\llm\dump.txt
 ===============================================================================
