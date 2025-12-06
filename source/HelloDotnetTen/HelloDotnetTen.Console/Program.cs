@@ -24,7 +24,6 @@ builder.Services.AddOpenTelemetry()
             .AddConsoleExporter()
             .AddOtlpExporter(options =>
             {
-                // Use base endpoint - SDK will append /v1/traces automatically
                 options.Endpoint = new Uri(uptraceEndpoint);
                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
                 options.Headers = uptraceDsn;
@@ -39,7 +38,6 @@ builder.Services.AddOpenTelemetry()
             .AddConsoleExporter()
             .AddOtlpExporter((options, readerOptions) =>
             {
-                // Use base endpoint - SDK will append /v1/metrics automatically
                 options.Endpoint = new Uri(uptraceEndpoint);
                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
                 options.Headers = uptraceDsn;
@@ -47,17 +45,20 @@ builder.Services.AddOpenTelemetry()
             });
     });
 
+// Logging uses a different API - AddOpenTelemetry on the ILoggingBuilder
 builder.Logging.AddOpenTelemetry(logging =>
 {
-    logging
-        .AddConsoleExporter()
-        .AddOtlpExporter(options =>
-        {
-            // Use base endpoint - SDK will append /v1/logs automatically
-            options.Endpoint = new Uri(uptraceEndpoint);
-            options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
-            options.Headers = uptraceDsn;
-        });
+    logging.SetResourceBuilder(ResourceBuilder.CreateDefault()
+        .AddService(
+            serviceName: "HelloDotnetTen.Console",
+            serviceVersion: "1.0.0"));
+    logging.AddConsoleExporter();
+    logging.AddOtlpExporter(options =>
+    {
+        options.Endpoint = new Uri(uptraceEndpoint);
+        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        options.Headers = uptraceDsn;
+    });
 });
 
 builder.Services.AddHelloDotnetLibrary(builder.Configuration);
