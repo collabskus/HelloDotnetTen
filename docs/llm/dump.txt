@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/06/2025 15:54:20
+Generated: 12/06/2025 15:56:51
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -538,7 +538,7 @@ MODIFIED: 12/05/2025 18:03:25
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
 SIZE: 2.67 KB
-MODIFIED: 12/06/2025 15:53:54
+MODIFIED: 12/06/2025 15:56:17
 ================================================================================
 
 using HelloDotnetTen.ClassLibrary1;
@@ -551,7 +551,7 @@ using OpenTelemetry.Trace;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-// Uptrace configuration - CRITICAL: Use api.uptrace.dev for HTTP
+// Uptrace configuration - Use api.uptrace.dev for HTTP
 const string uptraceEndpoint = "https://api.uptrace.dev";
 const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
 
@@ -588,19 +588,19 @@ builder.Services.AddOpenTelemetry()
             });
     });
 
-// Logging uses a different API - AddOpenTelemetry on the ILoggingBuilder
-builder.Logging.AddOpenTelemetry(logging =>
+// Logging - the parameter is OpenTelemetryLoggerOptions, not a builder
+builder.Logging.AddOpenTelemetry(options =>
 {
-    logging.SetResourceBuilder(ResourceBuilder.CreateDefault()
+    options.SetResourceBuilder(ResourceBuilder.CreateDefault()
         .AddService(
             serviceName: "HelloDotnetTen.Console",
             serviceVersion: "1.0.0"));
-    logging.AddConsoleExporter();
-    logging.AddOtlpExporter(options =>
+    options.AddConsoleExporter();
+    options.AddOtlpExporter(otlpOptions =>
     {
-        options.Endpoint = new Uri(uptraceEndpoint);
-        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
-        options.Headers = uptraceDsn;
+        otlpOptions.Endpoint = new Uri(uptraceEndpoint);
+        otlpOptions.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        otlpOptions.Headers = uptraceDsn;
     });
 });
 
@@ -632,7 +632,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/06/2025 15:54:20
+EXPORT COMPLETED: 12/06/2025 15:56:51
 Total Files Exported: 15
 Output File: .\docs\llm\dump.txt
 ===============================================================================

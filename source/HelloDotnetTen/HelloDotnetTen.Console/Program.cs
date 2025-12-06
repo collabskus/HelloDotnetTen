@@ -8,7 +8,7 @@ using OpenTelemetry.Trace;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-// Uptrace configuration - Use api.uptrace.dev for HTTP
+// Uptrace configuration
 const string uptraceEndpoint = "https://api.uptrace.dev";
 const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
 
@@ -45,7 +45,7 @@ builder.Services.AddOpenTelemetry()
             });
     });
 
-// Logging - the parameter is OpenTelemetryLoggerOptions, not a builder
+// THIS is the correct signature - Action<OpenTelemetryLoggerOptions>
 builder.Logging.AddOpenTelemetry(options =>
 {
     options.SetResourceBuilder(ResourceBuilder.CreateDefault()
