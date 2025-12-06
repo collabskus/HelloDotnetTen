@@ -2198,3 +2198,303 @@ Now you'll see:
 
 
 
+So it looks like I got some logs on my console but nothing on uptrace what could be wrong here? 
+PS C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console> Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet run; Get-Date -Format "yyyy-MM-dd HH:mm:ss";
+2025-12-06 15:29:15
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      Class1 initialized successfully with InjectedProperty1: Hello from Class 1 Config (Length: 25)
+info: HelloDotnetTen.ClassLibrary1.Class2[0]
+      Class2 initialized successfully with InjectedProperty1: Greetings from Class 2 (Length: 22)
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0005ms)
+Class1 length: 25
+info: HelloDotnetTen.ClassLibrary1.Class2[0]
+      InjectedProperty1 length is 22 (calculated in 0.0002ms)
+Class2 length: 22
+2025-12-06 15:29:18
+```csharp
+using HelloDotnetTen.ClassLibrary1;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+
+var builder = Host.CreateApplicationBuilder(args);
+
+// Configure OpenTelemetry Resource (identifies your service)
+var resourceBuilder = ResourceBuilder
+    .CreateDefault()
+    .AddService(
+        serviceName: "HelloDotnetTen.Console",
+        serviceVersion: "1.0.0");
+
+// Add OpenTelemetry Tracing
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing =>
+    {
+        tracing
+            .SetResourceBuilder(resourceBuilder)
+            .AddSource("HelloDotnetTen.*") // Capture traces from your app
+            .AddOtlpExporter(options =>
+            {
+                // HTTP endpoint for traces
+                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/traces");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+                // Add Uptrace DSN header
+                options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+            });
+    })
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .SetResourceBuilder(resourceBuilder)
+            .AddRuntimeInstrumentation() // .NET runtime metrics
+            .AddProcessInstrumentation() // Process metrics
+            .AddOtlpExporter((options, metricReaderOptions) =>
+            {
+                // HTTP endpoint for metrics
+                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/metrics");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+                // Add Uptrace DSN header
+                options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+                
+                // Prefer delta temporality (recommended by Uptrace)
+                //metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
+            });
+    });
+
+// Add OpenTelemetry to Logging
+builder.Logging.AddOpenTelemetry(logging =>
+{
+    logging.SetResourceBuilder(resourceBuilder);
+    logging.AddOtlpExporter(options =>
+    {
+        // HTTP endpoint for logs
+        options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/logs");
+        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        
+        // Add Uptrace DSN header
+        options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+    });
+});
+
+// Register your library services
+builder.Services.AddHelloDotnetLibrary(builder.Configuration);
+
+var app = builder.Build();
+
+// Resolve and use services
+var c1 = app.Services.GetRequiredService<IClass1>();
+var c2 = app.Services.GetRequiredService<IClass2>();
+
+Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
+Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
+
+// Give time for telemetry to flush before app exits
+await Task.Delay(1000);
+```
+The issue is likely that your traces and metrics aren't being captured. Let me identify the problems:
+
+## Issues I can see:
+
+1. **Metrics not being captured** - You need to add your custom meter source
+2. **ActivitySource wildcard pattern** - The `"HelloDotnetTen.*"` pattern might not work as expected
+3. **Missing meter instrumentation** - Need to explicitly add your meter
+
+Here's the corrected `Program.cs`:
+
+```csharp
+using HelloDotnetTen.ClassLibrary1;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+
+var builder = Host.CreateApplicationBuilder(args);
+
+// Configure OpenTelemetry Resource (identifies your service)
+var resourceBuilder = ResourceBuilder
+    .CreateDefault()
+    .AddService(
+        serviceName: "HelloDotnetTen.Console",
+        serviceVersion: "1.0.0");
+
+// Add OpenTelemetry Tracing
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing =>
+    {
+        tracing
+            .SetResourceBuilder(resourceBuilder)
+            .AddSource("HelloDotnetTen.ClassLibrary1") // Use exact name, not wildcard
+            .AddOtlpExporter(options =>
+            {
+                // HTTP endpoint for traces
+                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/traces");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+                // Add Uptrace DSN header
+                options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+            });
+    })
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .SetResourceBuilder(resourceBuilder)
+            .AddMeter("HelloDotnetTen.ClassLibrary1") // Add your custom meter
+            .AddRuntimeInstrumentation() // .NET runtime metrics
+            .AddProcessInstrumentation() // Process metrics
+            .AddOtlpExporter((options, metricReaderOptions) =>
+            {
+                // HTTP endpoint for metrics
+                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/metrics");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+                // Add Uptrace DSN header
+                options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+                
+                // Prefer delta temporality (recommended by Uptrace)
+                metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
+            });
+    });
+
+// Add OpenTelemetry to Logging
+builder.Logging.AddOpenTelemetry(logging =>
+{
+    logging.SetResourceBuilder(resourceBuilder);
+    logging.AddOtlpExporter(options =>
+    {
+        // HTTP endpoint for logs
+        options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/logs");
+        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        
+        // Add Uptrace DSN header
+        options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+    });
+});
+
+// Register your library services
+builder.Services.AddHelloDotnetLibrary(builder.Configuration);
+
+var app = builder.Build();
+
+// Resolve and use services
+var c1 = app.Services.GetRequiredService<IClass1>();
+var c2 = app.Services.GetRequiredService<IClass2>();
+
+Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
+Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
+
+// Give MORE time for telemetry to flush before app exits
+await Task.Delay(5000);
+```
+
+## Key changes:
+
+1. **Changed `AddSource("HelloDotnetTen.*")` to `AddSource("HelloDotnetTen.ClassLibrary1")`** - Exact name matching works better
+2. **Added `.AddMeter("HelloDotnetTen.ClassLibrary1")`** - This was missing! Your metrics won't be captured without this
+3. **Re-enabled delta temporality** - Uncommented the line
+4. **Increased delay to 5 seconds** - Give more time for the exporters to flush
+
+## Debugging tips:
+
+If it still doesn't work, let's add console exporters temporarily to verify data is being generated:
+
+```csharp
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing =>
+    {
+        tracing
+            .SetResourceBuilder(resourceBuilder)
+            .AddSource("HelloDotnetTen.ClassLibrary1")
+            .AddConsoleExporter() // ADD THIS for debugging
+            .AddOtlpExporter(options =>
+            {
+                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/traces");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+            });
+    })
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .SetResourceBuilder(resourceBuilder)
+            .AddMeter("HelloDotnetTen.ClassLibrary1")
+            .AddRuntimeInstrumentation()
+            .AddProcessInstrumentation()
+            .AddConsoleExporter() // ADD THIS for debugging
+            .AddOtlpExporter((options, metricReaderOptions) =>
+            {
+                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/metrics");
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+                metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
+            });
+    });
+```
+
+If you see traces and metrics in the console, then the data is being generated and the issue is with the Uptrace connection. If you don't see them in console, then the instrumentation isn't working.
+
+**Also verify your Uptrace DSN is correct** - The one you're using (`https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317`) looks like an example. Make sure you have your actual project DSN from Uptrace!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

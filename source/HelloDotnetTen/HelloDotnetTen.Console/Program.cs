@@ -22,7 +22,7 @@ builder.Services.AddOpenTelemetry()
     {
         tracing
             .SetResourceBuilder(resourceBuilder)
-            .AddSource("HelloDotnetTen.*") // Capture traces from your app
+            .AddSource("HelloDotnetTen.ClassLibrary1") // Use exact name, not wildcard
             .AddOtlpExporter(options =>
             {
                 // HTTP endpoint for traces
@@ -37,6 +37,7 @@ builder.Services.AddOpenTelemetry()
     {
         metrics
             .SetResourceBuilder(resourceBuilder)
+            .AddMeter("HelloDotnetTen.ClassLibrary1") // Add your custom meter
             .AddRuntimeInstrumentation() // .NET runtime metrics
             .AddProcessInstrumentation() // Process metrics
             .AddOtlpExporter((options, metricReaderOptions) =>
@@ -49,7 +50,7 @@ builder.Services.AddOpenTelemetry()
                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
                 
                 // Prefer delta temporality (recommended by Uptrace)
-                //metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
+                metricReaderOptions.TemporalityPreference = OpenTelemetry.Exporter.MetricReaderTemporalityPreference.Delta;
             });
     });
 
@@ -80,5 +81,5 @@ var c2 = app.Services.GetRequiredService<IClass2>();
 Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
 Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
 
-// Give time for telemetry to flush before app exits
-await Task.Delay(1000);
+// Give MORE time for telemetry to flush before app exits
+await Task.Delay(5000);
