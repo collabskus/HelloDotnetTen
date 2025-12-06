@@ -25,8 +25,11 @@ builder.Services.AddOpenTelemetry()
             .AddConsoleExporter() // For debugging
             .AddOtlpExporter(options =>
             {
-                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/traces");
+                // Use base endpoint - the exporter will append /v1/traces automatically
+                options.Endpoint = new Uri("https://otlp.uptrace.dev");
                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+                // Add Uptrace DSN header
                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
             });
     })
@@ -40,9 +43,14 @@ builder.Services.AddOpenTelemetry()
             .AddConsoleExporter() // For debugging
             .AddOtlpExporter((options, metricReaderOptions) =>
             {
-                options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/metrics");
+                // Use base endpoint - the exporter will append /v1/metrics automatically
+                options.Endpoint = new Uri("https://otlp.uptrace.dev");
                 options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                
+                // Add Uptrace DSN header
                 options.Headers = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+                
+                // Prefer delta temporality (recommended by Uptrace)
                 metricReaderOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
             });
     });
@@ -51,10 +59,11 @@ builder.Services.AddOpenTelemetry()
 builder.Logging.AddOpenTelemetry(logging =>
 {
     logging.SetResourceBuilder(resourceBuilder);
+    logging.AddConsoleExporter(); // For debugging
     logging.AddOtlpExporter(options =>
     {
-        // HTTP endpoint for logs
-        options.Endpoint = new Uri("https://otlp.uptrace.dev/v1/logs");
+        // Use base endpoint - the exporter will append /v1/logs automatically
+        options.Endpoint = new Uri("https://otlp.uptrace.dev");
         options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
         
         // Add Uptrace DSN header
@@ -74,5 +83,5 @@ var c2 = app.Services.GetRequiredService<IClass2>();
 Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
 Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
 
-// Give MORE time for telemetry to flush before app exits
+// Give time for telemetry to flush before app exits
 await Task.Delay(5000);
