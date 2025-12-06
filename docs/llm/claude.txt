@@ -3498,3 +3498,103 @@ await Task.Delay(5000);
 
 
 
+the problem is still there 
+C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs(49,17): error CS1501: No overload for method 'AddOpenTelemetry' takes 1 arguments
+
+The build failed. Fix the build errors and run again.
+PS C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console> Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet run; Get-Date -Format "yyyy-MM-dd HH:mm:ss";
+2025-12-06 15:54:32
+C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs(49,17): error CS1501: No overload for method 'AddOpenTelemetry' takes 1 arguments
+
+The build failed. Fix the build errors and run again.
+2025-12-06 15:54:34
+Let me check the actual API for logging in OpenTelemetry .NET. The issue is that the logging API signature might be different in the version you're using.Perfect! Now I can see the issue. Looking at the documentation, `AddOpenTelemetry` on `ILoggingBuilder` takes an `Action<OpenTelemetryLoggerOptions>` parameter. Here's the corrected code:
+
+```csharp
+using HelloDotnetTen.ClassLibrary1;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+
+var builder = Host.CreateApplicationBuilder(args);
+
+// Uptrace configuration - Use api.uptrace.dev for HTTP
+const string uptraceEndpoint = "https://api.uptrace.dev";
+const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource
+        .AddService(
+            serviceName: "HelloDotnetTen.Console",
+            serviceVersion: "1.0.0"))
+    .WithTracing(tracing =>
+    {
+        tracing
+            .AddSource("HelloDotnetTen.ClassLibrary1")
+            .AddConsoleExporter()
+            .AddOtlpExporter(options =>
+            {
+                options.Endpoint = new Uri(uptraceEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = uptraceDsn;
+            });
+    })
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .AddMeter("HelloDotnetTen.ClassLibrary1")
+            .AddRuntimeInstrumentation()
+            .AddProcessInstrumentation()
+            .AddConsoleExporter()
+            .AddOtlpExporter((options, readerOptions) =>
+            {
+                options.Endpoint = new Uri(uptraceEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = uptraceDsn;
+                readerOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
+            });
+    });
+
+// Logging - the parameter is OpenTelemetryLoggerOptions, not a builder
+builder.Logging.AddOpenTelemetry(options =>
+{
+    options.SetResourceBuilder(ResourceBuilder.CreateDefault()
+        .AddService(
+            serviceName: "HelloDotnetTen.Console",
+            serviceVersion: "1.0.0"));
+    options.AddConsoleExporter();
+    options.AddOtlpExporter(otlpOptions =>
+    {
+        otlpOptions.Endpoint = new Uri(uptraceEndpoint);
+        otlpOptions.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        otlpOptions.Headers = uptraceDsn;
+    });
+});
+
+builder.Services.AddHelloDotnetLibrary(builder.Configuration);
+
+var app = builder.Build();
+
+var c1 = app.Services.GetRequiredService<IClass1>();
+var c2 = app.Services.GetRequiredService<IClass2>();
+
+Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
+Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
+
+await Task.Delay(5000);
+```
+
+The key difference is that `AddOpenTelemetry` on `ILoggingBuilder` receives `OpenTelemetryLoggerOptions` (not a builder), so you call methods directly on the `options` parameter. This should now compile and run.
+
+
+
+
+
+
+
+
+
+

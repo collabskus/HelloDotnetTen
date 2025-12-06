@@ -8,7 +8,7 @@ using OpenTelemetry.Trace;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-// Uptrace configuration - CRITICAL: Use api.uptrace.dev for HTTP
+// Uptrace configuration - Use api.uptrace.dev for HTTP
 const string uptraceEndpoint = "https://api.uptrace.dev";
 const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
 
@@ -45,19 +45,19 @@ builder.Services.AddOpenTelemetry()
             });
     });
 
-// Logging uses a different API - AddOpenTelemetry on the ILoggingBuilder
-builder.Logging.AddOpenTelemetry(logging =>
+// Logging - the parameter is OpenTelemetryLoggerOptions, not a builder
+builder.Logging.AddOpenTelemetry(options =>
 {
-    logging.SetResourceBuilder(ResourceBuilder.CreateDefault()
+    options.SetResourceBuilder(ResourceBuilder.CreateDefault()
         .AddService(
             serviceName: "HelloDotnetTen.Console",
             serviceVersion: "1.0.0"));
-    logging.AddConsoleExporter();
-    logging.AddOtlpExporter(options =>
+    options.AddConsoleExporter();
+    options.AddOtlpExporter(otlpOptions =>
     {
-        options.Endpoint = new Uri(uptraceEndpoint);
-        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
-        options.Headers = uptraceDsn;
+        otlpOptions.Endpoint = new Uri(uptraceEndpoint);
+        otlpOptions.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        otlpOptions.Headers = uptraceDsn;
     });
 });
 
