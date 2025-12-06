@@ -3708,3 +3708,893 @@ The build failed. Fix the build errors and run again.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ok, lets start over. 
+I got this error 
+```csharp
+C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs(49,17): error CS1501: No overload for method 'AddOpenTelemetry' takes 1 arguments
+```
+here is the full context
+
+
+
+
+
+===============================================================================
+PROJECT EXPORT
+Generated: 12/06/2025 16:00:18
+Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
+===============================================================================
+
+DIRECTORY STRUCTURE:
+===================
+
+Folder PATH listing
+Volume serial number is 9892-5BAD
+C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
+|   .gitignore
+|   export.ps1
+|   
++---docs
+|   \---llm
+|           claude.txt
+|           dump.txt
+|           gemini.txt
+|           
+\---source
+    \---HelloDotnetTen
+        |   Directory.Build.props
+        |   Directory.Build.targets
+        |   Directory.Packages.props
+        |   HelloDotnetTen.slnx
+        |   
+        +---HelloDotnetTen.ClassLibrary1
+        |       Class1.cs
+        |       Class1Options.cs
+        |       Class2.cs
+        |       Class2Options.cs
+        |       ClassLibrary1Settings.cs
+        |       HelloDotnetTen.ClassLibrary1.csproj
+        |       IClass1.cs
+        |       IClass2.cs
+        |       ServiceCollectionExtensions.cs
+        |       
+        \---HelloDotnetTen.Console
+            |   appsettings.json
+            |   HelloDotnetTen.Console.csproj
+            |   Program.cs
+            |   
+            +---bin
+            |   \---Debug
+            |       \---net10.0
+            \---obj
+                \---Debug
+                    \---net10.0
+                        |   HelloDotnetTen.Console.GlobalUsings.g.cs
+                        |   
+                        +---ref
+                        \---refint
+
+
+FILE CONTENTS:
+==============
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\Directory.Build.props
+SIZE: 0.51 KB
+MODIFIED: 10/06/2025 15:32:23
+================================================================================
+
+<Project>
+  <!-- Common properties for all projects -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!-- Test project properties -->
+  <PropertyGroup Condition="$(MSBuildProjectName.Contains('.Tests'))">
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  
+  <!-- Note: Package versions are now managed in Directory.Packages.props -->
+</Project>
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\Directory.Packages.props
+SIZE: 3.58 KB
+MODIFIED: 12/05/2025 16:06:38
+================================================================================
+
+<Project>
+  <PropertyGroup>
+    <!-- Enable Central Package Management -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <!-- Optional: Enforce that all projects must use centrally managed versions -->
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- OpenTelemetry -->
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.0" />
+    <PackageVersion Include="OpenTelemetry" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Console" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.14.0-beta.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.14.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Process" Version="1.14.0-beta.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.14.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.0" />
+    <PackageVersion Include="Npgsql" Version="10.0.0" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Build.Framework" Version="18.0.2" />
+    <PackageVersion Include="Microsoft.Build.Locator" Version="1.11.2" />
+    <PackageVersion Include="Microsoft.Build.Tasks.Core" Version="18.0.2" />
+    <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="18.0.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+    <!-- Testing -->
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.analyzers" Version="1.26.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="Humanizer.Core" Version="3.0.1" />
+    <PackageVersion Include="Microsoft.OpenApi" Version="2.3.5" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
+    <PackageVersion Include="System.CodeDom" Version="10.0.0" />
+    <PackageVersion Include="System.Configuration.ConfigurationManager" Version="10.0.0" />
+    <PackageVersion Include="System.Formats.Nrbf" Version="10.0.0" />
+    <PackageVersion Include="System.Resources.Extensions" Version="10.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.Pkcs" Version="10.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.0" />
+    <PackageVersion Include="System.Diagnostics.EventLog" Version="10.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="10.0.0" />
+  </ItemGroup>
+</Project>
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1.cs
+SIZE: 3.65 KB
+MODIFIED: 12/06/2025 15:25:27
+================================================================================
+
+using System.Diagnostics;
+using System.Diagnostics.Metrics;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public class Class1 : IClass1
+{
+    private static readonly ActivitySource ActivitySource = new("HelloDotnetTen.ClassLibrary1");
+    private static readonly Meter Meter = new("HelloDotnetTen.ClassLibrary1");
+    
+    // Metrics
+    private static readonly Counter<long> _initializationCounter = Meter.CreateCounter<long>(
+        "class1.initializations",
+        description: "Number of Class1 instances created");
+    
+    private static readonly Counter<long> _methodCallCounter = Meter.CreateCounter<long>(
+        "class1.method_calls",
+        description: "Number of times GetLengthOfInjectedProperty was called");
+    
+    private static readonly Histogram<int> _propertyLengthHistogram = Meter.CreateHistogram<int>(
+        "class1.property_length",
+        unit: "characters",
+        description: "Distribution of property length values");
+    
+    private readonly Class1Options _options;
+    private readonly ILogger<Class1> _logger;
+
+    public Class1(IOptions<Class1Options> options, ILogger<Class1> logger)
+    {
+        _options = options.Value;
+        _logger = logger;
+
+        // Start a span for initialization
+        using var activity = ActivitySource.StartActivity("Class1.Initialize");
+        
+        if (string.IsNullOrEmpty(_options.InjectedProperty1))
+        {
+            _logger.LogError("InjectedProperty1 cannot be null or empty");
+            activity?.SetStatus(ActivityStatusCode.Error, "InjectedProperty1 validation failed");
+            activity?.SetTag("error", true);
+            activity?.SetTag("error.type", "ArgumentException");
+            throw new ArgumentException("Property cannot be null or empty", nameof(_options.InjectedProperty1));
+        }
+
+        // Record successful initialization
+        _initializationCounter.Add(1, 
+            new KeyValuePair<string, object?>("status", "success"),
+            new KeyValuePair<string, object?>("property_length", _options.InjectedProperty1.Length));
+        
+        activity?.SetTag("property.length", _options.InjectedProperty1.Length);
+        activity?.SetTag("initialization.status", "success");
+        
+        _logger.LogInformation(
+            "Class1 initialized successfully with InjectedProperty1: {Property} (Length: {Length})", 
+            _options.InjectedProperty1,
+            _options.InjectedProperty1.Length);
+    }
+
+    public int GetLengthOfInjectedProperty()
+    {
+        // Start trace span
+        using var activity = ActivitySource.StartActivity("Class1.GetLengthOfInjectedProperty");
+        
+        // Record method call
+        _methodCallCounter.Add(1);
+        
+        _logger.LogDebug("Getting length of InjectedProperty1");
+        
+        var startTime = Stopwatch.GetTimestamp();
+        var length = _options.InjectedProperty1.Length;
+        var elapsedMs = Stopwatch.GetElapsedTime(startTime).TotalMilliseconds;
+        
+        // Record metrics
+        _propertyLengthHistogram.Record(length);
+        
+        // Add trace tags
+        activity?.SetTag("property.length", length);
+        activity?.SetTag("property.value", _options.InjectedProperty1);
+        activity?.SetTag("operation.duration_ms", elapsedMs);
+        activity?.SetStatus(ActivityStatusCode.Ok);
+        
+        // Log with structured data
+        _logger.LogInformation(
+            "InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)", 
+            length, 
+            elapsedMs);
+        
+        return length;
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1Options.cs
+SIZE: 0.3 KB
+MODIFIED: 12/05/2025 15:52:28
+================================================================================
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+// Specific options for Class 1. 
+// This prevents "God Object" settings where unrelated configs reside in one class.
+public class Class1Options
+{
+    public const string SectionName = "Class1";
+    public required string InjectedProperty1 { get; set; }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2.cs
+SIZE: 3.65 KB
+MODIFIED: 12/06/2025 15:25:38
+================================================================================
+
+using System.Diagnostics;
+using System.Diagnostics.Metrics;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public class Class2 : IClass2
+{
+    private static readonly ActivitySource ActivitySource = new("HelloDotnetTen.ClassLibrary1");
+    private static readonly Meter Meter = new("HelloDotnetTen.ClassLibrary1");
+    
+    // Metrics
+    private static readonly Counter<long> _initializationCounter = Meter.CreateCounter<long>(
+        "class2.initializations",
+        description: "Number of Class2 instances created");
+    
+    private static readonly Counter<long> _methodCallCounter = Meter.CreateCounter<long>(
+        "class2.method_calls",
+        description: "Number of times GetLengthOfInjectedProperty was called");
+    
+    private static readonly Histogram<int> _propertyLengthHistogram = Meter.CreateHistogram<int>(
+        "class2.property_length",
+        unit: "characters",
+        description: "Distribution of property length values");
+    
+    private readonly Class2Options _options;
+    private readonly ILogger<Class2> _logger;
+
+    public Class2(IOptions<Class2Options> options, ILogger<Class2> logger)
+    {
+        _options = options.Value;
+        _logger = logger;
+
+        // Start a span for initialization
+        using var activity = ActivitySource.StartActivity("Class2.Initialize");
+        
+        if (string.IsNullOrEmpty(_options.InjectedProperty1))
+        {
+            _logger.LogError("InjectedProperty1 cannot be null or empty");
+            activity?.SetStatus(ActivityStatusCode.Error, "InjectedProperty1 validation failed");
+            activity?.SetTag("error", true);
+            activity?.SetTag("error.type", "ArgumentException");
+            throw new ArgumentException("Property cannot be null or empty", nameof(_options.InjectedProperty1));
+        }
+
+        // Record successful initialization
+        _initializationCounter.Add(1, 
+            new KeyValuePair<string, object?>("status", "success"),
+            new KeyValuePair<string, object?>("property_length", _options.InjectedProperty1.Length));
+        
+        activity?.SetTag("property.length", _options.InjectedProperty1.Length);
+        activity?.SetTag("initialization.status", "success");
+        
+        _logger.LogInformation(
+            "Class2 initialized successfully with InjectedProperty1: {Property} (Length: {Length})", 
+            _options.InjectedProperty1,
+            _options.InjectedProperty1.Length);
+    }
+
+    public int GetLengthOfInjectedProperty()
+    {
+        // Start trace span
+        using var activity = ActivitySource.StartActivity("Class2.GetLengthOfInjectedProperty");
+        
+        // Record method call
+        _methodCallCounter.Add(1);
+        
+        _logger.LogDebug("Getting length of InjectedProperty1");
+        
+        var startTime = Stopwatch.GetTimestamp();
+        var length = _options.InjectedProperty1.Length;
+        var elapsedMs = Stopwatch.GetElapsedTime(startTime).TotalMilliseconds;
+        
+        // Record metrics
+        _propertyLengthHistogram.Record(length);
+        
+        // Add trace tags
+        activity?.SetTag("property.length", length);
+        activity?.SetTag("property.value", _options.InjectedProperty1);
+        activity?.SetTag("operation.duration_ms", elapsedMs);
+        activity?.SetStatus(ActivityStatusCode.Ok);
+        
+        // Log with structured data
+        _logger.LogInformation(
+            "InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)", 
+            length, 
+            elapsedMs);
+        
+        return length;
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2Options.cs
+SIZE: 0.18 KB
+MODIFIED: 12/05/2025 15:52:45
+================================================================================
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public class Class2Options
+{
+    public const string SectionName = "Class2";
+    public required string InjectedProperty1 { get; set; }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ClassLibrary1Settings.cs
+SIZE: 0.15 KB
+MODIFIED: 12/05/2025 15:26:51
+================================================================================
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public sealed class ClassLibrary1Settings
+{
+    public required string InjectedProperty1 { get; init; }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\HelloDotnetTen.ClassLibrary1.csproj
+SIZE: 0.53 KB
+MODIFIED: 12/05/2025 16:23:45
+================================================================================
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Options" />
+  </ItemGroup>
+
+</Project>
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass1.cs
+SIZE: 0.12 KB
+MODIFIED: 12/05/2025 15:51:47
+================================================================================
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public interface IClass1
+{
+    int GetLengthOfInjectedProperty();
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass2.cs
+SIZE: 0.12 KB
+MODIFIED: 12/05/2025 15:52:09
+================================================================================
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public interface IClass2
+{
+    int GetLengthOfInjectedProperty();
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ServiceCollectionExtensions.cs
+SIZE: 1.11 KB
+MODIFIED: 12/05/2025 16:12:37
+================================================================================
+
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace HelloDotnetTen.ClassLibrary1;
+
+public static class ServiceCollectionExtensions
+{
+    /// <summary>
+    /// Registers the library services and binds configuration automatically.
+    /// This encapsulates the library's complexity from the consumer.
+    /// </summary>
+    public static IServiceCollection AddHelloDotnetLibrary(this IServiceCollection services, IConfiguration configuration)
+    {
+        // 1. Bind Options
+        // We look for sections named "Class1" and "Class2" in the root config
+        services.Configure<Class1Options>(options => configuration.GetSection(Class1Options.SectionName).Bind(options));
+        services.Configure<Class2Options>(options => configuration.GetSection(Class2Options.SectionName).Bind(options));
+
+        // 2. Register Services
+        // We register interfaces, allowing the implementation to change without breaking consumers
+        services.AddSingleton<IClass1, Class1>();
+        services.AddSingleton<IClass2, Class2>();
+
+        return services;
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 18:00:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\HelloDotnetTen.Console.csproj
+SIZE: 0.98 KB
+MODIFIED: 12/05/2025 18:03:25
+================================================================================
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Process" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HelloDotnetTen.ClassLibrary1\HelloDotnetTen.ClassLibrary1.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
+SIZE: 2.64 KB
+MODIFIED: 12/06/2025 15:58:17
+================================================================================
+
+using HelloDotnetTen.ClassLibrary1;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+
+var builder = Host.CreateApplicationBuilder(args);
+
+// Uptrace configuration
+const string uptraceEndpoint = "https://api.uptrace.dev";
+const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource
+        .AddService(
+            serviceName: "HelloDotnetTen.Console",
+            serviceVersion: "1.0.0"))
+    .WithTracing(tracing =>
+    {
+        tracing
+            .AddSource("HelloDotnetTen.ClassLibrary1")
+            .AddConsoleExporter()
+            .AddOtlpExporter(options =>
+            {
+                options.Endpoint = new Uri(uptraceEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = uptraceDsn;
+            });
+    })
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .AddMeter("HelloDotnetTen.ClassLibrary1")
+            .AddRuntimeInstrumentation()
+            .AddProcessInstrumentation()
+            .AddConsoleExporter()
+            .AddOtlpExporter((options, readerOptions) =>
+            {
+                options.Endpoint = new Uri(uptraceEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = uptraceDsn;
+                readerOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
+            });
+    });
+
+// THIS is the correct signature - Action<OpenTelemetryLoggerOptions>
+builder.Logging.AddOpenTelemetry(options =>
+{
+    options.SetResourceBuilder(ResourceBuilder.CreateDefault()
+        .AddService(
+            serviceName: "HelloDotnetTen.Console",
+            serviceVersion: "1.0.0"));
+    options.AddConsoleExporter();
+    options.AddOtlpExporter(otlpOptions =>
+    {
+        otlpOptions.Endpoint = new Uri(uptraceEndpoint);
+        otlpOptions.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        otlpOptions.Headers = uptraceDsn;
+    });
+});
+
+builder.Services.AddHelloDotnetLibrary(builder.Configuration);
+
+var app = builder.Build();
+
+var c1 = app.Services.GetRequiredService<IClass1>();
+var c2 = app.Services.GetRequiredService<IClass2>();
+
+Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
+Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
+
+await Task.Delay(5000);
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.slnx
+SIZE: 0.18 KB
+MODIFIED: 12/05/2025 15:22:18
+================================================================================
+
+<Solution>
+  <Project Path="HelloDotnetTen.ClassLibrary1/HelloDotnetTen.ClassLibrary1.csproj" />
+  <Project Path="HelloDotnetTen.Console/HelloDotnetTen.Console.csproj" />
+</Solution>
+
+
+
+===============================================================================
+EXPORT COMPLETED: 12/06/2025 16:00:19
+Total Files Exported: 15
+Output File: .\docs\llm\dump.txt
+===============================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Looking at your error and the code, the issue is on line 49 in `Program.cs`. You're calling `builder.Logging.AddOpenTelemetry(options => ...)` which expects an `Action<OpenTelemetryLoggerOptions>`, but based on the OpenTelemetry packages you have, this extension method doesn't exist in that form.
+
+The problem is that you need to add the **OpenTelemetry.Instrumentation.Logging** or use the logging configuration through the main `AddOpenTelemetry()` chain instead.
+
+Here's the corrected `Program.cs`:
+
+```csharp
+using HelloDotnetTen.ClassLibrary1;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+
+var builder = Host.CreateApplicationBuilder(args);
+
+// Uptrace configuration
+const string uptraceEndpoint = "https://api.uptrace.dev";
+const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource
+        .AddService(
+            serviceName: "HelloDotnetTen.Console",
+            serviceVersion: "1.0.0"))
+    .WithTracing(tracing =>
+    {
+        tracing
+            .AddSource("HelloDotnetTen.ClassLibrary1")
+            .AddConsoleExporter()
+            .AddOtlpExporter(options =>
+            {
+                options.Endpoint = new Uri(uptraceEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = uptraceDsn;
+            });
+    })
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .AddMeter("HelloDotnetTen.ClassLibrary1")
+            .AddRuntimeInstrumentation()
+            .AddProcessInstrumentation()
+            .AddConsoleExporter()
+            .AddOtlpExporter((options, readerOptions) =>
+            {
+                options.Endpoint = new Uri(uptraceEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = uptraceDsn;
+                readerOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
+            });
+    })
+    .WithLogging(logging =>
+    {
+        logging
+            .AddConsoleExporter()
+            .AddOtlpExporter(options =>
+            {
+                options.Endpoint = new Uri(uptraceEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = uptraceDsn;
+            });
+    });
+
+builder.Services.AddHelloDotnetLibrary(builder.Configuration);
+
+var app = builder.Build();
+
+var c1 = app.Services.GetRequiredService<IClass1>();
+var c2 = app.Services.GetRequiredService<IClass2>();
+
+Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
+Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
+
+await Task.Delay(5000);
+```
+
+The key change is replacing:
+
+```csharp
+builder.Logging.AddOpenTelemetry(options => { ... });
+```
+
+with:
+
+```csharp
+.WithLogging(logging =>
+{
+    logging
+        .AddConsoleExporter()
+        .AddOtlpExporter(options => { ... });
+});
+```
+
+This chains the logging configuration directly onto the `AddOpenTelemetry()` call, which is the correct pattern for the OpenTelemetry.Extensions.Hosting package you're using.
+
+
+
+

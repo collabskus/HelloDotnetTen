@@ -43,23 +43,18 @@ builder.Services.AddOpenTelemetry()
                 options.Headers = uptraceDsn;
                 readerOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
             });
-    });
-
-// THIS is the correct signature - Action<OpenTelemetryLoggerOptions>
-builder.Logging.AddOpenTelemetry(options =>
-{
-    options.SetResourceBuilder(ResourceBuilder.CreateDefault()
-        .AddService(
-            serviceName: "HelloDotnetTen.Console",
-            serviceVersion: "1.0.0"));
-    options.AddConsoleExporter();
-    options.AddOtlpExporter(otlpOptions =>
+    })
+    .WithLogging(logging =>
     {
-        otlpOptions.Endpoint = new Uri(uptraceEndpoint);
-        otlpOptions.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
-        otlpOptions.Headers = uptraceDsn;
+        logging
+            .AddConsoleExporter()
+            .AddOtlpExporter(options =>
+            {
+                options.Endpoint = new Uri(uptraceEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = uptraceDsn;
+            });
     });
-});
 
 builder.Services.AddHelloDotnetLibrary(builder.Configuration);
 
