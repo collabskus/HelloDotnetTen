@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/06/2025 15:56:51
+Generated: 12/06/2025 15:58:45
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -537,8 +537,8 @@ MODIFIED: 12/05/2025 18:03:25
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
-SIZE: 2.67 KB
-MODIFIED: 12/06/2025 15:56:17
+SIZE: 2.64 KB
+MODIFIED: 12/06/2025 15:58:17
 ================================================================================
 
 using HelloDotnetTen.ClassLibrary1;
@@ -551,7 +551,7 @@ using OpenTelemetry.Trace;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-// Uptrace configuration - Use api.uptrace.dev for HTTP
+// Uptrace configuration
 const string uptraceEndpoint = "https://api.uptrace.dev";
 const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
 
@@ -588,7 +588,7 @@ builder.Services.AddOpenTelemetry()
             });
     });
 
-// Logging - the parameter is OpenTelemetryLoggerOptions, not a builder
+// THIS is the correct signature - Action<OpenTelemetryLoggerOptions>
 builder.Logging.AddOpenTelemetry(options =>
 {
     options.SetResourceBuilder(ResourceBuilder.CreateDefault()
@@ -632,7 +632,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/06/2025 15:56:51
+EXPORT COMPLETED: 12/06/2025 15:58:45
 Total Files Exported: 15
 Output File: .\docs\llm\dump.txt
 ===============================================================================

@@ -3698,3 +3698,13 @@ await Task.Delay(5000);
 ```
 
 This should compile and run now.
+No, this is still wrong. please fix it properly. 
+2025-12-06 15:58:47
+C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs(49,17): error CS1501: No overload for method 'AddOpenTelemetry' takes 1 arguments
+
+The build failed. Fix the build errors and run again.
+
+
+
+
+
