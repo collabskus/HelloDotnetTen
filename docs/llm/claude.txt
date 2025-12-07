@@ -7698,4 +7698,58 @@ This confirms your trimming toggle is working perfectly - you're getting the ful
 
 
 
-Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet --info; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet clean; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet restore; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet build; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet outdated; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; git clean -dfx; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Start-Sleep -s 10; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; .\export.ps1; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; .\publish.ps1; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet outdated; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet run; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; git add .; git commit --message "add all files"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git push origin --all; Get-Date -Format "yyyy-MM-dd HH:mm:ss";
+I have pushed my repository to a public github.com instance. 
+I would like to have this publish.ps1 to be run on every single push and every single pull request to any branch at all. 
+I don't know if we can somehow make the resulting binaries available for download on github. 
+It would be great if we can but not required if it is not possible. 
+here is my git remote show origin if it helps 
+PS C:\Users\kushal\source\repos\HelloDotnetTen> git remote show origin
+* remote origin
+  Fetch URL: https://github.com/collabskus/HelloDotnetTen.git
+  Push  URL: https://github.com/collabskus/HelloDotnetTen.git
+  HEAD branch: master
+  Remote branch:
+    master tracked
+  Local ref configured for 'git push':
+    master pushes to master (up to date)
+PS C:\Users\kushal\source\repos\HelloDotnetTen>
+
+
+
+
+
+I found your `publish.ps1` script. Now let me create a GitHub Actions workflow file that will run this on every push and pull request, and upload the resulting binaries as downloadable artifacts.Here's your GitHub Actions workflow. To set it up:
+
+**Create this file in your repository:**
+```
+.github/workflows/build-and-publish.yml
+```
+
+**What this workflow does:**
+
+1. **Triggers** on every push and every pull request to any branch (the `'**'` pattern matches all branches)
+
+2. **Sets up .NET 10** (using preview quality since .NET 10 isn't GA yet)
+
+3. **Runs your publish.ps1** script using PowerShell Core (available on all GitHub runners)
+
+4. **Uploads all 10 platform binaries** as downloadable artifacts - each platform gets its own artifact for easy downloading
+
+**How to download the binaries:**
+
+After each workflow run completes, go to the workflow run page on GitHub and you'll see an "Artifacts" section at the bottom. Each platform's executable will be available as a separate downloadable zip file.
+
+**To add this to your repo:**
+
+```powershell
+# Create the directory
+New-Item -ItemType Directory -Path ".github\workflows" -Force
+
+# Create the file (copy the content from the artifact above)
+# Then commit and push:
+git add .github/workflows/build-and-publish.yml
+git commit -m "Add GitHub Actions workflow for CI/CD"
+git push
+```
+
+The artifacts are retained for 90 days by default. If you want to change retention, you can add a `retention-days` parameter to each upload step.
