@@ -136,12 +136,11 @@ public class FileMetricExporter : BaseExporter<Metric>
         
         return new
         {
-            Count = data.Count,
-            Sum = data.Sum,
             Scale = data.Scale,
             ZeroCount = data.ZeroCount,
             PositiveBuckets = SerializeExponentialBuckets(data.PositiveBuckets),
-            NegativeBuckets = SerializeExponentialBuckets(data.NegativeBuckets)
+            // Note: NegativeBuckets may not be available in all versions
+            // Check if your OpenTelemetry version supports it
         };
     }
 

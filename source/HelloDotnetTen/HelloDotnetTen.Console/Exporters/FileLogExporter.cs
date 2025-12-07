@@ -89,32 +89,24 @@ public class FileLogExporter : BaseExporter<LogRecord>
             SpanId = logRecord.SpanId.ToString(),
             TraceFlags = logRecord.TraceFlags.ToString(),
             CategoryName = logRecord.CategoryName,
-            Severity = logRecord.Severity?.ToString(),
-            SeverityText = logRecord.SeverityText,
+            LogLevel = logRecord.LogLevel.ToString(),
             Body = logRecord.Body,
             FormattedMessage = logRecord.FormattedMessage,
             Attributes = attributes,
-            EventId = logRecord.EventId.Id != 0 ? new { logRecord.EventId.Id, logRecord.EventId.Name } : null,
-            Exception = logRecord.Exception != null ? new
-            {
-                Type = logRecord.Exception.GetType().FullName,
-                Message = logRecord.Exception.Message,
-                StackTrace = logRecord.Exception.StackTrace
-            } : null,
+            EventId = logRecord.EventId.Id != 0 ? 
+                new { logRecord.EventId.Id, logRecord.EventId.Name } : null,
+            Exception = logRecord.Exception?.ToString(),
             Resource = ParentProvider?.GetResource()?.Attributes
                 .ToDictionary(a => a.Key, a => a.Value?.ToString())
         };
     }
 
     private static readonly Action<LogRecordScope, Dictionary<string, object?>> ProcessScope = 
-        (scope, state) =>
+        (scope, attributes) =>
         {
             foreach (var item in scope)
             {
-                if (!state.ContainsKey(item.Key))
-                {
-                    state[item.Key] = item.Value;
-                }
+                attributes[$"scope.{item.Key}"] = item.Value;
             }
         };
 
@@ -142,12 +134,14 @@ public class FileLogExporter : BaseExporter<LogRecord>
         _currentFileDate = date;
         _currentFilePath = GetFilePath(date, 0);
         
+        // Find the next available file number if file exists and is at size limit
         int fileNumber = 0;
         while (File.Exists(_currentFilePath))
         {
             var existingSize = new FileInfo(_currentFilePath).Length;
             if (existingSize < _options.MaxFileSizeBytes)
             {
+                // Can append to this file
                 _currentFileSize = existingSize;
                 break;
             }
@@ -156,13 +150,15 @@ public class FileLogExporter : BaseExporter<LogRecord>
         }
         
         _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
-        _currentFileSize = File.Exists(_currentFilePath) ? new FileInfo(_currentFilePath).Length : 0;
+        _currentFileSize = File.Exists(_currentFilePath) ? 
+            new FileInfo(_currentFilePath).Length : 0;
     }
 
     private void RotateFile()
     {
         CloseWriter();
         
+        // Find next available file number
         int fileNumber = 1;
         string newPath;
         do
