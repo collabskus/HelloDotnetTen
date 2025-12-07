@@ -7,7 +7,8 @@ namespace HelloDotnetTen.Console.Exporters;
 
 /// <summary>
 /// Custom file exporter for OpenTelemetry metrics.
-/// Writes metrics to JSON files with daily rotation and size limits.
+/// Writes metrics to JSON files with run-based separation, daily rotation, and size limits.
+/// Each application run creates new files (never appends to existing files from previous runs).
 /// </summary>
 public class FileMetricExporter : BaseExporter<Metric>
 {
@@ -17,6 +18,8 @@ public class FileMetricExporter : BaseExporter<Metric>
     private string _currentFilePath = string.Empty;
     private DateTime _currentFileDate;
     private long _currentFileSize;
+    private int _currentFileNumber;
+    private bool _isFirstRecord = true;
     private readonly JsonSerializerOptions _jsonOptions;
 
     public FileMetricExporter(FileExporterOptions options)
@@ -47,13 +50,23 @@ public class FileMetricExporter : BaseExporter<Metric>
                         var record = SerializeMetricPoint(metric, metricPoint);
                         var json = JsonSerializer.Serialize(record, _jsonOptions);
                         
-                        var bytesToWrite = Encoding.UTF8.GetByteCount(json) + Environment.NewLine.Length;
-                        if (_currentFileSize + bytesToWrite > _options.MaxFileSizeBytes)
+                        var bytesToWrite = Encoding.UTF8.GetByteCount(json) + Environment.NewLine.Length + 1;
+                        
+                        if (ShouldRotate(bytesToWrite))
                         {
                             RotateFile();
                         }
                         
-                        _writer!.WriteLine(json);
+                        if (!_isFirstRecord)
+                        {
+                            _writer!.WriteLine(",");
+                        }
+                        else
+                        {
+                            _isFirstRecord = false;
+                        }
+                        
+                        _writer!.Write(json);
                         _currentFileSize += bytesToWrite;
                     }
                 }
@@ -68,6 +81,17 @@ public class FileMetricExporter : BaseExporter<Metric>
             System.Console.Error.WriteLine($"[FileMetricExporter] Export failed: {ex.Message}");
             return ExportResult.Failure;
         }
+    }
+
+    private bool ShouldRotate(long bytesToWrite)
+    {
+        if (_currentFileSize + bytesToWrite > _options.MaxFileSizeBytes)
+            return true;
+        
+        if (_currentFileDate != DateTime.UtcNow.Date)
+            return true;
+        
+        return false;
     }
 
     private object SerializeMetricPoint(Metric metric, MetricPoint metricPoint)
@@ -139,8 +163,6 @@ public class FileMetricExporter : BaseExporter<Metric>
             Scale = data.Scale,
             ZeroCount = data.ZeroCount,
             PositiveBuckets = SerializeExponentialBuckets(data.PositiveBuckets),
-            // Note: NegativeBuckets may not be available in all versions
-            // Check if your OpenTelemetry version supports it
         };
     }
 
@@ -171,65 +193,64 @@ public class FileMetricExporter : BaseExporter<Metric>
     {
         var today = DateTime.UtcNow.Date;
         
-        if (_writer == null || _currentFileDate != today)
+        if (_writer == null)
         {
-            CloseWriter();
             OpenNewFile(today);
+        }
+        else if (_currentFileDate != today)
+        {
+            RotateFile();
         }
     }
 
     private void OpenNewFile(DateTime date)
     {
         _currentFileDate = date;
-        _currentFilePath = GetFilePath(date, 0);
+        _currentFileNumber = 0;
+        _currentFilePath = GetFilePath(date, _currentFileNumber);
         
-        int fileNumber = 0;
-        while (File.Exists(_currentFilePath))
-        {
-            var existingSize = new FileInfo(_currentFilePath).Length;
-            if (existingSize < _options.MaxFileSizeBytes)
-            {
-                _currentFileSize = existingSize;
-                break;
-            }
-            fileNumber++;
-            _currentFilePath = GetFilePath(date, fileNumber);
-        }
+        _writer = new StreamWriter(_currentFilePath, append: false, Encoding.UTF8);
+        _currentFileSize = 0;
+        _isFirstRecord = true;
         
-        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
-        _currentFileSize = File.Exists(_currentFilePath) ? new FileInfo(_currentFilePath).Length : 0;
+        _writer.WriteLine("[");
+        _currentFileSize += 2;
     }
 
     private void RotateFile()
     {
         CloseWriter();
         
-        int fileNumber = 1;
-        string newPath;
-        do
-        {
-            newPath = GetFilePath(_currentFileDate, fileNumber);
-            fileNumber++;
-        } while (File.Exists(newPath) && new FileInfo(newPath).Length >= _options.MaxFileSizeBytes);
+        _currentFileNumber++;
+        _currentFileDate = DateTime.UtcNow.Date;
+        _currentFilePath = GetFilePath(_currentFileDate, _currentFileNumber);
         
-        _currentFilePath = newPath;
-        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
+        _writer = new StreamWriter(_currentFilePath, append: false, Encoding.UTF8);
         _currentFileSize = 0;
+        _isFirstRecord = true;
+        
+        _writer.WriteLine("[");
+        _currentFileSize += 2;
     }
 
     private string GetFilePath(DateTime date, int fileNumber)
     {
         var fileName = fileNumber == 0
-            ? $"metrics_{date:yyyy-MM-dd}.json"
-            : $"metrics_{date:yyyy-MM-dd}_{fileNumber:D3}.json";
+            ? $"metrics_{_options.RunId}.json"
+            : $"metrics_{_options.RunId}_{fileNumber:D3}.json";
         return Path.Combine(_options.Directory, fileName);
     }
 
     private void CloseWriter()
     {
-        _writer?.Flush();
-        _writer?.Dispose();
-        _writer = null;
+        if (_writer != null)
+        {
+            _writer.WriteLine();
+            _writer.WriteLine("]");
+            _writer.Flush();
+            _writer.Dispose();
+            _writer = null;
+        }
     }
 
     protected override bool OnShutdown(int timeoutMilliseconds)

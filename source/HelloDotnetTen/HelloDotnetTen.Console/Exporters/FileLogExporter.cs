@@ -7,7 +7,8 @@ namespace HelloDotnetTen.Console.Exporters;
 
 /// <summary>
 /// Custom file exporter for OpenTelemetry logs.
-/// Writes logs to JSON files with daily rotation and size limits.
+/// Writes logs to JSON files with run-based separation, daily rotation, and size limits.
+/// Each application run creates new files (never appends to existing files from previous runs).
 /// </summary>
 public class FileLogExporter : BaseExporter<LogRecord>
 {
@@ -17,6 +18,8 @@ public class FileLogExporter : BaseExporter<LogRecord>
     private string _currentFilePath = string.Empty;
     private DateTime _currentFileDate;
     private long _currentFileSize;
+    private int _currentFileNumber;
+    private bool _isFirstRecord = true;
     private readonly JsonSerializerOptions _jsonOptions;
 
     public FileLogExporter(FileExporterOptions options)
@@ -45,13 +48,25 @@ public class FileLogExporter : BaseExporter<LogRecord>
                     var record = SerializeLogRecord(logRecord);
                     var json = JsonSerializer.Serialize(record, _jsonOptions);
                     
-                    var bytesToWrite = Encoding.UTF8.GetByteCount(json) + Environment.NewLine.Length;
-                    if (_currentFileSize + bytesToWrite > _options.MaxFileSizeBytes)
+                    var bytesToWrite = Encoding.UTF8.GetByteCount(json) + Environment.NewLine.Length + 1; // +1 for comma
+                    
+                    // Check if we need to rotate (size limit or day change)
+                    if (ShouldRotate(bytesToWrite))
                     {
                         RotateFile();
                     }
                     
-                    _writer!.WriteLine(json);
+                    // Write comma separator if not first record
+                    if (!_isFirstRecord)
+                    {
+                        _writer!.WriteLine(",");
+                    }
+                    else
+                    {
+                        _isFirstRecord = false;
+                    }
+                    
+                    _writer!.Write(json);
                     _currentFileSize += bytesToWrite;
                 }
                 
@@ -67,6 +82,19 @@ public class FileLogExporter : BaseExporter<LogRecord>
         }
     }
 
+    private bool ShouldRotate(long bytesToWrite)
+    {
+        // Rotate if size would exceed limit
+        if (_currentFileSize + bytesToWrite > _options.MaxFileSizeBytes)
+            return true;
+        
+        // Rotate if day has changed (for long-running applications)
+        if (_currentFileDate != DateTime.UtcNow.Date)
+            return true;
+        
+        return false;
+    }
+
     private object SerializeLogRecord(LogRecord logRecord)
     {
         var attributes = new Dictionary<string, object?>();
@@ -79,7 +107,6 @@ public class FileLogExporter : BaseExporter<LogRecord>
             }
         }
 
-        // Handle state values for structured logging
         logRecord.ForEachScope(ProcessScope, attributes);
 
         return new
@@ -122,69 +149,71 @@ public class FileLogExporter : BaseExporter<LogRecord>
     {
         var today = DateTime.UtcNow.Date;
         
-        if (_writer == null || _currentFileDate != today)
+        if (_writer == null)
         {
-            CloseWriter();
             OpenNewFile(today);
+        }
+        else if (_currentFileDate != today)
+        {
+            // Day changed - rotate to new file
+            RotateFile();
         }
     }
 
     private void OpenNewFile(DateTime date)
     {
         _currentFileDate = date;
-        _currentFilePath = GetFilePath(date, 0);
+        _currentFileNumber = 0;
+        _currentFilePath = GetFilePath(date, _currentFileNumber);
         
-        // Find the next available file number if file exists and is at size limit
-        int fileNumber = 0;
-        while (File.Exists(_currentFilePath))
-        {
-            var existingSize = new FileInfo(_currentFilePath).Length;
-            if (existingSize < _options.MaxFileSizeBytes)
-            {
-                // Can append to this file
-                _currentFileSize = existingSize;
-                break;
-            }
-            fileNumber++;
-            _currentFilePath = GetFilePath(date, fileNumber);
-        }
+        // For this run, always create a new file (never append)
+        _writer = new StreamWriter(_currentFilePath, append: false, Encoding.UTF8);
+        _currentFileSize = 0;
+        _isFirstRecord = true;
         
-        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
-        _currentFileSize = File.Exists(_currentFilePath) ? 
-            new FileInfo(_currentFilePath).Length : 0;
+        // Start JSON array
+        _writer.WriteLine("[");
+        _currentFileSize += 2; // "[\n"
     }
 
     private void RotateFile()
     {
         CloseWriter();
         
-        // Find next available file number
-        int fileNumber = 1;
-        string newPath;
-        do
-        {
-            newPath = GetFilePath(_currentFileDate, fileNumber);
-            fileNumber++;
-        } while (File.Exists(newPath) && new FileInfo(newPath).Length >= _options.MaxFileSizeBytes);
+        _currentFileNumber++;
+        _currentFileDate = DateTime.UtcNow.Date;
+        _currentFilePath = GetFilePath(_currentFileDate, _currentFileNumber);
         
-        _currentFilePath = newPath;
-        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
+        _writer = new StreamWriter(_currentFilePath, append: false, Encoding.UTF8);
         _currentFileSize = 0;
+        _isFirstRecord = true;
+        
+        // Start JSON array
+        _writer.WriteLine("[");
+        _currentFileSize += 2;
     }
 
     private string GetFilePath(DateTime date, int fileNumber)
     {
+        // Format: logs_YYYYMMDD_HHmmss_NNN.json
+        // The RunId contains the start time, fileNumber handles rotation within a run
         var fileName = fileNumber == 0
-            ? $"logs_{date:yyyy-MM-dd}.json"
-            : $"logs_{date:yyyy-MM-dd}_{fileNumber:D3}.json";
+            ? $"logs_{_options.RunId}.json"
+            : $"logs_{_options.RunId}_{fileNumber:D3}.json";
         return Path.Combine(_options.Directory, fileName);
     }
 
     private void CloseWriter()
     {
-        _writer?.Flush();
-        _writer?.Dispose();
-        _writer = null;
+        if (_writer != null)
+        {
+            // Close JSON array
+            _writer.WriteLine();
+            _writer.WriteLine("]");
+            _writer.Flush();
+            _writer.Dispose();
+            _writer = null;
+        }
     }
 
     protected override bool OnShutdown(int timeoutMilliseconds)

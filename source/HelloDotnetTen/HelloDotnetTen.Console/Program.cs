@@ -14,19 +14,19 @@ var builder = Host.CreateApplicationBuilder(args);
 const string uptraceEndpoint = "https://api.uptrace.dev";
 const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
 
-// File exporter configuration - outputs to docs/telemetry folder
-// Files rotate daily and when exceeding 25MB
-var telemetryDirectory = Path.Combine(
-    Directory.GetCurrentDirectory(), 
-    "..", "..", "..", "..", "..", "..", // Navigate from bin/Debug/net10.0 to project root
-    "docs", "telemetry");
+// File exporter configuration
+// Uses XDG-style directories by default:
+// - Windows: %LOCALAPPDATA%/HelloDotnetTen/telemetry
+// - Linux: ~/.local/share/HelloDotnetTen/telemetry
+// - macOS: ~/Library/Application Support/HelloDotnetTen/telemetry
+// Each run creates new files with timestamp in filename (never appends)
+var fileExporterOptions = new FileExporterOptions
+{
+    MaxFileSizeBytes = 25 * 1024 * 1024 // 25MB
+};
 
-// Normalize the path
-telemetryDirectory = Path.GetFullPath(telemetryDirectory);
-
-var fileExporterOptions = FileExporterOptions.Create(telemetryDirectory, maxFileSizeMb: 25);
-
-Console.WriteLine($"[Telemetry] Writing to: {telemetryDirectory}");
+Console.WriteLine($"[Telemetry] Writing to: {fileExporterOptions.Directory}");
+Console.WriteLine($"[Telemetry] Run ID: {fileExporterOptions.RunId}");
 
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource
@@ -129,23 +129,29 @@ logger.LogInformation("Parallel results: {Results}", string.Join(", ", results))
 
 logger.LogInformation("========================================");
 logger.LogInformation("Application completed. Check Uptrace for telemetry data.");
-logger.LogInformation("Telemetry files written to: {Directory}", telemetryDirectory);
+logger.LogInformation("Telemetry files written to: {Directory}", fileExporterOptions.Directory);
 
 // Give time for telemetry to flush before app exits
 Console.WriteLine("\nWaiting for telemetry to flush...");
 await Task.Delay(5000);
 
-Console.WriteLine($"\nTelemetry files should be in: {telemetryDirectory}");
-Console.WriteLine("Files created:");
-if (Directory.Exists(telemetryDirectory))
+Console.WriteLine($"\nTelemetry files for this run (ID: {fileExporterOptions.RunId}):");
+Console.WriteLine($"Directory: {fileExporterOptions.Directory}");
+if (Directory.Exists(fileExporterOptions.Directory))
 {
-    foreach (var file in Directory.GetFiles(telemetryDirectory, "*.json"))
+    var runFiles = Directory.GetFiles(fileExporterOptions.Directory, $"*_{fileExporterOptions.RunId}*.json");
+    foreach (var file in runFiles)
     {
         var info = new FileInfo(file);
         Console.WriteLine($"  - {info.Name} ({info.Length:N0} bytes)");
     }
+    
+    if (runFiles.Length == 0)
+    {
+        Console.WriteLine("  (no files created yet - telemetry may still be flushing)");
+    }
 }
 else
 {
-    Console.WriteLine("  (directory not created yet - run again to see files)");
+    Console.WriteLine("  (directory not created yet)");
 }

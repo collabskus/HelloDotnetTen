@@ -6400,3 +6400,101 @@ Replace these three files in your project:
 
 This is good progress. However, we have multiple issues. Firstly, because we are writing json in the logs, we should not append to existing log files when we run the application again a second time the same day. This causes us to have something like {} {} which is not valid json. Each run should create its own file, never append to the existing file. I made a mistake when I said logs should rotate daily. 
 I meant if the application is long running, the log should rotate daily but we should still create new files for each run, not continue existing file because we wre writing json. 
+Secondly, when I run the application using dotnet run, it does not write to the project folder. 
+Instead it writes to `C:\Users\kushal\docs\telemetry` I have added these logs to `output.txt`. 
+I have also updated `dump.txt` with our latest code.  
+When I run the application in Visual Studio, it writes in the correct location. 
+However, when I run the application from the terminal with dotnet run, that is when the 
+Telemetry files should be in: C:\Users\kushal\docs\telemetry
+Files created:
+  - logs_2025-12-07.json (57,323 bytes)
+2025-12-07 10:05:24
+I am thinking this is janky and we should write our logs to the xdg recommended folders for our application. 
+Can you please make both these changes together? 
+The file name should probably have hour minute and seconds as well to distinguish each run. 
+but we should still start a new file at midnight and when the files are too big. 
+
+
+
+
+
+I'll fix both issues: 1) Each run gets its own file (no appending), and 2) Use proper XDG-style directories that work consistently regardless of how the app is run.
+
+Let me update the file exporters:Here's a summary of the changes I made:
+
+**1. XDG-style directories (FileExporterOptions.cs)**
+
+The telemetry files now go to platform-appropriate locations that work consistently regardless of how you run the app:
+- **Windows**: `%LOCALAPPDATA%\HelloDotnetTen\telemetry` (e.g., `C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry`)
+- **Linux**: `~/.local/share/HelloDotnetTen/telemetry` (or `$XDG_DATA_HOME` if set)
+- **macOS**: `~/Library/Application Support/HelloDotnetTen/telemetry`
+
+**2. Run-based file separation (all exporters)**
+
+Each run now creates its own files with a unique `RunId` (timestamp-based):
+- Files are named like: `logs_20251207_102654.json`, `metrics_20251207_102654.json`, `traces_20251207_102654.json`
+- If a file exceeds 25MB during a run, it rotates to `logs_20251207_102654_001.json`, etc.
+- If midnight passes during a long-running app, it also starts a new file
+
+**3. Valid JSON output**
+
+Files are now proper JSON arrays:
+```json
+[
+  { "timestamp": "...", ... },
+  { "timestamp": "...", ... }
+]
+```
+
+The files are properly closed with the closing `]` when the application shuts down.
+
+**Key behavior changes:**
+- **Never appends** to files from previous runs
+- Each run is completely isolated by its `RunId`
+- Long-running apps still rotate at midnight or at 25MB
+- Works identically whether run from Visual Studio, `dotnet run`, or as a published executable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

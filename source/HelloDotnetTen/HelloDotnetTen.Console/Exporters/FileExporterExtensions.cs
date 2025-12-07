@@ -13,9 +13,6 @@ public static class FileExporterExtensions
     /// <summary>
     /// Adds a file exporter for traces to the TracerProviderBuilder.
     /// </summary>
-    /// <param name="builder">The TracerProviderBuilder to add the exporter to.</param>
-    /// <param name="options">Optional configuration options.</param>
-    /// <returns>The TracerProviderBuilder for method chaining.</returns>
     public static TracerProviderBuilder AddFileExporter(
         this TracerProviderBuilder builder,
         FileExporterOptions? options = null)
@@ -41,9 +38,6 @@ public static class FileExporterExtensions
     /// <summary>
     /// Adds a file exporter for metrics to the MeterProviderBuilder.
     /// </summary>
-    /// <param name="builder">The MeterProviderBuilder to add the exporter to.</param>
-    /// <param name="options">Optional configuration options.</param>
-    /// <returns>The MeterProviderBuilder for method chaining.</returns>
     public static MeterProviderBuilder AddFileExporter(
         this MeterProviderBuilder builder,
         FileExporterOptions? options = null)
@@ -53,7 +47,7 @@ public static class FileExporterExtensions
         return builder.AddReader(
             new PeriodicExportingMetricReader(
                 new FileMetricExporter(options),
-                exportIntervalMilliseconds: 10000)); // Export every 10 seconds
+                exportIntervalMilliseconds: 10000));
     }
 
     /// <summary>
@@ -85,9 +79,6 @@ public static class FileExporterExtensions
     /// <summary>
     /// Adds a file exporter for logs to the OpenTelemetryLoggerOptions.
     /// </summary>
-    /// <param name="options">The OpenTelemetryLoggerOptions to add the exporter to.</param>
-    /// <param name="exporterOptions">Optional configuration options.</param>
-    /// <returns>The OpenTelemetryLoggerOptions for method chaining.</returns>
     public static OpenTelemetryLoggerOptions AddFileExporter(
         this OpenTelemetryLoggerOptions options,
         FileExporterOptions? exporterOptions = null)
