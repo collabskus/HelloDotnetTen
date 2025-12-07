@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/07/2025 09:53:27
+Generated: 12/07/2025 10:02:10
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -25,6 +25,11 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
 |           .gitkeep
 |           
 \---source
+    +---docs
+    |   \---telemetry
+    |           logs_2025-12-07.json
+    |           metrics_2025-12-07.json
+    |           
     \---HelloDotnetTen
         |   Directory.Build.props
         |   Directory.Build.targets
@@ -1378,7 +1383,7 @@ MODIFIED: 12/05/2025 18:03:25
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
 SIZE: 5.71 KB
-MODIFIED: 12/07/2025 09:42:19
+MODIFIED: 12/07/2025 10:00:22
 ================================================================================
 
 using HelloDotnetTen.ClassLibrary1;
@@ -1401,7 +1406,7 @@ const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrac
 // Files rotate daily and when exceeding 25MB
 var telemetryDirectory = Path.Combine(
     Directory.GetCurrentDirectory(), 
-    "..", "..", "..", "..", "..", // Navigate from bin/Debug/net10.0 to project root
+    "..", "..", "..", "..", "..", "..", // Navigate from bin/Debug/net10.0 to project root
     "docs", "telemetry");
 
 // Normalize the path
@@ -1549,7 +1554,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/07/2025 09:53:28
+EXPORT COMPLETED: 12/07/2025 10:02:10
 Total Files Exported: 20
 Output File: .\docs\llm\dump.txt
 ===============================================================================
