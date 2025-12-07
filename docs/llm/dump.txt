@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/07/2025 18:44:20
+Generated: 12/07/2025 18:51:48
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -32,33 +32,43 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
 |   |   
 |   \---HelloDotnetTen.Console
 |       +---linux-arm
+|       |       appsettings.json
 |       |       HelloDotnetTen.Console
 |       |       
 |       +---linux-arm64
+|       |       appsettings.json
 |       |       HelloDotnetTen.Console
 |       |       
 |       +---linux-musl-arm64
+|       |       appsettings.json
 |       |       HelloDotnetTen.Console
 |       |       
 |       +---linux-musl-x64
+|       |       appsettings.json
 |       |       HelloDotnetTen.Console
 |       |       
 |       +---linux-x64
+|       |       appsettings.json
 |       |       HelloDotnetTen.Console
 |       |       
 |       +---osx-arm64
+|       |       appsettings.json
 |       |       HelloDotnetTen.Console
 |       |       
 |       +---osx-x64
+|       |       appsettings.json
 |       |       HelloDotnetTen.Console
 |       |       
 |       +---win-arm64
+|       |       appsettings.json
 |       |       HelloDotnetTen.Console.exe
 |       |       
 |       +---win-x64
+|       |       appsettings.json
 |       |       HelloDotnetTen.Console.exe
 |       |       
 |       \---win-x86
+|               appsettings.json
 |               HelloDotnetTen.Console.exe
 |               
 \---source
@@ -352,87 +362,327 @@ jobs:
 
 
 ================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\HelloDotnetTen.Console\linux-arm\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 18:00:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\HelloDotnetTen.Console\linux-arm64\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 18:00:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\HelloDotnetTen.Console\linux-musl-arm64\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 18:00:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\HelloDotnetTen.Console\linux-musl-x64\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 18:00:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\HelloDotnetTen.Console\linux-x64\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 18:00:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\HelloDotnetTen.Console\osx-arm64\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 18:00:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\HelloDotnetTen.Console\osx-x64\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 18:00:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\HelloDotnetTen.Console\win-arm64\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 18:00:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\HelloDotnetTen.Console\win-x64\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 18:00:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\HelloDotnetTen.Console\win-x86\appsettings.json
+SIZE: 0.32 KB
+MODIFIED: 12/05/2025 18:00:49
+================================================================================
+
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "Class1": {
+        "InjectedProperty1": "Hello from Class 1 Config"
+    },
+    "Class2": {
+        "InjectedProperty1": "Greetings from Class 2"
+    }
+}
+
+
+
+================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\publish-manifest.json
-SIZE: 4.18 KB
-MODIFIED: 12/07/2025 18:25:57
+SIZE: 4.64 KB
+MODIFIED: 12/07/2025 18:45:06
 ================================================================================
 
 {
     "Configuration":  "Full Runtime (No Trimming)",
-    "GeneratedAt":  "2025-12-07T18:25:57.4466349-05:00",
+    "GeneratedAt":  "2025-12-07T18:45:06.1158090-05:00",
     "Results":  [
                     {
-                        "Status":  "Success",
-                        "Platform":  "win-x64",
-                        "Project":  "HelloDotnetTen.Console",
+                        "Size":  "36.75 MB",
+                        "AppSettings":  true,
                         "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\win-x64\\HelloDotnetTen.Console.exe",
-                        "Size":  "36.75 MB"
+                        "Platform":  "win-x64",
+                        "Status":  "Success",
+                        "Project":  "HelloDotnetTen.Console"
                     },
                     {
-                        "Status":  "Success",
-                        "Platform":  "win-x86",
-                        "Project":  "HelloDotnetTen.Console",
+                        "Size":  "34.12 MB",
+                        "AppSettings":  true,
                         "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\win-x86\\HelloDotnetTen.Console.exe",
-                        "Size":  "34.12 MB"
+                        "Platform":  "win-x86",
+                        "Status":  "Success",
+                        "Project":  "HelloDotnetTen.Console"
                     },
                     {
-                        "Status":  "Success",
-                        "Platform":  "win-arm64",
-                        "Project":  "HelloDotnetTen.Console",
+                        "Size":  "36.1 MB",
+                        "AppSettings":  true,
                         "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\win-arm64\\HelloDotnetTen.Console.exe",
-                        "Size":  "36.1 MB"
+                        "Platform":  "win-arm64",
+                        "Status":  "Success",
+                        "Project":  "HelloDotnetTen.Console"
                     },
                     {
-                        "Status":  "Success",
-                        "Platform":  "linux-x64",
-                        "Project":  "HelloDotnetTen.Console",
+                        "Size":  "38.27 MB",
+                        "AppSettings":  true,
                         "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\linux-x64\\HelloDotnetTen.Console",
-                        "Size":  "38.27 MB"
+                        "Platform":  "linux-x64",
+                        "Status":  "Success",
+                        "Project":  "HelloDotnetTen.Console"
                     },
                     {
-                        "Status":  "Success",
-                        "Platform":  "linux-arm64",
-                        "Project":  "HelloDotnetTen.Console",
+                        "Size":  "36.29 MB",
+                        "AppSettings":  true,
                         "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\linux-arm64\\HelloDotnetTen.Console",
-                        "Size":  "36.29 MB"
+                        "Platform":  "linux-arm64",
+                        "Status":  "Success",
+                        "Project":  "HelloDotnetTen.Console"
                     },
                     {
-                        "Status":  "Success",
-                        "Platform":  "linux-arm",
-                        "Project":  "HelloDotnetTen.Console",
+                        "Size":  "33.51 MB",
+                        "AppSettings":  true,
                         "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\linux-arm\\HelloDotnetTen.Console",
-                        "Size":  "33.51 MB"
+                        "Platform":  "linux-arm",
+                        "Status":  "Success",
+                        "Project":  "HelloDotnetTen.Console"
                     },
                     {
-                        "Status":  "Success",
-                        "Platform":  "linux-musl-x64",
-                        "Project":  "HelloDotnetTen.Console",
+                        "Size":  "38.29 MB",
+                        "AppSettings":  true,
                         "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\linux-musl-x64\\HelloDotnetTen.Console",
-                        "Size":  "38.29 MB"
+                        "Platform":  "linux-musl-x64",
+                        "Status":  "Success",
+                        "Project":  "HelloDotnetTen.Console"
                     },
                     {
-                        "Status":  "Success",
-                        "Platform":  "linux-musl-arm64",
-                        "Project":  "HelloDotnetTen.Console",
+                        "Size":  "36.33 MB",
+                        "AppSettings":  true,
                         "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\linux-musl-arm64\\HelloDotnetTen.Console",
-                        "Size":  "36.33 MB"
+                        "Platform":  "linux-musl-arm64",
+                        "Status":  "Success",
+                        "Project":  "HelloDotnetTen.Console"
                     },
                     {
-                        "Status":  "Success",
-                        "Platform":  "osx-x64",
-                        "Project":  "HelloDotnetTen.Console",
+                        "Size":  "37.9 MB",
+                        "AppSettings":  true,
                         "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\osx-x64\\HelloDotnetTen.Console",
-                        "Size":  "37.9 MB"
+                        "Platform":  "osx-x64",
+                        "Status":  "Success",
+                        "Project":  "HelloDotnetTen.Console"
                     },
                     {
-                        "Status":  "Success",
-                        "Platform":  "osx-arm64",
-                        "Project":  "HelloDotnetTen.Console",
+                        "Size":  "35.64 MB",
+                        "AppSettings":  true,
                         "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\osx-arm64\\HelloDotnetTen.Console",
-                        "Size":  "35.64 MB"
+                        "Platform":  "osx-arm64",
+                        "Status":  "Success",
+                        "Project":  "HelloDotnetTen.Console"
                     }
                 ],
-    "ElapsedSeconds":  43.48
+    "ElapsedSeconds":  44.72
 }
 
 
@@ -2045,7 +2295,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/07/2025 18:44:21
-Total Files Exported: 22
+EXPORT COMPLETED: 12/07/2025 18:51:49
+Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
