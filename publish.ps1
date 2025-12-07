@@ -63,11 +63,21 @@ $currentBuild = 0
 $startTime = Get-Date
 
 foreach ($project in $ConsoleProjects) {
-    $projectFile = Join-Path $ProjectPath "$project\$project.csproj"
+    $projectDir = Join-Path $ProjectPath $project
+    $projectFile = Join-Path $projectDir "$project.csproj"
+    $appSettingsSource = Join-Path $projectDir "appsettings.json"
     
     if (-not (Test-Path $projectFile)) {
         Write-Host "ERROR: Project file not found: $projectFile" -ForegroundColor Red
         continue
+    }
+    
+    # Check if appsettings.json exists for this project
+    $hasAppSettings = Test-Path $appSettingsSource
+    if ($hasAppSettings) {
+        Write-Host "Found appsettings.json: $appSettingsSource" -ForegroundColor DarkGray
+    } else {
+        Write-Host "No appsettings.json found for $project" -ForegroundColor DarkYellow
     }
     
     Write-Host ""
@@ -120,6 +130,12 @@ foreach ($project in $ConsoleProjects) {
         $output = & dotnet @publishArgs 2>&1
         
         if ($LASTEXITCODE -eq 0) {
+            # Copy appsettings.json to the output directory if it exists
+            if ($hasAppSettings) {
+                $appSettingsDest = Join-Path $platformOutputDir "appsettings.json"
+                Copy-Item -Path $appSettingsSource -Destination $appSettingsDest -Force
+            }
+            
             # Find the executable
             $exePattern = if ($rid -like "win-*") { "*.exe" } else { $project }
             $executable = Get-ChildItem -Path $platformOutputDir -Filter $exePattern -File | 
@@ -128,13 +144,15 @@ foreach ($project in $ConsoleProjects) {
             
             if ($executable) {
                 $sizeMB = [math]::Round($executable.Length / 1MB, 2)
-                Write-Host "OK ($sizeMB MB)" -ForegroundColor Green
+                $appSettingsStatus = if ($hasAppSettings) { " +appsettings" } else { "" }
+                Write-Host "OK ($sizeMB MB$appSettingsStatus)" -ForegroundColor Green
                 
                 $results += [PSCustomObject]@{
                     Project = $project
                     Platform = $rid
                     Status = "Success"
                     Size = "$sizeMB MB"
+                    AppSettings = $hasAppSettings
                     Path = $executable.FullName
                 }
             } else {
@@ -144,6 +162,7 @@ foreach ($project in $ConsoleProjects) {
                     Platform = $rid
                     Status = "Success (no exe found)"
                     Size = "N/A"
+                    AppSettings = $hasAppSettings
                     Path = $platformOutputDir
                 }
             }
@@ -161,6 +180,7 @@ foreach ($project in $ConsoleProjects) {
                 Platform = $rid
                 Status = "Failed"
                 Size = "N/A"
+                AppSettings = $false
                 Path = ""
             }
         }
@@ -182,9 +202,11 @@ Write-Host ""
 
 $successCount = ($results | Where-Object { $_.Status -like "Success*" }).Count
 $failedCount = ($results | Where-Object { $_.Status -eq "Failed" }).Count
+$appSettingsCount = ($results | Where-Object { $_.AppSettings -eq $true -and $_.Status -like "Success*" }).Count
 
 Write-Host "Successful: $successCount" -ForegroundColor Green
 Write-Host "Failed: $failedCount" -ForegroundColor $(if ($failedCount -gt 0) { "Red" } else { "Green" })
+Write-Host "With appsettings.json: $appSettingsCount" -ForegroundColor Cyan
 Write-Host ""
 
 # Display results table
@@ -195,9 +217,11 @@ $results | ForEach-Object {
     $statusColor = if ($_.Status -like "Success*") { "Green" } else { "Red" }
     $platformPadded = $_.Platform.PadRight(20)
     $sizePadded = $_.Size.PadRight(12)
+    $appSettingsIcon = if ($_.AppSettings) { "[cfg]" } else { "     " }
     
     Write-Host "  $platformPadded" -NoNewline -ForegroundColor White
     Write-Host "$sizePadded" -NoNewline -ForegroundColor DarkGray
+    Write-Host "$appSettingsIcon " -NoNewline -ForegroundColor Cyan
     Write-Host $_.Status -ForegroundColor $statusColor
 }
 
@@ -217,6 +241,7 @@ $manifest = @{
             Platform = $_.Platform
             Status = $_.Status
             Size = $_.Size
+            AppSettings = $_.AppSettings
             Path = $_.Path
         }
     }
