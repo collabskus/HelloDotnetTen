@@ -6501,6 +6501,7 @@ The files are properly closed with the closing `]` when the application shuts do
 This is great work so far. 
 Next, I want to create a publish.ps1 file. 
 This file should generate FULL, self contained, standalone executables for my console applications all major platforms possible. 
+it should be single file for each of these platform if possible. 
 There should be no assumption that the target machine contains any dotnet at all. 
 Please and thank you. 
 I have included my export.ps1 file to show you how I generated my dump.txt if it helps. 
