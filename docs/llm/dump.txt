@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/07/2025 11:12:24
+Generated: 12/07/2025 11:16:27
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -22,6 +22,40 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
 |           gemini.txt
 |           output.txt
 |           
++---publish
+|   |   publish-manifest.json
+|   |   
+|   \---HelloDotnetTen.Console
+|       +---linux-arm
+|       |       HelloDotnetTen.Console
+|       |       
+|       +---linux-arm64
+|       |       HelloDotnetTen.Console
+|       |       
+|       +---linux-musl-arm64
+|       |       HelloDotnetTen.Console
+|       |       
+|       +---linux-musl-x64
+|       |       HelloDotnetTen.Console
+|       |       
+|       +---linux-x64
+|       |       HelloDotnetTen.Console
+|       |       
+|       +---osx-arm64
+|       |       HelloDotnetTen.Console
+|       |       
+|       +---osx-x64
+|       |       HelloDotnetTen.Console
+|       |       
+|       +---win-arm64
+|       |       HelloDotnetTen.Console.exe
+|       |       
+|       +---win-x64
+|       |       HelloDotnetTen.Console.exe
+|       |       
+|       \---win-x86
+|               HelloDotnetTen.Console.exe
+|               
 \---source
     \---HelloDotnetTen
         |   Directory.Build.props
@@ -43,17 +77,38 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
         |   +---bin
         |   |   \---Debug
         |   |       \---net10.0
+        |   |               HelloDotnetTen.ClassLibrary1.deps.json
+        |   |               HelloDotnetTen.ClassLibrary1.dll
+        |   |               HelloDotnetTen.ClassLibrary1.pdb
+        |   |               
         |   \---obj
+        |       |   HelloDotnetTen.ClassLibrary1.csproj.nuget.dgspec.json
+        |       |   HelloDotnetTen.ClassLibrary1.csproj.nuget.g.props
+        |       |   HelloDotnetTen.ClassLibrary1.csproj.nuget.g.targets
+        |       |   project.assets.json
+        |       |   project.nuget.cache
+        |       |   
         |       \---Debug
         |           \---net10.0
         |               |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
         |               |   HelloDotnetTen.ClassLibrary1.AssemblyInfo.cs
         |               |   HelloDotnetTen.ClassLibrary1.AssemblyInfoInputs.cache
+        |               |   HelloDotnetTen.ClassLibrary1.assets.cache
+        |               |   HelloDotnetTen.ClassLibrary1.csproj.AssemblyReference.cache
+        |               |   HelloDotnetTen.ClassLibrary1.csproj.CoreCompileInputs.cache
+        |               |   HelloDotnetTen.ClassLibrary1.csproj.FileListAbsolute.txt
+        |               |   HelloDotnetTen.ClassLibrary1.dll
         |               |   HelloDotnetTen.ClassLibrary1.GeneratedMSBuildEditorConfig.editorconfig
         |               |   HelloDotnetTen.ClassLibrary1.GlobalUsings.g.cs
+        |               |   HelloDotnetTen.ClassLibrary1.pdb
+        |               |   HelloDotnetTen.ClassLibrary1.sourcelink.json
         |               |   
         |               +---ref
+        |               |       HelloDotnetTen.ClassLibrary1.dll
+        |               |       
         |               \---refint
+        |                       HelloDotnetTen.ClassLibrary1.dll
+        |                       
         \---HelloDotnetTen.Console
             |   appsettings.json
             |   HelloDotnetTen.Console.csproj
@@ -62,6 +117,58 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
             +---bin
             |   \---Debug
             |       \---net10.0
+            |           |   appsettings.json
+            |           |   HelloDotnetTen.ClassLibrary1.dll
+            |           |   HelloDotnetTen.ClassLibrary1.pdb
+            |           |   HelloDotnetTen.Console.deps.json
+            |           |   HelloDotnetTen.Console.dll
+            |           |   HelloDotnetTen.Console.exe
+            |           |   HelloDotnetTen.Console.pdb
+            |           |   HelloDotnetTen.Console.runtimeconfig.json
+            |           |   Microsoft.Extensions.Configuration.Abstractions.dll
+            |           |   Microsoft.Extensions.Configuration.Binder.dll
+            |           |   Microsoft.Extensions.Configuration.CommandLine.dll
+            |           |   Microsoft.Extensions.Configuration.dll
+            |           |   Microsoft.Extensions.Configuration.EnvironmentVariables.dll
+            |           |   Microsoft.Extensions.Configuration.FileExtensions.dll
+            |           |   Microsoft.Extensions.Configuration.Json.dll
+            |           |   Microsoft.Extensions.Configuration.UserSecrets.dll
+            |           |   Microsoft.Extensions.DependencyInjection.Abstractions.dll
+            |           |   Microsoft.Extensions.DependencyInjection.dll
+            |           |   Microsoft.Extensions.Diagnostics.Abstractions.dll
+            |           |   Microsoft.Extensions.Diagnostics.dll
+            |           |   Microsoft.Extensions.FileProviders.Abstractions.dll
+            |           |   Microsoft.Extensions.FileProviders.Physical.dll
+            |           |   Microsoft.Extensions.FileSystemGlobbing.dll
+            |           |   Microsoft.Extensions.Hosting.Abstractions.dll
+            |           |   Microsoft.Extensions.Hosting.dll
+            |           |   Microsoft.Extensions.Logging.Abstractions.dll
+            |           |   Microsoft.Extensions.Logging.Configuration.dll
+            |           |   Microsoft.Extensions.Logging.Console.dll
+            |           |   Microsoft.Extensions.Logging.Debug.dll
+            |           |   Microsoft.Extensions.Logging.dll
+            |           |   Microsoft.Extensions.Logging.EventLog.dll
+            |           |   Microsoft.Extensions.Logging.EventSource.dll
+            |           |   Microsoft.Extensions.Options.ConfigurationExtensions.dll
+            |           |   Microsoft.Extensions.Options.dll
+            |           |   Microsoft.Extensions.Primitives.dll
+            |           |   OpenTelemetry.Api.dll
+            |           |   OpenTelemetry.Api.ProviderBuilderExtensions.dll
+            |           |   OpenTelemetry.dll
+            |           |   OpenTelemetry.Exporter.Console.dll
+            |           |   OpenTelemetry.Exporter.OpenTelemetryProtocol.dll
+            |           |   OpenTelemetry.Extensions.Hosting.dll
+            |           |   OpenTelemetry.Instrumentation.Process.dll
+            |           |   OpenTelemetry.Instrumentation.Runtime.dll
+            |           |   System.Diagnostics.EventLog.dll
+            |           |   
+            |           \---runtimes
+            |               \---win
+            |                   \---lib
+            |                       \---net10.0
+            |                               System.Diagnostics.EventLog.dll
+            |                               System.Diagnostics.EventLog.Messages.dll
+            |                               
             +---Exporters
             |       FileActivityExporter.cs
             |       FileExporterExtensions.cs
@@ -70,20 +177,126 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
             |       FileMetricExporter.cs
             |       
             \---obj
+                |   HelloDotnetTen.Console.csproj.nuget.dgspec.json
+                |   HelloDotnetTen.Console.csproj.nuget.g.props
+                |   HelloDotnetTen.Console.csproj.nuget.g.targets
+                |   project.assets.json
+                |   project.nuget.cache
+                |   
                 \---Debug
                     \---net10.0
                         |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+                        |   apphost.exe
+                        |   HelloDot.9A12DE43.Up2Date
                         |   HelloDotnetTen.Console.AssemblyInfo.cs
                         |   HelloDotnetTen.Console.AssemblyInfoInputs.cache
+                        |   HelloDotnetTen.Console.assets.cache
+                        |   HelloDotnetTen.Console.csproj.AssemblyReference.cache
+                        |   HelloDotnetTen.Console.csproj.CoreCompileInputs.cache
+                        |   HelloDotnetTen.Console.csproj.FileListAbsolute.txt
+                        |   HelloDotnetTen.Console.dll
                         |   HelloDotnetTen.Console.GeneratedMSBuildEditorConfig.editorconfig
+                        |   HelloDotnetTen.Console.genruntimeconfig.cache
                         |   HelloDotnetTen.Console.GlobalUsings.g.cs
+                        |   HelloDotnetTen.Console.pdb
+                        |   HelloDotnetTen.Console.sourcelink.json
                         |   
                         +---ref
+                        |       HelloDotnetTen.Console.dll
+                        |       
                         \---refint
+                                HelloDotnetTen.Console.dll
+                                
 
 
 FILE CONTENTS:
 ==============
+
+================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\publish-manifest.json
+SIZE: 4.18 KB
+MODIFIED: 12/07/2025 11:13:08
+================================================================================
+
+{
+    "Configuration":  "Full Runtime (No Trimming)",
+    "GeneratedAt":  "2025-12-07T11:13:08.2558289-05:00",
+    "Results":  [
+                    {
+                        "Status":  "Success",
+                        "Platform":  "win-x64",
+                        "Project":  "HelloDotnetTen.Console",
+                        "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\win-x64\\HelloDotnetTen.Console.exe",
+                        "Size":  "36.75 MB"
+                    },
+                    {
+                        "Status":  "Success",
+                        "Platform":  "win-x86",
+                        "Project":  "HelloDotnetTen.Console",
+                        "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\win-x86\\HelloDotnetTen.Console.exe",
+                        "Size":  "34.12 MB"
+                    },
+                    {
+                        "Status":  "Success",
+                        "Platform":  "win-arm64",
+                        "Project":  "HelloDotnetTen.Console",
+                        "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\win-arm64\\HelloDotnetTen.Console.exe",
+                        "Size":  "36.1 MB"
+                    },
+                    {
+                        "Status":  "Success",
+                        "Platform":  "linux-x64",
+                        "Project":  "HelloDotnetTen.Console",
+                        "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\linux-x64\\HelloDotnetTen.Console",
+                        "Size":  "38.27 MB"
+                    },
+                    {
+                        "Status":  "Success",
+                        "Platform":  "linux-arm64",
+                        "Project":  "HelloDotnetTen.Console",
+                        "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\linux-arm64\\HelloDotnetTen.Console",
+                        "Size":  "36.29 MB"
+                    },
+                    {
+                        "Status":  "Success",
+                        "Platform":  "linux-arm",
+                        "Project":  "HelloDotnetTen.Console",
+                        "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\linux-arm\\HelloDotnetTen.Console",
+                        "Size":  "33.51 MB"
+                    },
+                    {
+                        "Status":  "Success",
+                        "Platform":  "linux-musl-x64",
+                        "Project":  "HelloDotnetTen.Console",
+                        "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\linux-musl-x64\\HelloDotnetTen.Console",
+                        "Size":  "38.29 MB"
+                    },
+                    {
+                        "Status":  "Success",
+                        "Platform":  "linux-musl-arm64",
+                        "Project":  "HelloDotnetTen.Console",
+                        "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\linux-musl-arm64\\HelloDotnetTen.Console",
+                        "Size":  "36.33 MB"
+                    },
+                    {
+                        "Status":  "Success",
+                        "Platform":  "osx-x64",
+                        "Project":  "HelloDotnetTen.Console",
+                        "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\osx-x64\\HelloDotnetTen.Console",
+                        "Size":  "37.9 MB"
+                    },
+                    {
+                        "Status":  "Success",
+                        "Platform":  "osx-arm64",
+                        "Project":  "HelloDotnetTen.Console",
+                        "Path":  "C:\\Users\\kushal\\source\\repos\\HelloDotnetTen\\publish\\HelloDotnetTen.Console\\osx-arm64\\HelloDotnetTen.Console",
+                        "Size":  "35.64 MB"
+                    }
+                ],
+    "ElapsedSeconds":  43.84
+}
+
+
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\Directory.Build.props
@@ -1693,7 +1906,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/07/2025 11:12:24
-Total Files Exported: 20
+EXPORT COMPLETED: 12/07/2025 11:16:27
+Total Files Exported: 21
 Output File: .\docs\llm\dump.txt
 ===============================================================================
