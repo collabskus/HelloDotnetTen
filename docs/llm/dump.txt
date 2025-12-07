@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/07/2025 09:48:11
+Generated: 12/07/2025 09:53:27
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -52,7 +52,7 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
                     FileExporterExtensions.cs
                     FileExporterOptions.cs
                     FileLogExporter.cs
-                    FileMetricsExporter.cs
+                    FileMetricExporter.cs
                     
 
 
@@ -710,10 +710,11 @@ public class FileActivityExporter : BaseExporter<Activity>
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileExporterExtensions.cs
-SIZE: 4.16 KB
-MODIFIED: 12/07/2025 09:43:00
+SIZE: 4.18 KB
+MODIFIED: 12/07/2025 09:52:54
 ================================================================================
 
+using OpenTelemetry;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
@@ -879,8 +880,8 @@ public class FileExporterOptions
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileLogExporter.cs
-SIZE: 6.36 KB
-MODIFIED: 12/07/2025 09:43:39
+SIZE: 6.23 KB
+MODIFIED: 12/07/2025 09:52:37
 ================================================================================
 
 using System.Text;
@@ -974,32 +975,24 @@ public class FileLogExporter : BaseExporter<LogRecord>
             SpanId = logRecord.SpanId.ToString(),
             TraceFlags = logRecord.TraceFlags.ToString(),
             CategoryName = logRecord.CategoryName,
-            Severity = logRecord.Severity?.ToString(),
-            SeverityText = logRecord.SeverityText,
+            LogLevel = logRecord.LogLevel.ToString(),
             Body = logRecord.Body,
             FormattedMessage = logRecord.FormattedMessage,
             Attributes = attributes,
-            EventId = logRecord.EventId.Id != 0 ? new { logRecord.EventId.Id, logRecord.EventId.Name } : null,
-            Exception = logRecord.Exception != null ? new
-            {
-                Type = logRecord.Exception.GetType().FullName,
-                Message = logRecord.Exception.Message,
-                StackTrace = logRecord.Exception.StackTrace
-            } : null,
+            EventId = logRecord.EventId.Id != 0 ? 
+                new { logRecord.EventId.Id, logRecord.EventId.Name } : null,
+            Exception = logRecord.Exception?.ToString(),
             Resource = ParentProvider?.GetResource()?.Attributes
                 .ToDictionary(a => a.Key, a => a.Value?.ToString())
         };
     }
 
     private static readonly Action<LogRecordScope, Dictionary<string, object?>> ProcessScope = 
-        (scope, state) =>
+        (scope, attributes) =>
         {
             foreach (var item in scope)
             {
-                if (!state.ContainsKey(item.Key))
-                {
-                    state[item.Key] = item.Value;
-                }
+                attributes[$"scope.{item.Key}"] = item.Value;
             }
         };
 
@@ -1027,12 +1020,14 @@ public class FileLogExporter : BaseExporter<LogRecord>
         _currentFileDate = date;
         _currentFilePath = GetFilePath(date, 0);
         
+        // Find the next available file number if file exists and is at size limit
         int fileNumber = 0;
         while (File.Exists(_currentFilePath))
         {
             var existingSize = new FileInfo(_currentFilePath).Length;
             if (existingSize < _options.MaxFileSizeBytes)
             {
+                // Can append to this file
                 _currentFileSize = existingSize;
                 break;
             }
@@ -1041,13 +1036,15 @@ public class FileLogExporter : BaseExporter<LogRecord>
         }
         
         _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
-        _currentFileSize = File.Exists(_currentFilePath) ? new FileInfo(_currentFilePath).Length : 0;
+        _currentFileSize = File.Exists(_currentFilePath) ? 
+            new FileInfo(_currentFilePath).Length : 0;
     }
 
     private void RotateFile()
     {
         CloseWriter();
         
+        // Find next available file number
         int fileNumber = 1;
         string newPath;
         do
@@ -1089,9 +1086,9 @@ public class FileLogExporter : BaseExporter<LogRecord>
 
 
 ================================================================================
-FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileMetricsExporter.cs
-SIZE: 7.84 KB
-MODIFIED: 12/07/2025 09:43:55
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileMetricExporter.cs
+SIZE: 7.83 KB
+MODIFIED: 12/07/2025 09:52:11
 ================================================================================
 
 using System.Text;
@@ -1232,12 +1229,11 @@ public class FileMetricExporter : BaseExporter<Metric>
         
         return new
         {
-            Count = data.Count,
-            Sum = data.Sum,
             Scale = data.Scale,
             ZeroCount = data.ZeroCount,
             PositiveBuckets = SerializeExponentialBuckets(data.PositiveBuckets),
-            NegativeBuckets = SerializeExponentialBuckets(data.NegativeBuckets)
+            // Note: NegativeBuckets may not be available in all versions
+            // Check if your OpenTelemetry version supports it
         };
     }
 
@@ -1553,7 +1549,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/07/2025 09:48:11
+EXPORT COMPLETED: 12/07/2025 09:53:28
 Total Files Exported: 20
 Output File: .\docs\llm\dump.txt
 ===============================================================================
