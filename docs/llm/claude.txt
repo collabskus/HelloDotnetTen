@@ -7801,6 +7801,8 @@ The artifacts are retained for 90 days by default. If you want to change retenti
 Interestingly, publish failed on github actions. 
 It works just fine on my machine! 
 Here is what it says on github actions. 
+Can you please fix this problem and also add me a readme file? 
+
 ```
 Run ./publish.ps1 -SkipRestore
 =============================================
@@ -7865,3 +7867,34 @@ Manifest saved: publish/publish-manifest.json
 WARNING: Some builds failed. Check the output above for details.
 Error: Process completed with exit code 1.
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
