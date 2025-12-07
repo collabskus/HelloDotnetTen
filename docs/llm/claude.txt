@@ -6398,3 +6398,5 @@ Replace these three files in your project:
 
 
 
+This is good progress. However, we have multiple issues. Firstly, because we are writing json in the logs, we should not append to existing log files when we run the application again a second time the same day. This causes us to have something like {} {} which is not valid json. Each run should create its own file, never append to the existing file. I made a mistake when I said logs should rotate daily. 
+I meant if the application is long running, the log should rotate daily but we should still create new files for each run, not continue existing file because we wre writing json. 
