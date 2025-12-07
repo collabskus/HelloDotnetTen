@@ -37,7 +37,7 @@ jobs:
 
       - name: Run publish script
         shell: pwsh
-        run: ./publish.ps1 -SkipRestore
+        run: ./publish.ps1
 
       - name: List published files
         run: |
