@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/07/2025 10:52:21
+Generated: 12/07/2025 10:59:22
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -38,30 +38,16 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
         |   HelloDotnetTen.slnx
         |   
         +---HelloDotnetTen.ClassLibrary1
-        |   |   Class1.cs
-        |   |   Class1Options.cs
-        |   |   Class2.cs
-        |   |   Class2Options.cs
-        |   |   ClassLibrary1Settings.cs
-        |   |   HelloDotnetTen.ClassLibrary1.csproj
-        |   |   IClass1.cs
-        |   |   IClass2.cs
-        |   |   ServiceCollectionExtensions.cs
-        |   |   
-        |   +---bin
-        |   |   \---Debug
-        |   |       \---net10.0
-        |   \---obj
-        |       \---Debug
-        |           \---net10.0
-        |               |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
-        |               |   HelloDotnetTen.ClassLibrary1.AssemblyInfo.cs
-        |               |   HelloDotnetTen.ClassLibrary1.AssemblyInfoInputs.cache
-        |               |   HelloDotnetTen.ClassLibrary1.GeneratedMSBuildEditorConfig.editorconfig
-        |               |   HelloDotnetTen.ClassLibrary1.GlobalUsings.g.cs
-        |               |   
-        |               +---ref
-        |               \---refint
+        |       Class1.cs
+        |       Class1Options.cs
+        |       Class2.cs
+        |       Class2Options.cs
+        |       ClassLibrary1Settings.cs
+        |       HelloDotnetTen.ClassLibrary1.csproj
+        |       IClass1.cs
+        |       IClass2.cs
+        |       ServiceCollectionExtensions.cs
+        |       
         \---HelloDotnetTen.Console
             |   appsettings.json
             |   HelloDotnetTen.Console.csproj
@@ -1687,7 +1673,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/07/2025 10:52:21
+EXPORT COMPLETED: 12/07/2025 10:59:22
 Total Files Exported: 20
 Output File: .\docs\llm\dump.txt
 ===============================================================================
