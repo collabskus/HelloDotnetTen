@@ -18,7 +18,7 @@ const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrac
 // Files rotate daily and when exceeding 25MB
 var telemetryDirectory = Path.Combine(
     Directory.GetCurrentDirectory(), 
-    "..", "..", "..", "..", "..", // Navigate from bin/Debug/net10.0 to project root
+    "..", "..", "..", "..", "..", "..", // Navigate from bin/Debug/net10.0 to project root
     "docs", "telemetry");
 
 // Normalize the path
