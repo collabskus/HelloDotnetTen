@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/06/2025 16:06:31
+Generated: 12/07/2025 09:27:30
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -19,6 +19,7 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
 |           claude.txt
 |           dump.txt
 |           gemini.txt
+|           output.txt
 |           
 \---source
     \---HelloDotnetTen
@@ -28,31 +29,37 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
         |   HelloDotnetTen.slnx
         |   
         +---HelloDotnetTen.ClassLibrary1
-        |       Class1.cs
-        |       Class1Options.cs
-        |       Class2.cs
-        |       Class2Options.cs
-        |       ClassLibrary1Settings.cs
-        |       HelloDotnetTen.ClassLibrary1.csproj
-        |       IClass1.cs
-        |       IClass2.cs
-        |       ServiceCollectionExtensions.cs
-        |       
+        |   |   Class1.cs
+        |   |   Class1Options.cs
+        |   |   Class2.cs
+        |   |   Class2Options.cs
+        |   |   ClassLibrary1Settings.cs
+        |   |   HelloDotnetTen.ClassLibrary1.csproj
+        |   |   IClass1.cs
+        |   |   IClass2.cs
+        |   |   ServiceCollectionExtensions.cs
+        |   |   
+        |   +---bin
+        |   |   \---Debug
+        |   |       \---net10.0
+        |   \---obj
+        |       \---Debug
+        |           \---net10.0
+        |               |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+        |               |   HelloDotnetTen.ClassLibrary1.AssemblyInfo.cs
+        |               |   HelloDotnetTen.ClassLibrary1.AssemblyInfoInputs.cache
+        |               |   HelloDotnetTen.ClassLibrary1.assets.cache
+        |               |   HelloDotnetTen.ClassLibrary1.csproj.AssemblyReference.cache
+        |               |   HelloDotnetTen.ClassLibrary1.GeneratedMSBuildEditorConfig.editorconfig
+        |               |   HelloDotnetTen.ClassLibrary1.GlobalUsings.g.cs
+        |               |   
+        |               +---ref
+        |               \---refint
         \---HelloDotnetTen.Console
-            |   appsettings.json
-            |   HelloDotnetTen.Console.csproj
-            |   Program.cs
-            |   
-            +---bin
-            |   \---Debug
-            |       \---net10.0
-            \---obj
-                \---Debug
-                    \---net10.0
-                        |   HelloDotnetTen.Console.GlobalUsings.g.cs
-                        |   
-                        +---ref
-                        \---refint
+                appsettings.json
+                HelloDotnetTen.Console.csproj
+                Program.cs
+                
 
 
 FILE CONTENTS:
@@ -717,7 +724,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/06/2025 16:06:32
+EXPORT COMPLETED: 12/07/2025 09:27:31
 Total Files Exported: 15
 Output File: .\docs\llm\dump.txt
 ===============================================================================
