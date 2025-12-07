@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/07/2025 11:16:27
+Generated: 12/07/2025 11:17:48
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -215,12 +215,12 @@ FILE CONTENTS:
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\publish-manifest.json
 SIZE: 4.18 KB
-MODIFIED: 12/07/2025 11:13:08
+MODIFIED: 12/07/2025 11:17:12
 ================================================================================
 
 {
     "Configuration":  "Full Runtime (No Trimming)",
-    "GeneratedAt":  "2025-12-07T11:13:08.2558289-05:00",
+    "GeneratedAt":  "2025-12-07T11:17:12.3290465-05:00",
     "Results":  [
                     {
                         "Status":  "Success",
@@ -293,7 +293,7 @@ MODIFIED: 12/07/2025 11:13:08
                         "Size":  "35.64 MB"
                     }
                 ],
-    "ElapsedSeconds":  43.84
+    "ElapsedSeconds":  44.57
 }
 
 
@@ -1906,7 +1906,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/07/2025 11:16:27
+EXPORT COMPLETED: 12/07/2025 11:17:48
 Total Files Exported: 21
 Output File: .\docs\llm\dump.txt
 ===============================================================================
