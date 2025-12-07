@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/07/2025 11:17:48
+Generated: 12/07/2025 11:23:49
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -15,6 +15,10 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
 |   export.ps1
 |   publish.ps1
 |   
++---.github
+|   \---workflows
+|           build-and-publish.yml
+|           
 +---docs
 |   \---llm
 |           claude.txt
@@ -213,14 +217,148 @@ FILE CONTENTS:
 ==============
 
 ================================================================================
+FILE: :\Users\kushal\source\repos\HelloDotnetTen\.github\workflows\build-and-publish.yml
+SIZE: 3.84 KB
+MODIFIED: 12/07/2025 11:23:18
+================================================================================
+
+# GitHub Actions Workflow: Build and Publish Self-Contained Executables
+# Triggers on every push and pull request to any branch
+# Uploads binaries as downloadable artifacts
+
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - '**'  # All branches
+  pull_request:
+    branches:
+      - '**'  # All branches
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+          dotnet-quality: 'preview'  # Required for .NET 10 until GA release
+
+      - name: Display .NET info
+        run: dotnet --info
+
+      - name: Restore dependencies
+        run: dotnet restore source/HelloDotnetTen
+
+      - name: Build solution
+        run: dotnet build source/HelloDotnetTen --configuration Release --no-restore
+
+      - name: Run publish script
+        shell: pwsh
+        run: ./publish.ps1 -SkipRestore
+
+      - name: List published files
+        run: |
+          echo "Published files:"
+          find publish -type f -executable -o -name "*.exe" 2>/dev/null | head -50
+          echo ""
+          echo "Directory structure:"
+          ls -laR publish/ | head -100
+
+      - name: Upload Windows x64 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloDotnetTen-win-x64
+          path: publish/HelloDotnetTen.Console/win-x64/
+          if-no-files-found: warn
+
+      - name: Upload Windows x86 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloDotnetTen-win-x86
+          path: publish/HelloDotnetTen.Console/win-x86/
+          if-no-files-found: warn
+
+      - name: Upload Windows ARM64 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloDotnetTen-win-arm64
+          path: publish/HelloDotnetTen.Console/win-arm64/
+          if-no-files-found: warn
+
+      - name: Upload Linux x64 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloDotnetTen-linux-x64
+          path: publish/HelloDotnetTen.Console/linux-x64/
+          if-no-files-found: warn
+
+      - name: Upload Linux ARM64 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloDotnetTen-linux-arm64
+          path: publish/HelloDotnetTen.Console/linux-arm64/
+          if-no-files-found: warn
+
+      - name: Upload Linux ARM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloDotnetTen-linux-arm
+          path: publish/HelloDotnetTen.Console/linux-arm/
+          if-no-files-found: warn
+
+      - name: Upload Linux musl x64 (Alpine) artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloDotnetTen-linux-musl-x64
+          path: publish/HelloDotnetTen.Console/linux-musl-x64/
+          if-no-files-found: warn
+
+      - name: Upload Linux musl ARM64 (Alpine) artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloDotnetTen-linux-musl-arm64
+          path: publish/HelloDotnetTen.Console/linux-musl-arm64/
+          if-no-files-found: warn
+
+      - name: Upload macOS x64 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloDotnetTen-osx-x64
+          path: publish/HelloDotnetTen.Console/osx-x64/
+          if-no-files-found: warn
+
+      - name: Upload macOS ARM64 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloDotnetTen-osx-arm64
+          path: publish/HelloDotnetTen.Console/osx-arm64/
+          if-no-files-found: warn
+
+      - name: Upload publish manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: publish-manifest
+          path: publish/publish-manifest.json
+          if-no-files-found: warn
+
+
+
+================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\publish-manifest.json
 SIZE: 4.18 KB
-MODIFIED: 12/07/2025 11:17:12
+MODIFIED: 12/07/2025 11:18:33
 ================================================================================
 
 {
     "Configuration":  "Full Runtime (No Trimming)",
-    "GeneratedAt":  "2025-12-07T11:17:12.3290465-05:00",
+    "GeneratedAt":  "2025-12-07T11:18:33.5899597-05:00",
     "Results":  [
                     {
                         "Status":  "Success",
@@ -293,7 +431,7 @@ MODIFIED: 12/07/2025 11:17:12
                         "Size":  "35.64 MB"
                     }
                 ],
-    "ElapsedSeconds":  44.57
+    "ElapsedSeconds":  44.75
 }
 
 
@@ -1906,7 +2044,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/07/2025 11:17:48
-Total Files Exported: 21
+EXPORT COMPLETED: 12/07/2025 11:23:49
+Total Files Exported: 22
 Output File: .\docs\llm\dump.txt
 ===============================================================================
