@@ -7398,3 +7398,109 @@ Write-Host "All builds completed successfully!" -ForegroundColor Green
 
 
 
+Before 
+2025-12-07 10:52:21
+=============================================
+  Self-Contained Executable Publisher
+=============================================
+
+Project Path: source\HelloDotnetTen
+Output Directory: publish
+Platforms: 10
+
+
+Publishing: HelloDotnetTen.Console
+= * 50
+  [1/10] win-x64... OK (12.24 MB)
+  [2/10] win-x86... OK (10.93 MB)
+  [3/10] win-arm64... OK (12.7 MB)
+  [4/10] linux-x64... OK (14.15 MB)
+  [5/10] linux-arm64... OK (13.53 MB)
+  [6/10] linux-arm... OK (9.32 MB)
+  [7/10] linux-musl-x64... OK (14.18 MB)
+  [8/10] linux-musl-arm64... OK (13.57 MB)
+  [9/10] osx-x64... OK (13.77 MB)
+  [10/10] osx-arm64... OK (12.89 MB)
+
+=============================================
+  PUBLISH SUMMARY
+=============================================
+
+Elapsed Time: 1.87 minutes
+
+Successful: 10
+Failed: 0
+
+Platform Results:
+- * 80
+  win-x64             12.24 MB  Success
+  win-x86             10.93 MB  Success
+  win-arm64           12.7 MB   Success
+  linux-x64           14.15 MB  Success
+  linux-arm64         13.53 MB  Success
+  linux-arm           9.32 MB   Success
+  linux-musl-x64      14.18 MB  Success
+  linux-musl-arm64    13.57 MB  Success
+  osx-x64             13.77 MB  Success
+  osx-arm64           12.89 MB  Success
+
+Output Location: C:\Users\kushal\source\repos\HelloDotnetTen\publish
+
+Manifest saved: publish\publish-manifest.json
+All builds completed successfully!
+2025-12-07 10:54:14
+
+After 
+2025-12-07 10:59:22
+2025-12-07 10:59:22
+=============================================
+  Self-Contained Executable Publisher
+  (Full Runtime - No Trimming)
+=============================================
+
+Project Path: source\HelloDotnetTen
+Output Directory: publish
+Platforms: 10
+
+
+Publishing: HelloDotnetTen.Console
+= * 50
+  [1/10] win-x64... OK (36.75 MB)
+  [2/10] win-x86... OK (34.12 MB)
+  [3/10] win-arm64... OK (36.1 MB)
+  [4/10] linux-x64... OK (38.27 MB)
+  [5/10] linux-arm64... OK (36.29 MB)
+  [6/10] linux-arm... OK (33.51 MB)
+  [7/10] linux-musl-x64... OK (38.29 MB)
+  [8/10] linux-musl-arm64... OK (36.33 MB)
+  [9/10] osx-x64... OK (37.9 MB)
+  [10/10] osx-arm64... OK (35.64 MB)
+
+=============================================
+  PUBLISH SUMMARY (Full Runtime)
+=============================================
+
+Elapsed Time: 0.76 minutes
+
+Successful: 10
+Failed: 0
+
+Platform Results:
+- * 80
+  win-x64             36.75 MB    Success
+  win-x86             34.12 MB    Success
+  win-arm64           36.1 MB     Success
+  linux-x64           38.27 MB    Success
+  linux-arm64         36.29 MB    Success
+  linux-arm           33.51 MB    Success
+  linux-musl-x64      38.29 MB    Success
+  linux-musl-arm64    36.33 MB    Success
+  osx-x64             37.9 MB     Success
+  osx-arm64           35.64 MB    Success
+
+Output Location: C:\Users\kushal\source\repos\HelloDotnetTen\publish
+
+Manifest saved: publish\publish-manifest.json
+All builds completed successfully!
+2025-12-07 11:00:08
+2025-12-07 11:00:08
