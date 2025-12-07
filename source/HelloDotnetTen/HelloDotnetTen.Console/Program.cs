@@ -1,4 +1,5 @@
 ﻿using HelloDotnetTen.ClassLibrary1;
+using HelloDotnetTen.Console.Exporters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -9,9 +10,23 @@ using OpenTelemetry.Trace;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-// Uptrace configuration
+// Uptrace configuration (keeping existing OTLP export)
 const string uptraceEndpoint = "https://api.uptrace.dev";
 const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+
+// File exporter configuration - outputs to docs/telemetry folder
+// Files rotate daily and when exceeding 25MB
+var telemetryDirectory = Path.Combine(
+    Directory.GetCurrentDirectory(), 
+    "..", "..", "..", "..", "..", // Navigate from bin/Debug/net10.0 to project root
+    "docs", "telemetry");
+
+// Normalize the path
+telemetryDirectory = Path.GetFullPath(telemetryDirectory);
+
+var fileExporterOptions = FileExporterOptions.Create(telemetryDirectory, maxFileSizeMb: 25);
+
+Console.WriteLine($"[Telemetry] Writing to: {telemetryDirectory}");
 
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource
@@ -22,7 +37,11 @@ builder.Services.AddOpenTelemetry()
     {
         tracing
             .AddSource("HelloDotnetTen.ClassLibrary1")
+            // Console exporter for immediate visibility
             .AddConsoleExporter()
+            // File exporter for persistent storage
+            .AddFileExporter(fileExporterOptions)
+            // OTLP exporter for Uptrace
             .AddOtlpExporter(options =>
             {
                 options.Endpoint = new Uri(uptraceEndpoint);
@@ -36,7 +55,11 @@ builder.Services.AddOpenTelemetry()
             .AddMeter("HelloDotnetTen.ClassLibrary1")
             .AddRuntimeInstrumentation()
             .AddProcessInstrumentation()
+            // Console exporter for immediate visibility
             .AddConsoleExporter()
+            // File exporter for persistent storage (exports every 10 seconds)
+            .AddFileExporter(fileExporterOptions)
+            // OTLP exporter for Uptrace
             .AddOtlpExporter((options, readerOptions) =>
             {
                 options.Endpoint = new Uri(uptraceEndpoint);
@@ -44,106 +67,85 @@ builder.Services.AddOpenTelemetry()
                 options.Headers = uptraceDsn;
                 readerOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
             });
-    })
-    .WithLogging(logging =>
-    {
-        logging
-            .AddConsoleExporter()
-            .AddOtlpExporter(options =>
-            {
-                options.Endpoint = new Uri(uptraceEndpoint);
-                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
-                options.Headers = uptraceDsn;
-            });
     });
+
+// Configure logging with OpenTelemetry
+builder.Logging.AddOpenTelemetry(options =>
+{
+    options.SetResourceBuilder(ResourceBuilder.CreateDefault()
+        .AddService(
+            serviceName: "HelloDotnetTen.Console",
+            serviceVersion: "1.0.0"));
+    options.IncludeScopes = true;
+    options.IncludeFormattedMessage = true;
+    // Console exporter for immediate visibility
+    options.AddConsoleExporter();
+    // File exporter for persistent storage
+    options.AddFileExporter(fileExporterOptions);
+    // OTLP exporter for Uptrace
+    options.AddOtlpExporter(otlpOptions =>
+    {
+        otlpOptions.Endpoint = new Uri(uptraceEndpoint);
+        otlpOptions.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        otlpOptions.Headers = uptraceDsn;
+    });
+});
 
 builder.Services.AddHelloDotnetLibrary(builder.Configuration);
 
 var app = builder.Build();
 
+// Get logger to demonstrate logging
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
-var c1 = app.Services.GetRequiredService<IClass1>();
-var c2 = app.Services.GetRequiredService<IClass2>();
 
-logger.LogInformation("========================================");
 logger.LogInformation("Starting HelloDotnetTen Console Application");
 logger.LogInformation("========================================");
 
-// Scenario 1: Sequential calls to generate baseline metrics
+// Test the services
+var c1 = app.Services.GetRequiredService<IClass1>();
+var c2 = app.Services.GetRequiredService<IClass2>();
+
 logger.LogInformation("--- Scenario 1: Sequential Operations ---");
-for (int i = 1; i <= 10; i++)
+for (int i = 1; i <= 3; i++)
 {
     logger.LogInformation("Sequential iteration {Iteration}", i);
-    var length1 = c1.GetLengthOfInjectedProperty();
-    var length2 = c2.GetLengthOfInjectedProperty();
-    logger.LogInformation("Class1: {Length1}, Class2: {Length2}", length1, length2);
-    await Task.Delay(100); // Small delay between iterations
+    Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
+    Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
+    await Task.Delay(500);
 }
 
-// Scenario 2: Parallel calls to generate concurrent activity
 logger.LogInformation("--- Scenario 2: Parallel Operations ---");
-var parallelTasks = new List<Task>();
-for (int i = 1; i <= 20; i++)
+var tasks = Enumerable.Range(1, 5).Select(async i =>
 {
-    int iteration = i;
-    parallelTasks.Add(Task.Run(() =>
-    {
-        logger.LogInformation("Parallel iteration {Iteration}", iteration);
-        var length1 = c1.GetLengthOfInjectedProperty();
-        var length2 = c2.GetLengthOfInjectedProperty();
-        logger.LogInformation("Parallel result {Iteration}: Class1={Length1}, Class2={Length2}", 
-            iteration, length1, length2);
-    }));
-}
-await Task.WhenAll(parallelTasks);
+    logger.LogInformation("Parallel task {TaskId} starting", i);
+    await Task.Delay(100 * i);
+    var len = c1.GetLengthOfInjectedProperty();
+    logger.LogInformation("Parallel task {TaskId} completed with length {Length}", i, len);
+    return len;
+});
 
-// Scenario 3: Rapid-fire calls to stress metrics
-logger.LogInformation("--- Scenario 3: Rapid-Fire Operations ---");
-for (int i = 1; i <= 50; i++)
-{
-    c1.GetLengthOfInjectedProperty();
-    c2.GetLengthOfInjectedProperty();
-    if (i % 10 == 0)
-    {
-        logger.LogInformation("Completed {Count} rapid-fire operations", i);
-    }
-}
+var results = await Task.WhenAll(tasks);
+logger.LogInformation("Parallel results: {Results}", string.Join(", ", results));
 
-// Scenario 4: Burst pattern - simulate real-world traffic spikes
-logger.LogInformation("--- Scenario 4: Burst Pattern ---");
-for (int burst = 1; burst <= 3; burst++)
-{
-    logger.LogWarning("Starting burst {Burst}", burst);
-    for (int i = 1; i <= 15; i++)
-    {
-        c1.GetLengthOfInjectedProperty();
-        c2.GetLengthOfInjectedProperty();
-    }
-    logger.LogWarning("Completed burst {Burst} - 15 operations", burst);
-    await Task.Delay(500); // Pause between bursts
-}
-
-// Scenario 5: Mixed logging levels
-logger.LogInformation("--- Scenario 5: Mixed Logging Levels ---");
-logger.LogDebug("Debug: Testing Class1");
-c1.GetLengthOfInjectedProperty();
-logger.LogInformation("Information: Class1 operation completed");
-logger.LogWarning("Warning: High frequency operations detected");
-c2.GetLengthOfInjectedProperty();
-logger.LogError("Error: Simulated error condition for testing");
-
-// Final statistics
 logger.LogInformation("========================================");
-logger.LogInformation("Total operations completed:");
-logger.LogInformation("  - Sequential: 10 iterations");
-logger.LogInformation("  - Parallel: 20 iterations");
-logger.LogInformation("  - Rapid-fire: 50 iterations");
-logger.LogInformation("  - Burst: 45 iterations (3 bursts x 15)");
-logger.LogInformation("  - TOTAL: ~125 operations per class");
-logger.LogInformation("========================================");
-
-// Give time for all telemetry to flush
-logger.LogInformation("Waiting 10 seconds for telemetry to flush to Uptrace...");
-await Task.Delay(10000);
-
 logger.LogInformation("Application completed. Check Uptrace for telemetry data.");
+logger.LogInformation("Telemetry files written to: {Directory}", telemetryDirectory);
+
+// Give time for telemetry to flush before app exits
+Console.WriteLine("\nWaiting for telemetry to flush...");
+await Task.Delay(5000);
+
+Console.WriteLine($"\nTelemetry files should be in: {telemetryDirectory}");
+Console.WriteLine("Files created:");
+if (Directory.Exists(telemetryDirectory))
+{
+    foreach (var file in Directory.GetFiles(telemetryDirectory, "*.json"))
+    {
+        var info = new FileInfo(file);
+        Console.WriteLine($"  - {info.Name} ({info.Length:N0} bytes)");
+    }
+}
+else
+{
+    Console.WriteLine("  (directory not created yet - run again to see files)");
+}

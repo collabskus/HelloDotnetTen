@@ -4798,3 +4798,1433 @@ This should generate approximately **125+ operations per class** with diverse pa
 
 
 
+I have included dump.txt which contains the code for this repository. 
+I have also included output.txt which shows me building and running this console application. 
+I would like to make the necessary changes to write the open telemetry logs -- spans, metrics, traces, logs, alerts, everything possible that comes out of the application into machine readable (and preferably human readable as well) files in a folder within docs just like we have `docs\llm` folder. 
+I want to later also investigate why the opentelemetry stuff  doesn't appear in uptrace but first, lets write everything to this folder. 
+Logs should rotate every day, meaning a new file file should be created every day. 
+Additionally, log files should not exceed 25MB although I doubt they will anyway. 
+
+
+
+
+Opus 4.5 
+
+I'll search through your project files to understand the current OpenTelemetry setup and codebase structure.Now let me search for the current Program.cs and Class1.cs to understand the full current state:Now let me get the current full state of Program.cs from dump.txt:Now I have a good understanding of your current setup. Let me search for information about file-based exporters for OpenTelemetry:Now I have a good understanding. File exporter is not implemented in .NET - we'll need to create custom exporters. Let me create a comprehensive solution with custom file exporters for traces, metrics, and logs with daily rotation and size limits.Now let me create a summary document explaining all the files and the folder structure:Here's a summary of what I've created for you:
+
+## Summary
+
+I've created a complete custom file exporter implementation for OpenTelemetry that will write all telemetry (traces, metrics, and logs) to JSON files in `docs/telemetry/`. Since OpenTelemetry .NET doesn't have a built-in file exporter, I created custom exporters following the official OpenTelemetry SDK patterns.
+
+### Files to Create
+
+Create a new folder `source/HelloDotnetTen/HelloDotnetTen.Console/Exporters/` and add these 5 files:
+
+1. **FileExporterOptions.cs** - Configuration class with directory path and 25MB max file size
+2. **FileActivityExporter.cs** - Exports traces/spans to JSON files
+3. **FileMetricExporter.cs** - Exports metrics to JSON files  
+4. **FileLogExporter.cs** - Exports logs to JSON files
+5. **FileExporterExtensions.cs** - Extension methods for easy integration
+
+Then update **Program.cs** with the new version that includes the file exporters alongside the existing console and OTLP exporters.
+
+### Key Features
+
+- **Daily rotation**: Files are named `traces_2025-12-07.json`, `metrics_2025-12-07.json`, `logs_2025-12-07.json`
+- **Size rotation**: When a file exceeds 25MB, it creates `traces_2025-12-07_001.json`, etc.
+- **Human & machine readable**: Pretty-printed JSON with clear field names
+- **Output location**: `docs/telemetry/` folder (parallel to your `docs/llm/` folder)
+- **All signals**: Traces, metrics, and logs are all captured
+
+### What the Files Will Contain
+
+The JSON files include:
+- **Traces**: TraceId, SpanId, operation name, duration, tags, events, links
+- **Metrics**: Metric name, type (counter/gauge/histogram), values, timestamps, tags
+- **Logs**: Severity, message, structured attributes, trace correlation, exceptions
+
+This will give you a complete local copy of all telemetry data that you can then compare against what should be arriving at Uptrace, helping you debug why the Uptrace integration might not be working.
+
+
+
+
+# OpenTelemetry File Exporter Implementation Guide
+
+## Overview
+
+This implementation adds custom file exporters for OpenTelemetry in .NET that write traces, metrics, and logs to JSON files in `docs/telemetry/`. The files are:
+
+- **Human-readable**: Pretty-printed JSON with clear field names
+- **Machine-readable**: Standard JSON format that can be parsed programmatically
+- **Daily rotation**: New files are created each day
+- **Size-limited**: Files rotate when exceeding 25MB
+
+## Folder Structure
+
+After implementation, your project should look like this:
+
+```
+HelloDotnetTen/
+├── docs/
+│   ├── llm/
+│   │   └── dump.txt
+│   └── telemetry/              ← NEW: Telemetry output folder
+│       ├── traces_2025-12-07.json
+│       ├── metrics_2025-12-07.json
+│       └── logs_2025-12-07.json
+└── source/
+    └── HelloDotnetTen/
+        └── HelloDotnetTen.Console/
+            ├── Exporters/          ← NEW: Custom exporter folder
+            │   ├── FileActivityExporter.cs
+            │   ├── FileMetricExporter.cs
+            │   ├── FileLogExporter.cs
+            │   ├── FileExporterOptions.cs
+            │   └── FileExporterExtensions.cs
+            ├── Program.cs          ← MODIFIED
+            └── HelloDotnetTen.Console.csproj
+```
+
+## Files to Create
+
+### 1. Create the Exporters folder
+```bash
+mkdir source\HelloDotnetTen\HelloDotnetTen.Console\Exporters
+```
+
+### 2. Create docs/telemetry folder
+```bash
+mkdir docs\telemetry
+```
+
+### 3. Add these files to the Exporters folder:
+- `FileExporterOptions.cs` - Configuration class
+- `FileActivityExporter.cs` - Trace exporter
+- `FileMetricExporter.cs` - Metrics exporter
+- `FileLogExporter.cs` - Log exporter
+- `FileExporterExtensions.cs` - Extension methods
+
+### 4. Update Program.cs
+Replace your existing Program.cs with the updated version.
+
+## File Naming Convention
+
+Files are named using this pattern:
+- `traces_YYYY-MM-DD.json` - Daily trace file
+- `metrics_YYYY-MM-DD.json` - Daily metrics file
+- `logs_YYYY-MM-DD.json` - Daily logs file
+
+If a file exceeds 25MB, it rotates to:
+- `traces_YYYY-MM-DD_001.json`
+- `traces_YYYY-MM-DD_002.json`
+- etc.
+
+## Sample Output
+
+### traces_2025-12-07.json
+```json
+{
+  "timestamp": "2025-12-07T14:30:00.0000000Z",
+  "traceId": "abc123...",
+  "spanId": "def456...",
+  "parentSpanId": "",
+  "operationName": "Class1.GetLengthOfInjectedProperty",
+  "displayName": "Class1.GetLengthOfInjectedProperty",
+  "kind": "Internal",
+  "status": {
+    "code": "Ok",
+    "description": null
+  },
+  "startTime": "2025-12-07T14:30:00.0000000Z",
+  "endTime": "2025-12-07T14:30:00.0050000Z",
+  "durationMs": 5.0,
+  "tags": {
+    "property.length": "27",
+    "property.value": "Hello from Class 1 Config"
+  },
+  "events": [],
+  "links": [],
+  "resource": {
+    "service.name": "HelloDotnetTen.Console",
+    "service.version": "1.0.0"
+  }
+}
+```
+
+### metrics_2025-12-07.json
+```json
+{
+  "timestamp": "2025-12-07T14:30:10.0000000Z",
+  "name": "class1.method_calls",
+  "description": "Number of times GetLengthOfInjectedProperty was called",
+  "unit": null,
+  "type": "LongSum",
+  "tags": {
+    "status": "success"
+  },
+  "value": 15,
+  "startTime": "2025-12-07T14:30:00.0000000Z",
+  "endTime": "2025-12-07T14:30:10.0000000Z",
+  "resource": {
+    "service.name": "HelloDotnetTen.Console",
+    "service.version": "1.0.0"
+  }
+}
+```
+
+### logs_2025-12-07.json
+```json
+{
+  "timestamp": "2025-12-07T14:30:00.1230000Z",
+  "traceId": "abc123...",
+  "spanId": "def456...",
+  "traceFlags": "Recorded",
+  "categoryName": "HelloDotnetTen.ClassLibrary1.Class1",
+  "severity": "Information",
+  "severityText": "Information",
+  "body": "InjectedProperty1 length is {Length}",
+  "formattedMessage": "InjectedProperty1 length is 27",
+  "attributes": {
+    "Length": 27,
+    "OriginalFormat (a.k.a Body)": "InjectedProperty1 length is {Length}"
+  },
+  "eventId": null,
+  "exception": null,
+  "resource": {
+    "service.name": "HelloDotnetTen.Console",
+    "service.version": "1.0.0"
+  }
+}
+```
+
+## Verifying the Implementation
+
+After running the application, check:
+
+1. **Console output** - You should see telemetry printed immediately
+2. **docs/telemetry folder** - Should contain JSON files
+3. **File contents** - Open the JSON files to verify format
+
+## Configuration Options
+
+You can customize the file exporter in Program.cs:
+
+```csharp
+// Change output directory
+var fileExporterOptions = FileExporterOptions.ForDirectory("custom/path");
+
+// Change max file size (in MB)
+var fileExporterOptions = FileExporterOptions.Create("docs/telemetry", maxFileSizeMb: 10);
+
+// Or configure inline
+.AddFileExporter(opts => {
+    opts.Directory = "docs/telemetry";
+    opts.MaxFileSizeBytes = 50 * 1024 * 1024; // 50MB
+})
+```
+
+## Next Steps: Investigating Uptrace
+
+Now that you have telemetry being written to files, you can:
+
+1. **Compare** what's in the files vs what Uptrace receives
+2. **Verify** the OTLP data format is correct
+3. **Check** network connectivity to Uptrace
+4. **Review** Uptrace DSN and endpoint configuration
+
+
+
+
+
+
+
+using System.Diagnostics;
+using System.Text;
+using System.Text.Json;
+using OpenTelemetry;
+
+namespace HelloDotnetTen.Console.Exporters;
+
+/// <summary>
+/// Custom file exporter for OpenTelemetry traces (Activities).
+/// Writes traces to JSON files with daily rotation and size limits.
+/// </summary>
+public class FileActivityExporter : BaseExporter<Activity>
+{
+    private readonly FileExporterOptions _options;
+    private readonly object _lock = new();
+    private StreamWriter? _writer;
+    private string _currentFilePath = string.Empty;
+    private DateTime _currentFileDate;
+    private long _currentFileSize;
+    private readonly JsonSerializerOptions _jsonOptions;
+
+    public FileActivityExporter(FileExporterOptions options)
+    {
+        _options = options ?? throw new ArgumentNullException(nameof(options));
+        _jsonOptions = new JsonSerializerOptions 
+        { 
+            WriteIndented = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        EnsureDirectoryExists();
+    }
+
+    public override ExportResult Export(in Batch<Activity> batch)
+    {
+        using var scope = SuppressInstrumentationScope.Begin();
+        
+        try
+        {
+            lock (_lock)
+            {
+                EnsureWriter();
+                
+                foreach (var activity in batch)
+                {
+                    var record = SerializeActivity(activity);
+                    var json = JsonSerializer.Serialize(record, _jsonOptions);
+                    
+                    // Check if we need to rotate before writing
+                    var bytesToWrite = Encoding.UTF8.GetByteCount(json) + Environment.NewLine.Length;
+                    if (_currentFileSize + bytesToWrite > _options.MaxFileSizeBytes)
+                    {
+                        RotateFile();
+                    }
+                    
+                    _writer!.WriteLine(json);
+                    _currentFileSize += bytesToWrite;
+                }
+                
+                _writer!.Flush();
+            }
+            
+            return ExportResult.Success;
+        }
+        catch (Exception ex)
+        {
+            System.Console.Error.WriteLine($"[FileActivityExporter] Export failed: {ex.Message}");
+            return ExportResult.Failure;
+        }
+    }
+
+    private object SerializeActivity(Activity activity)
+    {
+        return new
+        {
+            Timestamp = activity.StartTimeUtc.ToString("O"),
+            TraceId = activity.TraceId.ToString(),
+            SpanId = activity.SpanId.ToString(),
+            ParentSpanId = activity.ParentSpanId.ToString(),
+            OperationName = activity.OperationName,
+            DisplayName = activity.DisplayName,
+            Kind = activity.Kind.ToString(),
+            Status = new
+            {
+                Code = activity.Status.ToString(),
+                Description = activity.StatusDescription
+            },
+            StartTime = activity.StartTimeUtc.ToString("O"),
+            EndTime = (activity.StartTimeUtc + activity.Duration).ToString("O"),
+            DurationMs = activity.Duration.TotalMilliseconds,
+            Tags = activity.TagObjects.ToDictionary(t => t.Key, t => t.Value?.ToString()),
+            Events = activity.Events.Select(e => new
+            {
+                Name = e.Name,
+                Timestamp = e.Timestamp.ToString("O"),
+                Attributes = e.Tags.ToDictionary(t => t.Key, t => t.Value?.ToString())
+            }).ToArray(),
+            Links = activity.Links.Select(l => new
+            {
+                TraceId = l.Context.TraceId.ToString(),
+                SpanId = l.Context.SpanId.ToString()
+            }).ToArray(),
+            Resource = ParentProvider?.GetResource()?.Attributes
+                .ToDictionary(a => a.Key, a => a.Value?.ToString())
+        };
+    }
+
+    private void EnsureDirectoryExists()
+    {
+        if (!Directory.Exists(_options.Directory))
+        {
+            Directory.CreateDirectory(_options.Directory);
+        }
+    }
+
+    private void EnsureWriter()
+    {
+        var today = DateTime.UtcNow.Date;
+        
+        if (_writer == null || _currentFileDate != today)
+        {
+            CloseWriter();
+            OpenNewFile(today);
+        }
+    }
+
+    private void OpenNewFile(DateTime date)
+    {
+        _currentFileDate = date;
+        _currentFilePath = GetFilePath(date, 0);
+        
+        // Find the next available file number if file exists and is at size limit
+        int fileNumber = 0;
+        while (File.Exists(_currentFilePath))
+        {
+            var existingSize = new FileInfo(_currentFilePath).Length;
+            if (existingSize < _options.MaxFileSizeBytes)
+            {
+                // Can append to this file
+                _currentFileSize = existingSize;
+                break;
+            }
+            fileNumber++;
+            _currentFilePath = GetFilePath(date, fileNumber);
+        }
+        
+        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
+        _currentFileSize = File.Exists(_currentFilePath) ? new FileInfo(_currentFilePath).Length : 0;
+    }
+
+    private void RotateFile()
+    {
+        CloseWriter();
+        
+        // Find next available file number
+        int fileNumber = 1;
+        string newPath;
+        do
+        {
+            newPath = GetFilePath(_currentFileDate, fileNumber);
+            fileNumber++;
+        } while (File.Exists(newPath) && new FileInfo(newPath).Length >= _options.MaxFileSizeBytes);
+        
+        _currentFilePath = newPath;
+        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
+        _currentFileSize = 0;
+    }
+
+    private string GetFilePath(DateTime date, int fileNumber)
+    {
+        var fileName = fileNumber == 0
+            ? $"traces_{date:yyyy-MM-dd}.json"
+            : $"traces_{date:yyyy-MM-dd}_{fileNumber:D3}.json";
+        return Path.Combine(_options.Directory, fileName);
+    }
+
+    private void CloseWriter()
+    {
+        _writer?.Flush();
+        _writer?.Dispose();
+        _writer = null;
+    }
+
+    protected override bool OnShutdown(int timeoutMilliseconds)
+    {
+        lock (_lock)
+        {
+            CloseWriter();
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+
+
+using HelloDotnetTen.ClassLibrary1;
+using HelloDotnetTen.Console.Exporters;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+
+var builder = Host.CreateApplicationBuilder(args);
+
+// Uptrace configuration (keeping existing OTLP export)
+const string uptraceEndpoint = "https://api.uptrace.dev";
+const string uptraceDsn = "uptrace-dsn=https://20MWRhNvOdzl6e7VCczHvA@api.uptrace.dev?grpc=4317";
+
+// File exporter configuration - outputs to docs/telemetry folder
+// Files rotate daily and when exceeding 25MB
+var telemetryDirectory = Path.Combine(
+    Directory.GetCurrentDirectory(), 
+    "..", "..", "..", "..", "..", // Navigate from bin/Debug/net10.0 to project root
+    "docs", "telemetry");
+
+// Normalize the path
+telemetryDirectory = Path.GetFullPath(telemetryDirectory);
+
+var fileExporterOptions = FileExporterOptions.Create(telemetryDirectory, maxFileSizeMb: 25);
+
+Console.WriteLine($"[Telemetry] Writing to: {telemetryDirectory}");
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource
+        .AddService(
+            serviceName: "HelloDotnetTen.Console",
+            serviceVersion: "1.0.0"))
+    .WithTracing(tracing =>
+    {
+        tracing
+            .AddSource("HelloDotnetTen.ClassLibrary1")
+            // Console exporter for immediate visibility
+            .AddConsoleExporter()
+            // File exporter for persistent storage
+            .AddFileExporter(fileExporterOptions)
+            // OTLP exporter for Uptrace
+            .AddOtlpExporter(options =>
+            {
+                options.Endpoint = new Uri(uptraceEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = uptraceDsn;
+            });
+    })
+    .WithMetrics(metrics =>
+    {
+        metrics
+            .AddMeter("HelloDotnetTen.ClassLibrary1")
+            .AddRuntimeInstrumentation()
+            .AddProcessInstrumentation()
+            // Console exporter for immediate visibility
+            .AddConsoleExporter()
+            // File exporter for persistent storage (exports every 10 seconds)
+            .AddFileExporter(fileExporterOptions)
+            // OTLP exporter for Uptrace
+            .AddOtlpExporter((options, readerOptions) =>
+            {
+                options.Endpoint = new Uri(uptraceEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+                options.Headers = uptraceDsn;
+                readerOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
+            });
+    });
+
+// Configure logging with OpenTelemetry
+builder.Logging.AddOpenTelemetry(options =>
+{
+    options.SetResourceBuilder(ResourceBuilder.CreateDefault()
+        .AddService(
+            serviceName: "HelloDotnetTen.Console",
+            serviceVersion: "1.0.0"));
+    options.IncludeScopes = true;
+    options.IncludeFormattedMessage = true;
+    // Console exporter for immediate visibility
+    options.AddConsoleExporter();
+    // File exporter for persistent storage
+    options.AddFileExporter(fileExporterOptions);
+    // OTLP exporter for Uptrace
+    options.AddOtlpExporter(otlpOptions =>
+    {
+        otlpOptions.Endpoint = new Uri(uptraceEndpoint);
+        otlpOptions.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+        otlpOptions.Headers = uptraceDsn;
+    });
+});
+
+builder.Services.AddHelloDotnetLibrary(builder.Configuration);
+
+var app = builder.Build();
+
+// Get logger to demonstrate logging
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
+logger.LogInformation("Starting HelloDotnetTen Console Application");
+logger.LogInformation("========================================");
+
+// Test the services
+var c1 = app.Services.GetRequiredService<IClass1>();
+var c2 = app.Services.GetRequiredService<IClass2>();
+
+logger.LogInformation("--- Scenario 1: Sequential Operations ---");
+for (int i = 1; i <= 3; i++)
+{
+    logger.LogInformation("Sequential iteration {Iteration}", i);
+    Console.WriteLine($"Class1 length: {c1.GetLengthOfInjectedProperty()}");
+    Console.WriteLine($"Class2 length: {c2.GetLengthOfInjectedProperty()}");
+    await Task.Delay(500);
+}
+
+logger.LogInformation("--- Scenario 2: Parallel Operations ---");
+var tasks = Enumerable.Range(1, 5).Select(async i =>
+{
+    logger.LogInformation("Parallel task {TaskId} starting", i);
+    await Task.Delay(100 * i);
+    var len = c1.GetLengthOfInjectedProperty();
+    logger.LogInformation("Parallel task {TaskId} completed with length {Length}", i, len);
+    return len;
+});
+
+var results = await Task.WhenAll(tasks);
+logger.LogInformation("Parallel results: {Results}", string.Join(", ", results));
+
+logger.LogInformation("========================================");
+logger.LogInformation("Application completed. Check Uptrace for telemetry data.");
+logger.LogInformation("Telemetry files written to: {Directory}", telemetryDirectory);
+
+// Give time for telemetry to flush before app exits
+Console.WriteLine("\nWaiting for telemetry to flush...");
+await Task.Delay(5000);
+
+Console.WriteLine($"\nTelemetry files should be in: {telemetryDirectory}");
+Console.WriteLine("Files created:");
+if (Directory.Exists(telemetryDirectory))
+{
+    foreach (var file in Directory.GetFiles(telemetryDirectory, "*.json"))
+    {
+        var info = new FileInfo(file);
+        Console.WriteLine($"  - {info.Name} ({info.Length:N0} bytes)");
+    }
+}
+else
+{
+    Console.WriteLine("  (directory not created yet - run again to see files)");
+}
+
+
+
+
+
+
+
+
+
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Trace;
+
+namespace HelloDotnetTen.Console.Exporters;
+
+/// <summary>
+/// Extension methods for adding file exporters to OpenTelemetry builders.
+/// </summary>
+public static class FileExporterExtensions
+{
+    /// <summary>
+    /// Adds a file exporter for traces to the TracerProviderBuilder.
+    /// </summary>
+    /// <param name="builder">The TracerProviderBuilder to add the exporter to.</param>
+    /// <param name="options">Optional configuration options.</param>
+    /// <returns>The TracerProviderBuilder for method chaining.</returns>
+    public static TracerProviderBuilder AddFileExporter(
+        this TracerProviderBuilder builder,
+        FileExporterOptions? options = null)
+    {
+        options ??= FileExporterOptions.Default;
+        
+        return builder.AddProcessor(
+            new BatchActivityExportProcessor(new FileActivityExporter(options)));
+    }
+
+    /// <summary>
+    /// Adds a file exporter for traces with custom configuration.
+    /// </summary>
+    public static TracerProviderBuilder AddFileExporter(
+        this TracerProviderBuilder builder,
+        Action<FileExporterOptions> configure)
+    {
+        var options = new FileExporterOptions();
+        configure(options);
+        return builder.AddFileExporter(options);
+    }
+
+    /// <summary>
+    /// Adds a file exporter for metrics to the MeterProviderBuilder.
+    /// </summary>
+    /// <param name="builder">The MeterProviderBuilder to add the exporter to.</param>
+    /// <param name="options">Optional configuration options.</param>
+    /// <returns>The MeterProviderBuilder for method chaining.</returns>
+    public static MeterProviderBuilder AddFileExporter(
+        this MeterProviderBuilder builder,
+        FileExporterOptions? options = null)
+    {
+        options ??= FileExporterOptions.Default;
+        
+        return builder.AddReader(
+            new PeriodicExportingMetricReader(
+                new FileMetricExporter(options),
+                exportIntervalMilliseconds: 10000)); // Export every 10 seconds
+    }
+
+    /// <summary>
+    /// Adds a file exporter for metrics with custom configuration.
+    /// </summary>
+    public static MeterProviderBuilder AddFileExporter(
+        this MeterProviderBuilder builder,
+        Action<FileExporterOptions> configure)
+    {
+        var options = new FileExporterOptions();
+        configure(options);
+        return builder.AddFileExporter(options);
+    }
+
+    /// <summary>
+    /// Adds a file exporter for metrics with custom export interval.
+    /// </summary>
+    public static MeterProviderBuilder AddFileExporter(
+        this MeterProviderBuilder builder,
+        FileExporterOptions options,
+        int exportIntervalMilliseconds)
+    {
+        return builder.AddReader(
+            new PeriodicExportingMetricReader(
+                new FileMetricExporter(options),
+                exportIntervalMilliseconds: exportIntervalMilliseconds));
+    }
+
+    /// <summary>
+    /// Adds a file exporter for logs to the OpenTelemetryLoggerOptions.
+    /// </summary>
+    /// <param name="options">The OpenTelemetryLoggerOptions to add the exporter to.</param>
+    /// <param name="exporterOptions">Optional configuration options.</param>
+    /// <returns>The OpenTelemetryLoggerOptions for method chaining.</returns>
+    public static OpenTelemetryLoggerOptions AddFileExporter(
+        this OpenTelemetryLoggerOptions options,
+        FileExporterOptions? exporterOptions = null)
+    {
+        exporterOptions ??= FileExporterOptions.Default;
+        
+        return options.AddProcessor(
+            new BatchLogRecordExportProcessor(new FileLogExporter(exporterOptions)));
+    }
+
+    /// <summary>
+    /// Adds a file exporter for logs with custom configuration.
+    /// </summary>
+    public static OpenTelemetryLoggerOptions AddFileExporter(
+        this OpenTelemetryLoggerOptions options,
+        Action<FileExporterOptions> configure)
+    {
+        var exporterOptions = new FileExporterOptions();
+        configure(exporterOptions);
+        return options.AddFileExporter(exporterOptions);
+    }
+}
+
+
+
+
+
+
+
+
+
+namespace HelloDotnetTen.Console.Exporters;
+
+/// <summary>
+/// Configuration options for file-based OpenTelemetry exporters.
+/// </summary>
+public class FileExporterOptions
+{
+    /// <summary>
+    /// The directory where telemetry files will be written.
+    /// </summary>
+    public string Directory { get; set; } = "telemetry";
+
+    /// <summary>
+    /// Maximum file size in bytes before rotation occurs.
+    /// Default is 25MB (25 * 1024 * 1024 bytes).
+    /// </summary>
+    public long MaxFileSizeBytes { get; set; } = 25 * 1024 * 1024; // 25MB
+
+    /// <summary>
+    /// Creates options with default values.
+    /// </summary>
+    public static FileExporterOptions Default => new();
+
+    /// <summary>
+    /// Creates options for the specified directory with default 25MB size limit.
+    /// </summary>
+    public static FileExporterOptions ForDirectory(string directory) => new()
+    {
+        Directory = directory
+    };
+
+    /// <summary>
+    /// Creates options for the specified directory and max file size in megabytes.
+    /// </summary>
+    public static FileExporterOptions Create(string directory, int maxFileSizeMb) => new()
+    {
+        Directory = directory,
+        MaxFileSizeBytes = maxFileSizeMb * 1024L * 1024L
+    };
+}
+
+
+
+
+
+
+
+
+
+
+using System.Text;
+using System.Text.Json;
+using OpenTelemetry;
+using OpenTelemetry.Logs;
+
+namespace HelloDotnetTen.Console.Exporters;
+
+/// <summary>
+/// Custom file exporter for OpenTelemetry logs.
+/// Writes logs to JSON files with daily rotation and size limits.
+/// </summary>
+public class FileLogExporter : BaseExporter<LogRecord>
+{
+    private readonly FileExporterOptions _options;
+    private readonly object _lock = new();
+    private StreamWriter? _writer;
+    private string _currentFilePath = string.Empty;
+    private DateTime _currentFileDate;
+    private long _currentFileSize;
+    private readonly JsonSerializerOptions _jsonOptions;
+
+    public FileLogExporter(FileExporterOptions options)
+    {
+        _options = options ?? throw new ArgumentNullException(nameof(options));
+        _jsonOptions = new JsonSerializerOptions 
+        { 
+            WriteIndented = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        EnsureDirectoryExists();
+    }
+
+    public override ExportResult Export(in Batch<LogRecord> batch)
+    {
+        using var scope = SuppressInstrumentationScope.Begin();
+        
+        try
+        {
+            lock (_lock)
+            {
+                EnsureWriter();
+                
+                foreach (var logRecord in batch)
+                {
+                    var record = SerializeLogRecord(logRecord);
+                    var json = JsonSerializer.Serialize(record, _jsonOptions);
+                    
+                    var bytesToWrite = Encoding.UTF8.GetByteCount(json) + Environment.NewLine.Length;
+                    if (_currentFileSize + bytesToWrite > _options.MaxFileSizeBytes)
+                    {
+                        RotateFile();
+                    }
+                    
+                    _writer!.WriteLine(json);
+                    _currentFileSize += bytesToWrite;
+                }
+                
+                _writer!.Flush();
+            }
+            
+            return ExportResult.Success;
+        }
+        catch (Exception ex)
+        {
+            System.Console.Error.WriteLine($"[FileLogExporter] Export failed: {ex.Message}");
+            return ExportResult.Failure;
+        }
+    }
+
+    private object SerializeLogRecord(LogRecord logRecord)
+    {
+        var attributes = new Dictionary<string, object?>();
+        
+        if (logRecord.Attributes != null)
+        {
+            foreach (var attr in logRecord.Attributes)
+            {
+                attributes[attr.Key] = attr.Value;
+            }
+        }
+
+        // Handle state values for structured logging
+        logRecord.ForEachScope(ProcessScope, attributes);
+
+        return new
+        {
+            Timestamp = logRecord.Timestamp.ToString("O"),
+            TraceId = logRecord.TraceId.ToString(),
+            SpanId = logRecord.SpanId.ToString(),
+            TraceFlags = logRecord.TraceFlags.ToString(),
+            CategoryName = logRecord.CategoryName,
+            Severity = logRecord.Severity?.ToString(),
+            SeverityText = logRecord.SeverityText,
+            Body = logRecord.Body,
+            FormattedMessage = logRecord.FormattedMessage,
+            Attributes = attributes,
+            EventId = logRecord.EventId.Id != 0 ? new { logRecord.EventId.Id, logRecord.EventId.Name } : null,
+            Exception = logRecord.Exception != null ? new
+            {
+                Type = logRecord.Exception.GetType().FullName,
+                Message = logRecord.Exception.Message,
+                StackTrace = logRecord.Exception.StackTrace
+            } : null,
+            Resource = ParentProvider?.GetResource()?.Attributes
+                .ToDictionary(a => a.Key, a => a.Value?.ToString())
+        };
+    }
+
+    private static readonly Action<LogRecordScope, Dictionary<string, object?>> ProcessScope = 
+        (scope, state) =>
+        {
+            foreach (var item in scope)
+            {
+                if (!state.ContainsKey(item.Key))
+                {
+                    state[item.Key] = item.Value;
+                }
+            }
+        };
+
+    private void EnsureDirectoryExists()
+    {
+        if (!Directory.Exists(_options.Directory))
+        {
+            Directory.CreateDirectory(_options.Directory);
+        }
+    }
+
+    private void EnsureWriter()
+    {
+        var today = DateTime.UtcNow.Date;
+        
+        if (_writer == null || _currentFileDate != today)
+        {
+            CloseWriter();
+            OpenNewFile(today);
+        }
+    }
+
+    private void OpenNewFile(DateTime date)
+    {
+        _currentFileDate = date;
+        _currentFilePath = GetFilePath(date, 0);
+        
+        int fileNumber = 0;
+        while (File.Exists(_currentFilePath))
+        {
+            var existingSize = new FileInfo(_currentFilePath).Length;
+            if (existingSize < _options.MaxFileSizeBytes)
+            {
+                _currentFileSize = existingSize;
+                break;
+            }
+            fileNumber++;
+            _currentFilePath = GetFilePath(date, fileNumber);
+        }
+        
+        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
+        _currentFileSize = File.Exists(_currentFilePath) ? new FileInfo(_currentFilePath).Length : 0;
+    }
+
+    private void RotateFile()
+    {
+        CloseWriter();
+        
+        int fileNumber = 1;
+        string newPath;
+        do
+        {
+            newPath = GetFilePath(_currentFileDate, fileNumber);
+            fileNumber++;
+        } while (File.Exists(newPath) && new FileInfo(newPath).Length >= _options.MaxFileSizeBytes);
+        
+        _currentFilePath = newPath;
+        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
+        _currentFileSize = 0;
+    }
+
+    private string GetFilePath(DateTime date, int fileNumber)
+    {
+        var fileName = fileNumber == 0
+            ? $"logs_{date:yyyy-MM-dd}.json"
+            : $"logs_{date:yyyy-MM-dd}_{fileNumber:D3}.json";
+        return Path.Combine(_options.Directory, fileName);
+    }
+
+    private void CloseWriter()
+    {
+        _writer?.Flush();
+        _writer?.Dispose();
+        _writer = null;
+    }
+
+    protected override bool OnShutdown(int timeoutMilliseconds)
+    {
+        lock (_lock)
+        {
+            CloseWriter();
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+
+using System.Text;
+using System.Text.Json;
+using OpenTelemetry;
+using OpenTelemetry.Metrics;
+
+namespace HelloDotnetTen.Console.Exporters;
+
+/// <summary>
+/// Custom file exporter for OpenTelemetry metrics.
+/// Writes metrics to JSON files with daily rotation and size limits.
+/// </summary>
+public class FileMetricExporter : BaseExporter<Metric>
+{
+    private readonly FileExporterOptions _options;
+    private readonly object _lock = new();
+    private StreamWriter? _writer;
+    private string _currentFilePath = string.Empty;
+    private DateTime _currentFileDate;
+    private long _currentFileSize;
+    private readonly JsonSerializerOptions _jsonOptions;
+
+    public FileMetricExporter(FileExporterOptions options)
+    {
+        _options = options ?? throw new ArgumentNullException(nameof(options));
+        _jsonOptions = new JsonSerializerOptions 
+        { 
+            WriteIndented = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        EnsureDirectoryExists();
+    }
+
+    public override ExportResult Export(in Batch<Metric> batch)
+    {
+        using var scope = SuppressInstrumentationScope.Begin();
+        
+        try
+        {
+            lock (_lock)
+            {
+                EnsureWriter();
+                
+                foreach (var metric in batch)
+                {
+                    foreach (var metricPoint in metric.GetMetricPoints())
+                    {
+                        var record = SerializeMetricPoint(metric, metricPoint);
+                        var json = JsonSerializer.Serialize(record, _jsonOptions);
+                        
+                        var bytesToWrite = Encoding.UTF8.GetByteCount(json) + Environment.NewLine.Length;
+                        if (_currentFileSize + bytesToWrite > _options.MaxFileSizeBytes)
+                        {
+                            RotateFile();
+                        }
+                        
+                        _writer!.WriteLine(json);
+                        _currentFileSize += bytesToWrite;
+                    }
+                }
+                
+                _writer!.Flush();
+            }
+            
+            return ExportResult.Success;
+        }
+        catch (Exception ex)
+        {
+            System.Console.Error.WriteLine($"[FileMetricExporter] Export failed: {ex.Message}");
+            return ExportResult.Failure;
+        }
+    }
+
+    private object SerializeMetricPoint(Metric metric, MetricPoint metricPoint)
+    {
+        var tags = new Dictionary<string, string?>();
+        foreach (var tag in metricPoint.Tags)
+        {
+            tags[tag.Key] = tag.Value?.ToString();
+        }
+
+        object? value = metric.MetricType switch
+        {
+            MetricType.LongSum => metricPoint.GetSumLong(),
+            MetricType.DoubleSum => metricPoint.GetSumDouble(),
+            MetricType.LongGauge => metricPoint.GetGaugeLastValueLong(),
+            MetricType.DoubleGauge => metricPoint.GetGaugeLastValueDouble(),
+            MetricType.Histogram => SerializeHistogram(metricPoint),
+            MetricType.ExponentialHistogram => SerializeExponentialHistogram(metricPoint),
+            _ => null
+        };
+
+        return new
+        {
+            Timestamp = metricPoint.EndTime.ToString("O"),
+            Name = metric.Name,
+            Description = metric.Description,
+            Unit = metric.Unit,
+            Type = metric.MetricType.ToString(),
+            Tags = tags,
+            Value = value,
+            StartTime = metricPoint.StartTime.ToString("O"),
+            EndTime = metricPoint.EndTime.ToString("O"),
+            Resource = ParentProvider?.GetResource()?.Attributes
+                .ToDictionary(a => a.Key, a => a.Value?.ToString())
+        };
+    }
+
+    private object SerializeHistogram(MetricPoint metricPoint)
+    {
+        var bucketCounts = new List<long>();
+        var explicitBounds = new List<double>();
+        
+        foreach (var histogramBucket in metricPoint.GetHistogramBuckets())
+        {
+            bucketCounts.Add(histogramBucket.BucketCount);
+            if (histogramBucket.ExplicitBound != double.PositiveInfinity)
+            {
+                explicitBounds.Add(histogramBucket.ExplicitBound);
+            }
+        }
+
+        return new
+        {
+            Count = metricPoint.GetHistogramCount(),
+            Sum = metricPoint.GetHistogramSum(),
+            BucketCounts = bucketCounts,
+            ExplicitBounds = explicitBounds,
+            Min = metricPoint.TryGetHistogramMinMaxValues(out var min, out _) ? min : (double?)null,
+            Max = metricPoint.TryGetHistogramMinMaxValues(out _, out var max) ? max : (double?)null
+        };
+    }
+
+    private object SerializeExponentialHistogram(MetricPoint metricPoint)
+    {
+        var data = metricPoint.GetExponentialHistogramData();
+        
+        return new
+        {
+            Count = data.Count,
+            Sum = data.Sum,
+            Scale = data.Scale,
+            ZeroCount = data.ZeroCount,
+            PositiveBuckets = SerializeExponentialBuckets(data.PositiveBuckets),
+            NegativeBuckets = SerializeExponentialBuckets(data.NegativeBuckets)
+        };
+    }
+
+    private object SerializeExponentialBuckets(ExponentialHistogramBuckets buckets)
+    {
+        var bucketCounts = new List<long>();
+        foreach (var count in buckets)
+        {
+            bucketCounts.Add(count);
+        }
+        
+        return new
+        {
+            Offset = buckets.Offset,
+            BucketCounts = bucketCounts
+        };
+    }
+
+    private void EnsureDirectoryExists()
+    {
+        if (!Directory.Exists(_options.Directory))
+        {
+            Directory.CreateDirectory(_options.Directory);
+        }
+    }
+
+    private void EnsureWriter()
+    {
+        var today = DateTime.UtcNow.Date;
+        
+        if (_writer == null || _currentFileDate != today)
+        {
+            CloseWriter();
+            OpenNewFile(today);
+        }
+    }
+
+    private void OpenNewFile(DateTime date)
+    {
+        _currentFileDate = date;
+        _currentFilePath = GetFilePath(date, 0);
+        
+        int fileNumber = 0;
+        while (File.Exists(_currentFilePath))
+        {
+            var existingSize = new FileInfo(_currentFilePath).Length;
+            if (existingSize < _options.MaxFileSizeBytes)
+            {
+                _currentFileSize = existingSize;
+                break;
+            }
+            fileNumber++;
+            _currentFilePath = GetFilePath(date, fileNumber);
+        }
+        
+        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
+        _currentFileSize = File.Exists(_currentFilePath) ? new FileInfo(_currentFilePath).Length : 0;
+    }
+
+    private void RotateFile()
+    {
+        CloseWriter();
+        
+        int fileNumber = 1;
+        string newPath;
+        do
+        {
+            newPath = GetFilePath(_currentFileDate, fileNumber);
+            fileNumber++;
+        } while (File.Exists(newPath) && new FileInfo(newPath).Length >= _options.MaxFileSizeBytes);
+        
+        _currentFilePath = newPath;
+        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
+        _currentFileSize = 0;
+    }
+
+    private string GetFilePath(DateTime date, int fileNumber)
+    {
+        var fileName = fileNumber == 0
+            ? $"metrics_{date:yyyy-MM-dd}.json"
+            : $"metrics_{date:yyyy-MM-dd}_{fileNumber:D3}.json";
+        return Path.Combine(_options.Directory, fileName);
+    }
+
+    private void CloseWriter()
+    {
+        _writer?.Flush();
+        _writer?.Dispose();
+        _writer = null;
+    }
+
+    protected override bool OnShutdown(int timeoutMilliseconds)
+    {
+        lock (_lock)
+        {
+            CloseWriter();
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+using System.Diagnostics;
+using System.Text;
+using System.Text.Json;
+using OpenTelemetry;
+
+namespace HelloDotnetTen.Console.Exporters;
+
+/// <summary>
+/// Custom file exporter for OpenTelemetry traces (Activities).
+/// Writes traces to JSON files with daily rotation and size limits.
+/// </summary>
+public class FileActivityExporter : BaseExporter<Activity>
+{
+    private readonly FileExporterOptions _options;
+    private readonly object _lock = new();
+    private StreamWriter? _writer;
+    private string _currentFilePath = string.Empty;
+    private DateTime _currentFileDate;
+    private long _currentFileSize;
+    private readonly JsonSerializerOptions _jsonOptions;
+
+    public FileActivityExporter(FileExporterOptions options)
+    {
+        _options = options ?? throw new ArgumentNullException(nameof(options));
+        _jsonOptions = new JsonSerializerOptions 
+        { 
+            WriteIndented = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        EnsureDirectoryExists();
+    }
+
+    public override ExportResult Export(in Batch<Activity> batch)
+    {
+        using var scope = SuppressInstrumentationScope.Begin();
+        
+        try
+        {
+            lock (_lock)
+            {
+                EnsureWriter();
+                
+                foreach (var activity in batch)
+                {
+                    var record = SerializeActivity(activity);
+                    var json = JsonSerializer.Serialize(record, _jsonOptions);
+                    
+                    // Check if we need to rotate before writing
+                    var bytesToWrite = Encoding.UTF8.GetByteCount(json) + Environment.NewLine.Length;
+                    if (_currentFileSize + bytesToWrite > _options.MaxFileSizeBytes)
+                    {
+                        RotateFile();
+                    }
+                    
+                    _writer!.WriteLine(json);
+                    _currentFileSize += bytesToWrite;
+                }
+                
+                _writer!.Flush();
+            }
+            
+            return ExportResult.Success;
+        }
+        catch (Exception ex)
+        {
+            System.Console.Error.WriteLine($"[FileActivityExporter] Export failed: {ex.Message}");
+            return ExportResult.Failure;
+        }
+    }
+
+    private object SerializeActivity(Activity activity)
+    {
+        return new
+        {
+            Timestamp = activity.StartTimeUtc.ToString("O"),
+            TraceId = activity.TraceId.ToString(),
+            SpanId = activity.SpanId.ToString(),
+            ParentSpanId = activity.ParentSpanId.ToString(),
+            OperationName = activity.OperationName,
+            DisplayName = activity.DisplayName,
+            Kind = activity.Kind.ToString(),
+            Status = new
+            {
+                Code = activity.Status.ToString(),
+                Description = activity.StatusDescription
+            },
+            StartTime = activity.StartTimeUtc.ToString("O"),
+            EndTime = (activity.StartTimeUtc + activity.Duration).ToString("O"),
+            DurationMs = activity.Duration.TotalMilliseconds,
+            Tags = activity.TagObjects.ToDictionary(t => t.Key, t => t.Value?.ToString()),
+            Events = activity.Events.Select(e => new
+            {
+                Name = e.Name,
+                Timestamp = e.Timestamp.ToString("O"),
+                Attributes = e.Tags.ToDictionary(t => t.Key, t => t.Value?.ToString())
+            }).ToArray(),
+            Links = activity.Links.Select(l => new
+            {
+                TraceId = l.Context.TraceId.ToString(),
+                SpanId = l.Context.SpanId.ToString()
+            }).ToArray(),
+            Resource = ParentProvider?.GetResource()?.Attributes
+                .ToDictionary(a => a.Key, a => a.Value?.ToString())
+        };
+    }
+
+    private void EnsureDirectoryExists()
+    {
+        if (!Directory.Exists(_options.Directory))
+        {
+            Directory.CreateDirectory(_options.Directory);
+        }
+    }
+
+    private void EnsureWriter()
+    {
+        var today = DateTime.UtcNow.Date;
+        
+        if (_writer == null || _currentFileDate != today)
+        {
+            CloseWriter();
+            OpenNewFile(today);
+        }
+    }
+
+    private void OpenNewFile(DateTime date)
+    {
+        _currentFileDate = date;
+        _currentFilePath = GetFilePath(date, 0);
+        
+        // Find the next available file number if file exists and is at size limit
+        int fileNumber = 0;
+        while (File.Exists(_currentFilePath))
+        {
+            var existingSize = new FileInfo(_currentFilePath).Length;
+            if (existingSize < _options.MaxFileSizeBytes)
+            {
+                // Can append to this file
+                _currentFileSize = existingSize;
+                break;
+            }
+            fileNumber++;
+            _currentFilePath = GetFilePath(date, fileNumber);
+        }
+        
+        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
+        _currentFileSize = File.Exists(_currentFilePath) ? new FileInfo(_currentFilePath).Length : 0;
+    }
+
+    private void RotateFile()
+    {
+        CloseWriter();
+        
+        // Find next available file number
+        int fileNumber = 1;
+        string newPath;
+        do
+        {
+            newPath = GetFilePath(_currentFileDate, fileNumber);
+            fileNumber++;
+        } while (File.Exists(newPath) && new FileInfo(newPath).Length >= _options.MaxFileSizeBytes);
+        
+        _currentFilePath = newPath;
+        _writer = new StreamWriter(_currentFilePath, append: true, Encoding.UTF8);
+        _currentFileSize = 0;
+    }
+
+    private string GetFilePath(DateTime date, int fileNumber)
+    {
+        var fileName = fileNumber == 0
+            ? $"traces_{date:yyyy-MM-dd}.json"
+            : $"traces_{date:yyyy-MM-dd}_{fileNumber:D3}.json";
+        return Path.Combine(_options.Directory, fileName);
+    }
+
+    private void CloseWriter()
+    {
+        _writer?.Flush();
+        _writer?.Dispose();
+        _writer = null;
+    }
+
+    protected override bool OnShutdown(int timeoutMilliseconds)
+    {
+        lock (_lock)
+        {
+            CloseWriter();
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+
+
