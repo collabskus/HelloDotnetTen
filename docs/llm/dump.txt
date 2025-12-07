@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/07/2025 11:23:49
+Generated: 12/07/2025 11:32:48
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -14,6 +14,7 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
 |   .gitignore
 |   export.ps1
 |   publish.ps1
+|   README.md
 |   
 +---.github
 |   \---workflows
@@ -218,8 +219,8 @@ FILE CONTENTS:
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\.github\workflows\build-and-publish.yml
-SIZE: 3.84 KB
-MODIFIED: 12/07/2025 11:23:18
+SIZE: 3.83 KB
+MODIFIED: 12/07/2025 11:31:55
 ================================================================================
 
 # GitHub Actions Workflow: Build and Publish Self-Contained Executables
@@ -261,7 +262,7 @@ jobs:
 
       - name: Run publish script
         shell: pwsh
-        run: ./publish.ps1 -SkipRestore
+        run: ./publish.ps1
 
       - name: List published files
         run: |
@@ -353,12 +354,12 @@ jobs:
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\publish-manifest.json
 SIZE: 4.18 KB
-MODIFIED: 12/07/2025 11:18:33
+MODIFIED: 12/07/2025 11:24:33
 ================================================================================
 
 {
     "Configuration":  "Full Runtime (No Trimming)",
-    "GeneratedAt":  "2025-12-07T11:18:33.5899597-05:00",
+    "GeneratedAt":  "2025-12-07T11:24:33.9054176-05:00",
     "Results":  [
                     {
                         "Status":  "Success",
@@ -431,7 +432,7 @@ MODIFIED: 12/07/2025 11:18:33
                         "Size":  "35.64 MB"
                     }
                 ],
-    "ElapsedSeconds":  44.75
+    "ElapsedSeconds":  43.92
 }
 
 
@@ -2044,7 +2045,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/07/2025 11:23:49
+EXPORT COMPLETED: 12/07/2025 11:32:49
 Total Files Exported: 22
 Output File: .\docs\llm\dump.txt
 ===============================================================================
