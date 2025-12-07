@@ -7753,3 +7753,115 @@ git push
 ```
 
 The artifacts are retained for 90 days by default. If you want to change retention, you can add a `retention-days` parameter to each upload step.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Interestingly, publish failed on github actions. 
+It works just fine on my machine! 
+Here is what it says on github actions. 
+```
+Run ./publish.ps1 -SkipRestore
+=============================================
+  Self-Contained Executable Publisher
+  (Full Runtime - No Trimming)
+=============================================
+
+Project Path: source\HelloDotnetTen
+Output Directory: publish
+Platforms: 10
+
+
+Publishing: HelloDotnetTen.Console
+= * 50
+  [1/10] win-x64... FAILED
+    Error: /usr/share/dotnet/sdk/10.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1047: Assets file '/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/obj/project.assets.json' doesn't have a target for 'net10.0/win-x64'. Ensure that restore has run and that you have included 'net10.0' in the TargetFrameworks for your project. You may also need to include 'win-x64' in your project's RuntimeIdentifiers. [/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/HelloDotnetTen.Console.csproj]
+  [2/10] win-x86... FAILED
+    Error: /usr/share/dotnet/sdk/10.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1047: Assets file '/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/obj/project.assets.json' doesn't have a target for 'net10.0/win-x86'. Ensure that restore has run and that you have included 'net10.0' in the TargetFrameworks for your project. You may also need to include 'win-x86' in your project's RuntimeIdentifiers. [/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/HelloDotnetTen.Console.csproj]
+  [3/10] win-arm64... FAILED
+    Error: /usr/share/dotnet/sdk/10.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1047: Assets file '/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/obj/project.assets.json' doesn't have a target for 'net10.0/win-arm64'. Ensure that restore has run and that you have included 'net10.0' in the TargetFrameworks for your project. You may also need to include 'win-arm64' in your project's RuntimeIdentifiers. [/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/HelloDotnetTen.Console.csproj]
+  [4/10] linux-x64... FAILED
+    Error: /usr/share/dotnet/sdk/10.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1047: Assets file '/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/obj/project.assets.json' doesn't have a target for 'net10.0/linux-x64'. Ensure that restore has run and that you have included 'net10.0' in the TargetFrameworks for your project. You may also need to include 'linux-x64' in your project's RuntimeIdentifiers. [/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/HelloDotnetTen.Console.csproj]
+  [5/10] linux-arm64... FAILED
+    Error: /usr/share/dotnet/sdk/10.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1047: Assets file '/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/obj/project.assets.json' doesn't have a target for 'net10.0/linux-arm64'. Ensure that restore has run and that you have included 'net10.0' in the TargetFrameworks for your project. You may also need to include 'linux-arm64' in your project's RuntimeIdentifiers. [/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/HelloDotnetTen.Console.csproj]
+  [6/10] linux-arm... FAILED
+    Error: /usr/share/dotnet/sdk/10.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1047: Assets file '/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/obj/project.assets.json' doesn't have a target for 'net10.0/linux-arm'. Ensure that restore has run and that you have included 'net10.0' in the TargetFrameworks for your project. You may also need to include 'linux-arm' in your project's RuntimeIdentifiers. [/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/HelloDotnetTen.Console.csproj]
+  [7/10] linux-musl-x64... FAILED
+    Error: /usr/share/dotnet/sdk/10.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1047: Assets file '/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/obj/project.assets.json' doesn't have a target for 'net10.0/linux-musl-x64'. Ensure that restore has run and that you have included 'net10.0' in the TargetFrameworks for your project. You may also need to include 'linux-musl-x64' in your project's RuntimeIdentifiers. [/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/HelloDotnetTen.Console.csproj]
+  [8/10] linux-musl-arm64... FAILED
+    Error: /usr/share/dotnet/sdk/10.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1047: Assets file '/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/obj/project.assets.json' doesn't have a target for 'net10.0/linux-musl-arm64'. Ensure that restore has run and that you have included 'net10.0' in the TargetFrameworks for your project. You may also need to include 'linux-musl-arm64' in your project's RuntimeIdentifiers. [/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/HelloDotnetTen.Console.csproj]
+  [9/10] osx-x64... FAILED
+    Error: /usr/share/dotnet/sdk/10.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1047: Assets file '/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/obj/project.assets.json' doesn't have a target for 'net10.0/osx-x64'. Ensure that restore has run and that you have included 'net10.0' in the TargetFrameworks for your project. You may also need to include 'osx-x64' in your project's RuntimeIdentifiers. [/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/HelloDotnetTen.Console.csproj]
+  [10/10] osx-arm64... FAILED
+    Error: /usr/share/dotnet/sdk/10.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets(266,5): error NETSDK1047: Assets file '/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/obj/project.assets.json' doesn't have a target for 'net10.0/osx-arm64'. Ensure that restore has run and that you have included 'net10.0' in the TargetFrameworks for your project. You may also need to include 'osx-arm64' in your project's RuntimeIdentifiers. [/home/runner/work/HelloDotnetTen/HelloDotnetTen/source/HelloDotnetTen/HelloDotnetTen.Console/HelloDotnetTen.Console.csproj]
+
+=============================================
+  PUBLISH SUMMARY (Full Runtime)
+=============================================
+
+Elapsed Time: 0.12 minutes
+
+Successful: 0
+Failed: 10
+
+Platform Results:
+- * 80
+  win-x64             N/A         Failed
+  win-x86             N/A         Failed
+  win-arm64           N/A         Failed
+  linux-x64           N/A         Failed
+  linux-arm64         N/A         Failed
+  linux-arm           N/A         Failed
+  linux-musl-x64      N/A         Failed
+  linux-musl-arm64    N/A         Failed
+  osx-x64             N/A         Failed
+  osx-arm64           N/A         Failed
+
+Output Location: /home/runner/work/HelloDotnetTen/HelloDotnetTen/publish
+
+Manifest saved: publish/publish-manifest.json
+
+WARNING: Some builds failed. Check the output above for details.
+Error: Process completed with exit code 1.
+```
