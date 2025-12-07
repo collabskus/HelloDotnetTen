@@ -1,6 +1,7 @@
 # Publish Console Applications as Self-Contained Single-File Executables
 # PowerShell 5 compatible script
 # Generates standalone executables for all major platforms - NO .NET runtime required on target
+# NO TRIMMING - Full runtime included for maximum compatibility
 
 param(
     [string]$ProjectPath = "source\HelloDotnetTen",
@@ -21,7 +22,7 @@ $RuntimeIdentifiers = @(
     "linux-x64",        # Linux 64-bit (most servers/desktops)
     "linux-arm64",      # Linux ARM64 (Raspberry Pi 4, AWS Graviton, etc.)
     "linux-arm",        # Linux ARM32 (older Raspberry Pi)
-    "linux-musl-x64",   # Alpine Linux (Docker containers)
+    "linux-musl-x64",   # Alpine Linux x64 (Docker containers)
     "linux-musl-arm64", # Alpine Linux ARM64
     
     # macOS
@@ -36,6 +37,7 @@ $ConsoleProjects = @(
 
 Write-Host "=============================================" -ForegroundColor Cyan
 Write-Host "  Self-Contained Executable Publisher" -ForegroundColor Cyan
+Write-Host "  (Full Runtime - No Trimming)" -ForegroundColor DarkCyan
 Write-Host "=============================================" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Project Path: $ProjectPath" -ForegroundColor Yellow
@@ -87,9 +89,10 @@ foreach ($project in $ConsoleProjects) {
         #   -r $rid                       : Target runtime identifier
         #   --self-contained true         : Include .NET runtime (NO .NET needed on target)
         #   -p:PublishSingleFile=true     : Bundle everything into ONE executable
-        #   -p:PublishTrimmed=true        : Remove unused code (smaller file size)
-        #   -p:EnableCompressionInSingleFile=true : Compress the single file
+        #   -p:PublishTrimmed=false       : DO NOT TRIM - include full runtime
+        #   -p:EnableCompressionInSingleFile=true : Compress single file (no extra dependencies)
         #   -p:IncludeNativeLibrariesForSelfExtract=true : Include native libs in single file
+        #   -p:IncludeAllContentForSelfExtract=true : Include all content files
         #   -p:DebugType=None             : No debug symbols (smaller file)
         #   -p:DebugSymbols=false         : No PDB files
         
@@ -101,9 +104,10 @@ foreach ($project in $ConsoleProjects) {
             "-o", $platformOutputDir
             "--self-contained", "true"
             "-p:PublishSingleFile=true"
-            "-p:PublishTrimmed=true"
+            "-p:PublishTrimmed=false"
             "-p:EnableCompressionInSingleFile=true"
             "-p:IncludeNativeLibrariesForSelfExtract=true"
+            "-p:IncludeAllContentForSelfExtract=true"
             "-p:DebugType=None"
             "-p:DebugSymbols=false"
         )
@@ -119,13 +123,12 @@ foreach ($project in $ConsoleProjects) {
             # Find the executable
             $exePattern = if ($rid -like "win-*") { "*.exe" } else { $project }
             $executable = Get-ChildItem -Path $platformOutputDir -Filter $exePattern -File | 
-                          Where-Object { $_.Name -notlike "*.pdb" -and $_.Name -notlike "*.json" } |
+                          Where-Object { $_.Name -notlike "*.pdb" } | 
                           Select-Object -First 1
             
             if ($executable) {
                 $sizeMB = [math]::Round($executable.Length / 1MB, 2)
-                Write-Host "OK " -ForegroundColor Green -NoNewline
-                Write-Host "($sizeMB MB)" -ForegroundColor DarkGray
+                Write-Host "OK ($sizeMB MB)" -ForegroundColor Green
                 
                 $results += [PSCustomObject]@{
                     Project = $project
@@ -135,11 +138,11 @@ foreach ($project in $ConsoleProjects) {
                     Path = $executable.FullName
                 }
             } else {
-                Write-Host "OK (no exe found)" -ForegroundColor Yellow
+                Write-Host "OK (size unknown)" -ForegroundColor Yellow
                 $results += [PSCustomObject]@{
                     Project = $project
                     Platform = $rid
-                    Status = "Success (no exe)"
+                    Status = "Success (no exe found)"
                     Size = "N/A"
                     Path = $platformOutputDir
                 }
@@ -147,10 +150,10 @@ foreach ($project in $ConsoleProjects) {
         } else {
             Write-Host "FAILED" -ForegroundColor Red
             
-            # Show error details
-            $errorLines = $output | Where-Object { $_ -match "error" } | Select-Object -First 3
-            foreach ($line in $errorLines) {
-                Write-Host "    $line" -ForegroundColor DarkRed
+            # Show first error line
+            $errorLine = $output | Where-Object { $_ -match "error" } | Select-Object -First 1
+            if ($errorLine) {
+                Write-Host "    Error: $errorLine" -ForegroundColor DarkRed
             }
             
             $results += [PSCustomObject]@{
@@ -158,7 +161,7 @@ foreach ($project in $ConsoleProjects) {
                 Platform = $rid
                 Status = "Failed"
                 Size = "N/A"
-                Path = "N/A"
+                Path = ""
             }
         }
     }
@@ -171,7 +174,7 @@ $elapsed = $endTime - $startTime
 # Summary
 Write-Host ""
 Write-Host "=============================================" -ForegroundColor Cyan
-Write-Host "  PUBLISH SUMMARY" -ForegroundColor Cyan
+Write-Host "  PUBLISH SUMMARY (Full Runtime)" -ForegroundColor Cyan
 Write-Host "=============================================" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Elapsed Time: $([math]::Round($elapsed.TotalMinutes, 2)) minutes" -ForegroundColor Yellow
@@ -191,7 +194,7 @@ Write-Host "-" * 80 -ForegroundColor DarkGray
 $results | ForEach-Object {
     $statusColor = if ($_.Status -like "Success*") { "Green" } else { "Red" }
     $platformPadded = $_.Platform.PadRight(20)
-    $sizePadded = $_.Size.PadRight(10)
+    $sizePadded = $_.Size.PadRight(12)
     
     Write-Host "  $platformPadded" -NoNewline -ForegroundColor White
     Write-Host "$sizePadded" -NoNewline -ForegroundColor DarkGray
@@ -206,6 +209,7 @@ Write-Host ""
 $manifestPath = Join-Path $OutputDir "publish-manifest.json"
 $manifest = @{
     GeneratedAt = (Get-Date).ToString("o")
+    Configuration = "Full Runtime (No Trimming)"
     ElapsedSeconds = [math]::Round($elapsed.TotalSeconds, 2)
     Results = $results | ForEach-Object {
         @{
