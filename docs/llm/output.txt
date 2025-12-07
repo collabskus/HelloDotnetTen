@@ -1,901 +1,3 @@
-Windows PowerShell
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
-
-PS C:\Users\kushal> Get-Date -Format "yyyy-MM-dd HH:mm:ss";
-2025-12-07 10:59:11
-PS C:\Users\kushal> Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet --info; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet clean; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet restore; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet build; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet outdated; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; git clean -dfx; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; .\export.ps1; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; .\publish.ps1; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet outdated; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet run; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; git add .; git commit --message "add all files"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; Get-Date -Format "yyyy-MM-dd HH:mm:ss";
-2025-12-07 10:59:14
-On branch master
-nothing to commit, working tree clean
-2025-12-07 10:59:14
-.NET SDK:
- Version:           10.0.100
- Commit:            b0f34d51fc
- Workload version:  10.0.100-manifests.5fb86115
- MSBuild version:   18.0.2+b0f34d51f
-
-Runtime Environment:
- OS Name:     Windows
- OS Version:  10.0.26100
- OS Platform: Windows
- RID:         win-x64
- Base Path:   C:\Program Files\dotnet\sdk\10.0.100\
-
-.NET workloads installed:
-There are no installed workloads to display.
-Configured to use workload sets when installing new manifests.
-No workload sets are installed. Run "dotnet workload restore" to install a workload set.
-
-Host:
-  Version:      10.0.0
-  Architecture: x64
-  Commit:       b0f34d51fc
-
-.NET SDKs installed:
-  9.0.308 [C:\Program Files\dotnet\sdk]
-  10.0.100-rc.1.25451.107 [C:\Program Files\dotnet\sdk]
-  10.0.100 [C:\Program Files\dotnet\sdk]
-
-.NET runtimes installed:
-  Microsoft.AspNetCore.App 8.0.22 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
-  Microsoft.AspNetCore.App 9.0.11 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
-  Microsoft.AspNetCore.App 10.0.0 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
-  Microsoft.NETCore.App 8.0.22 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
-  Microsoft.NETCore.App 9.0.11 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
-  Microsoft.NETCore.App 10.0.0 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
-  Microsoft.WindowsDesktop.App 8.0.22 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
-  Microsoft.WindowsDesktop.App 9.0.11 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
-  Microsoft.WindowsDesktop.App 10.0.0 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
-
-Other architectures found:
-  x86   [C:\Program Files (x86)\dotnet]
-    registered at [HKLM\SOFTWARE\dotnet\Setup\InstalledVersions\x86\InstallLocation]
-
-Environment variables:
-  Not set
-
-global.json file:
-  Not found
-
-Learn more:
-  https://aka.ms/dotnet/info
-
-Download .NET:
-  https://aka.ms/dotnet/download
-2025-12-07 10:59:15
-
-Build succeeded in 1.3s
-2025-12-07 10:59:16
-Restore complete (0.7s)
-
-Build succeeded in 0.8s
-2025-12-07 10:59:17
-Restore complete (0.5s)
-  HelloDotnetTen.ClassLibrary1 net10.0 succeeded (0.3s) → HelloDotnetTen.ClassLibrary1\bin\Debug\net10.0\HelloDotnetTen.ClassLibrary1.dll
-  HelloDotnetTen.Console net10.0 succeeded (0.3s) → HelloDotnetTen.Console\bin\Debug\net10.0\HelloDotnetTen.Console.dll
-
-Build succeeded in 1.4s
-2025-12-07 10:59:19
-Discovering projects...
-Analyzing project(s)...
-Analyzing dependencies...
-No outdated dependencies were detected
-Elapsed: 00:00:02.4010156
-2025-12-07 10:59:22
-Removing publish/
-Removing source/HelloDotnetTen/HelloDotnetTen.ClassLibrary1/bin/
-Removing source/HelloDotnetTen/HelloDotnetTen.ClassLibrary1/obj/
-Removing source/HelloDotnetTen/HelloDotnetTen.Console/bin/
-Removing source/HelloDotnetTen/HelloDotnetTen.Console/obj/
-2025-12-07 10:59:22
-Starting project export...
-Project Path: .
-Output File: docs\llm\dump.txt
-Generating directory structure...
-Collecting files...
-Found 20 files to export
-Processing (1/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\Directory.Build.props
-Processing (2/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\Directory.Packages.props
-Processing (3/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1.cs
-Processing (4/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1Options.cs
-Processing (5/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2.cs
-Processing (6/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2Options.cs
-Processing (7/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ClassLibrary1Settings.cs
-Processing (8/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\HelloDotnetTen.ClassLibrary1.csproj
-Processing (9/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass1.cs
-Processing (10/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass2.cs
-Processing (11/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ServiceCollectionExtensions.cs
-Processing (12/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\appsettings.json
-Processing (13/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileActivityExporter.cs
-Processing (14/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileExporterExtensions.cs
-Processing (15/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileExporterOptions.cs
-Processing (16/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileLogExporter.cs
-Processing (17/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileMetricExporter.cs
-Processing (18/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\HelloDotnetTen.Console.csproj
-Processing (19/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
-Processing (20/20): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.slnx
-
-Export completed successfully!
-Output file: .\docs\llm\dump.txt
-Total files exported: 20
-Output file size: 0.06 MB
-2025-12-07 10:59:22
-2025-12-07 10:59:22
-=============================================
-  Self-Contained Executable Publisher
-  (Full Runtime - No Trimming)
-=============================================
-
-Project Path: source\HelloDotnetTen
-Output Directory: publish
-Platforms: 10
-
-
-Publishing: HelloDotnetTen.Console
-= * 50
-  [1/10] win-x64... OK (36.75 MB)
-  [2/10] win-x86... OK (34.12 MB)
-  [3/10] win-arm64... OK (36.1 MB)
-  [4/10] linux-x64... OK (38.27 MB)
-  [5/10] linux-arm64... OK (36.29 MB)
-  [6/10] linux-arm... OK (33.51 MB)
-  [7/10] linux-musl-x64... OK (38.29 MB)
-  [8/10] linux-musl-arm64... OK (36.33 MB)
-  [9/10] osx-x64... OK (37.9 MB)
-  [10/10] osx-arm64... OK (35.64 MB)
-
-=============================================
-  PUBLISH SUMMARY (Full Runtime)
-=============================================
-
-Elapsed Time: 0.76 minutes
-
-Successful: 10
-Failed: 0
-
-Platform Results:
-- * 80
-  win-x64             36.75 MB    Success
-  win-x86             34.12 MB    Success
-  win-arm64           36.1 MB     Success
-  linux-x64           38.27 MB    Success
-  linux-arm64         36.29 MB    Success
-  linux-arm           33.51 MB    Success
-  linux-musl-x64      38.29 MB    Success
-  linux-musl-arm64    36.33 MB    Success
-  osx-x64             37.9 MB     Success
-  osx-arm64           35.64 MB    Success
-
-Output Location: C:\Users\kushal\source\repos\HelloDotnetTen\publish
-
-Manifest saved: publish\publish-manifest.json
-All builds completed successfully!
-2025-12-07 11:00:08
-2025-12-07 11:00:08
-Discovering projects...
-Analyzing project(s)...
-Analyzing dependencies...
-No outdated dependencies were detected
-Elapsed: 00:00:01.7713711
-2025-12-07 11:00:10
-[Telemetry] Writing to: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
-[Telemetry] Run ID: 20251207_160012
-info: Program[0]
-      Starting HelloDotnetTen Console Application
-LogRecord.Timestamp:               2025-12-07T16:00:13.2336489Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Starting HelloDotnetTen Console Application
-LogRecord.Body:                    Starting HelloDotnetTen Console Application
-LogRecord.Attributes (Key:Value):
-    OriginalFormat (a.k.a Body): Starting HelloDotnetTen Console Application
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      ========================================
-LogRecord.Timestamp:               2025-12-07T16:00:13.2437394Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        ========================================
-LogRecord.Body:                    ========================================
-LogRecord.Attributes (Key:Value):
-    OriginalFormat (a.k.a Body): ========================================
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: HelloDotnetTen.ClassLibrary1.Class1[0]
-      Class1 initialized successfully with InjectedProperty1: Hello from Class 1 Config (Length: 25)
-LogRecord.Timestamp:               2025-12-07T16:00:13.2565634Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Class1 initialized successfully with InjectedProperty1: Hello from Class 1 Config (Length: 25)
-LogRecord.Body:                    Class1 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
-LogRecord.Attributes (Key:Value):
-    Property: Hello from Class 1 Config
-    Length: 25
-    OriginalFormat (a.k.a Body): Class1 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: HelloDotnetTen.ClassLibrary1.Class2[0]
-      Class2 initialized successfully with InjectedProperty1: Greetings from Class 2 (Length: 22)
-LogRecord.Timestamp:               2025-12-07T16:00:13.2586287Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Class2 initialized successfully with InjectedProperty1: Greetings from Class 2 (Length: 22)
-LogRecord.Body:                    Class2 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
-LogRecord.Attributes (Key:Value):
-    Property: Greetings from Class 2
-    Length: 22
-    OriginalFormat (a.k.a Body): Class2 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      --- Scenario 1: Sequential Operations ---
-LogRecord.Timestamp:               2025-12-07T16:00:13.2593908Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        --- Scenario 1: Sequential Operations ---
-LogRecord.Body:                    --- Scenario 1: Sequential Operations ---
-LogRecord.Attributes (Key:Value):
-    OriginalFormat (a.k.a Body): --- Scenario 1: Sequential Operations ---
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      Sequential iteration 1
-LogRecord.Timestamp:               2025-12-07T16:00:13.2623664Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Sequential iteration 1
-LogRecord.Body:                    Sequential iteration {Iteration}
-LogRecord.Attributes (Key:Value):
-    Iteration: 1
-    OriginalFormat (a.k.a Body): Sequential iteration {Iteration}
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: HelloDotnetTen.ClassLibrary1.Class1[0]
-      InjectedProperty1 length is 25 (calculated in 0.0019ms)
-LogRecord.Timestamp:               2025-12-07T16:00:13.2718485Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0019ms)
-LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-LogRecord.Attributes (Key:Value):
-    Length: 25
-    DurationMs: 0.0019
-    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-Class1 length: 25
-info: HelloDotnetTen.ClassLibrary1.Class2[0]
-      InjectedProperty1 length is 22 (calculated in 0.0008ms)
-LogRecord.Timestamp:               2025-12-07T16:00:13.2741127Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        InjectedProperty1 length is 22 (calculated in 0.0008ms)
-LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-LogRecord.Attributes (Key:Value):
-    Length: 22
-    DurationMs: 0.0008
-    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-Class2 length: 22
-info: Program[0]
-      Sequential iteration 2
-LogRecord.Timestamp:               2025-12-07T16:00:13.7900162Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Sequential iteration 2
-LogRecord.Body:                    Sequential iteration {Iteration}
-LogRecord.Attributes (Key:Value):
-    Iteration: 2
-    OriginalFormat (a.k.a Body): Sequential iteration {Iteration}
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: HelloDotnetTen.ClassLibrary1.Class1[0]
-      InjectedProperty1 length is 25 (calculated in 0.0012ms)
-LogRecord.Timestamp:               2025-12-07T16:00:13.7951618Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0012ms)
-LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-LogRecord.Attributes (Key:Value):
-    Length: 25
-    DurationMs: 0.0012
-    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-Class1 length: 25
-info: HelloDotnetTen.ClassLibrary1.Class2[0]
-      InjectedProperty1 length is 22 (calculated in 0.0008ms)
-LogRecord.Timestamp:               2025-12-07T16:00:13.8022609Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        InjectedProperty1 length is 22 (calculated in 0.0008ms)
-LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-LogRecord.Attributes (Key:Value):
-    Length: 22
-    DurationMs: 0.0008
-    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-Class2 length: 22
-info: Program[0]
-      Sequential iteration 3
-LogRecord.Timestamp:               2025-12-07T16:00:14.3111003Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Sequential iteration 3
-LogRecord.Body:                    Sequential iteration {Iteration}
-LogRecord.Attributes (Key:Value):
-    Iteration: 3
-    OriginalFormat (a.k.a Body): Sequential iteration {Iteration}
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: HelloDotnetTen.ClassLibrary1.Class1[0]
-      InjectedProperty1 length is 25 (calculated in 0.0004ms)
-LogRecord.Timestamp:               2025-12-07T16:00:14.3120223Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0004ms)
-LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-LogRecord.Attributes (Key:Value):
-    Length: 25
-    DurationMs: 0.0004
-    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-Class1 length: 25
-LogRecord.Timestamp:               2025-12-07T16:00:14.3126982Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        InjectedProperty1 length is 22 (calculated in 0.0003ms)
-LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-LogRecord.Attributes (Key:Value):
-    Length: 22
-info: HelloDotnetTen.ClassLibrary1.Class2[0]
-      InjectedProperty1 length is 22 (calculated in 0.0003ms)
-    DurationMs: 0.0003
-    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-Class2 length: 22
-info: Program[0]
-      --- Scenario 2: Parallel Operations ---
-LogRecord.Timestamp:               2025-12-07T16:00:14.8226484Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        --- Scenario 2: Parallel Operations ---
-LogRecord.Body:                    --- Scenario 2: Parallel Operations ---
-LogRecord.Attributes (Key:Value):
-    OriginalFormat (a.k.a Body): --- Scenario 2: Parallel Operations ---
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      Parallel task 1 starting
-LogRecord.Timestamp:               2025-12-07T16:00:14.8265567Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Parallel task 1 starting
-LogRecord.Body:                    Parallel task {TaskId} starting
-LogRecord.Attributes (Key:Value):
-    TaskId: 1
-    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      Parallel task 2 starting
-LogRecord.Timestamp:               2025-12-07T16:00:14.8279341Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Parallel task 2 starting
-LogRecord.Body:                    Parallel task {TaskId} starting
-LogRecord.Attributes (Key:Value):
-    TaskId: 2
-    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-LogRecord.Timestamp:               2025-12-07T16:00:14.8287696Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Parallel task 3 starting
-LogRecord.Body:                    Parallel task {TaskId} starting
-LogRecord.Attributes (Key:Value):
-info: Program[0]
-      Parallel task 3 starting
-    TaskId: 3
-    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      Parallel task 4 starting
-LogRecord.Timestamp:               2025-12-07T16:00:14.8295393Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Parallel task 4 starting
-LogRecord.Body:                    Parallel task {TaskId} starting
-LogRecord.Attributes (Key:Value):
-    TaskId: 4
-    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      Parallel task 5 starting
-LogRecord.Timestamp:               2025-12-07T16:00:14.8302661Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Parallel task 5 starting
-LogRecord.Body:                    Parallel task {TaskId} starting
-LogRecord.Attributes (Key:Value):
-    TaskId: 5
-    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: HelloDotnetTen.ClassLibrary1.Class1[0]
-      InjectedProperty1 length is 25 (calculated in 0.0009ms)
-LogRecord.Timestamp:               2025-12-07T16:00:14.9359731Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0009ms)
-LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-LogRecord.Attributes (Key:Value):
-    Length: 25
-    DurationMs: 0.0009
-    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-LogRecord.Timestamp:               2025-12-07T16:00:14.9369301Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Parallel task 1 completed with length 25
-LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
-LogRecord.Attributes (Key:Value):
-info: Program[0]
-      Parallel task 1 completed with length 25
-    TaskId: 1
-    Length: 25
-    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: HelloDotnetTen.ClassLibrary1.Class1[0]
-      InjectedProperty1 length is 25 (calculated in 0.0006ms)
-LogRecord.Timestamp:               2025-12-07T16:00:15.0430148Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0006ms)
-LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-LogRecord.Attributes (Key:Value):
-    Length: 25
-    DurationMs: 0.0006
-    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-LogRecord.Timestamp:               2025-12-07T16:00:15.0437829Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Parallel task 2 completed with length 25
-LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
-LogRecord.Attributes (Key:Value):
-    TaskId: 2
-    Length: 25
-info: Program[0]
-      Parallel task 2 completed with length 25
-    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: HelloDotnetTen.ClassLibrary1.Class1[0]
-      InjectedProperty1 length is 25 (calculated in 0.0007ms)
-LogRecord.Timestamp:               2025-12-07T16:00:15.1357190Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0007ms)
-LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-LogRecord.Attributes (Key:Value):
-    Length: 25
-    DurationMs: 0.0007
-    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-LogRecord.Timestamp:               2025-12-07T16:00:15.1367551Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Parallel task 3 completed with length 25
-LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
-LogRecord.Attributes (Key:Value):
-    TaskId: 3
-    Length: 25
-    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      Parallel task 3 completed with length 25
-info: HelloDotnetTen.ClassLibrary1.Class1[0]
-      InjectedProperty1 length is 25 (calculated in 0.0006ms)
-LogRecord.Timestamp:               2025-12-07T16:00:15.2365685Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0006ms)
-LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-LogRecord.Attributes (Key:Value):
-    Length: 25
-    DurationMs: 0.0006
-    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-LogRecord.Timestamp:               2025-12-07T16:00:15.2375299Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Parallel task 4 completed with length 25
-LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
-LogRecord.Attributes (Key:Value):
-    TaskId: 4
-    Length: 25
-    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      Parallel task 4 completed with length 25
-info: HelloDotnetTen.ClassLibrary1.Class1[0]
-      InjectedProperty1 length is 25 (calculated in 0.0006ms)
-LogRecord.Timestamp:               2025-12-07T16:00:15.3384460Z
-LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0006ms)
-LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-LogRecord.Attributes (Key:Value):
-    Length: 25
-    DurationMs: 0.0006
-    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-LogRecord.Timestamp:               2025-12-07T16:00:15.3394117Z
-LogRecord.CategoryName:            Program
-info: Program[0]
-      Parallel task 5 completed with length 25
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Parallel task 5 completed with length 25
-LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
-LogRecord.Attributes (Key:Value):
-    TaskId: 5
-    Length: 25
-    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      Parallel results: 25, 25, 25, 25, 25
-LogRecord.Timestamp:               2025-12-07T16:00:15.3419977Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Parallel results: 25, 25, 25, 25, 25
-LogRecord.Body:                    Parallel results: {Results}
-LogRecord.Attributes (Key:Value):
-    Results: 25, 25, 25, 25, 25
-    OriginalFormat (a.k.a Body): Parallel results: {Results}
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-LogRecord.Timestamp:               2025-12-07T16:00:15.3428033Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        ========================================
-LogRecord.Body:                    ========================================
-LogRecord.Attributes (Key:Value):
-    OriginalFormat (a.k.a Body): ========================================
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      ========================================
-info: Program[0]
-      Application completed. Check Uptrace for telemetry data.
-LogRecord.Timestamp:               2025-12-07T16:00:15.3433959Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Application completed. Check Uptrace for telemetry data.
-LogRecord.Body:                    Application completed. Check Uptrace for telemetry data.
-LogRecord.Attributes (Key:Value):
-    OriginalFormat (a.k.a Body): Application completed. Check Uptrace for telemetry data.
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-info: Program[0]
-      Telemetry files written to: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
-LogRecord.Timestamp:               2025-12-07T16:00:15.3440984Z
-LogRecord.CategoryName:            Program
-LogRecord.Severity:                Info
-LogRecord.SeverityText:            Information
-LogRecord.FormattedMessage:        Telemetry files written to: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
-LogRecord.Body:                    Telemetry files written to: {Directory}
-LogRecord.Attributes (Key:Value):
-    Directory: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
-    OriginalFormat (a.k.a Body): Telemetry files written to: {Directory}
-
-Resource associated with LogRecord:
-service.name: HelloDotnetTen.Console
-service.version: 1.0.0
-service.instance.id: 668fb9e5-343b-4eb7-b9cd-e8bf0793fd9b
-telemetry.sdk.name: opentelemetry
-telemetry.sdk.language: dotnet
-telemetry.sdk.version: 1.14.0
-
-
-Waiting for telemetry to flush...
-
-Telemetry files for this run (ID: 20251207_160012):
-Directory: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
-  - logs_20251207_160012.json (28,749 bytes)
-2025-12-07 11:00:20
-2025-12-07 11:00:20
-On branch master
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-        modified:   docs/llm/dump.txt
-
-no changes added to commit (use "git add" and/or "git commit -a")
-[master 94335b3] add all files
  1 file changed, 12 insertions(+), 26 deletions(-)
 2025-12-07 11:00:20
 On branch master
@@ -8163,4 +7265,1812 @@ PS C:\Users\kushal\source\repos\HelloDotnetTen>
 PS C:\Users\kushal\source\repos\HelloDotnetTen> Get-Date -Format "yyyy-MM-dd HH:mm:ss";
 2025-12-07 11:32:16
 PS C:\Users\kushal\source\repos\HelloDotnetTen>
+PS C:\Users\kushal\source\repos\HelloDotnetTen> Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet --info; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet clean; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet restore; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet build; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet outdated; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; .\export.ps1; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; .\publish.ps1; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet outdated; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet run; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; git add .; git commit --message "add all files"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git push origin --all; Get-Date -Format "yyyy-MM-dd HH:mm:ss";
+2025-12-07 11:32:42
+On branch master
+nothing to commit, working tree clean
+2025-12-07 11:32:42
+.NET SDK:
+ Version:           10.0.100
+ Commit:            b0f34d51fc
+ Workload version:  10.0.100-manifests.5fb86115
+ MSBuild version:   18.0.2+b0f34d51f
+
+Runtime Environment:
+ OS Name:     Windows
+ OS Version:  10.0.26100
+ OS Platform: Windows
+ RID:         win-x64
+ Base Path:   C:\Program Files\dotnet\sdk\10.0.100\
+
+.NET workloads installed:
+There are no installed workloads to display.
+Configured to use workload sets when installing new manifests.
+No workload sets are installed. Run "dotnet workload restore" to install a workload set.
+
+Host:
+  Version:      10.0.0
+  Architecture: x64
+  Commit:       b0f34d51fc
+
+.NET SDKs installed:
+  9.0.308 [C:\Program Files\dotnet\sdk]
+  10.0.100-rc.1.25451.107 [C:\Program Files\dotnet\sdk]
+  10.0.100 [C:\Program Files\dotnet\sdk]
+
+.NET runtimes installed:
+  Microsoft.AspNetCore.App 8.0.22 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 9.0.11 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 10.0.0 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 8.0.22 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 9.0.11 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 10.0.0 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.WindowsDesktop.App 8.0.22 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+  Microsoft.WindowsDesktop.App 9.0.11 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+  Microsoft.WindowsDesktop.App 10.0.0 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+
+Other architectures found:
+  x86   [C:\Program Files (x86)\dotnet]
+    registered at [HKLM\SOFTWARE\dotnet\Setup\InstalledVersions\x86\InstallLocation]
+
+Environment variables:
+  Not set
+
+global.json file:
+  Not found
+
+Learn more:
+  https://aka.ms/dotnet/info
+
+Download .NET:
+  https://aka.ms/dotnet/download
+2025-12-07 11:32:42
+
+Build succeeded in 1.2s
+2025-12-07 11:32:43
+Restore complete (0.6s)
+
+Build succeeded in 0.7s
+2025-12-07 11:32:44
+Restore complete (0.5s)
+  HelloDotnetTen.ClassLibrary1 net10.0 succeeded (0.4s) → HelloDotnetTen.ClassLibrary1\bin\Debug\net10.0\HelloDotnetTen.ClassLibrary1.dll
+  HelloDotnetTen.Console net10.0 succeeded (0.3s) → HelloDotnetTen.Console\bin\Debug\net10.0\HelloDotnetTen.Console.dll
+
+Build succeeded in 1.4s
+2025-12-07 11:32:46
+Discovering projects...
+Analyzing project(s)...
+Analyzing dependencies...
+No outdated dependencies were detected
+Elapsed: 00:00:01.9781175
+2025-12-07 11:32:48
+2025-12-07 11:32:48
+Starting project export...
+Project Path: .
+Output File: docs\llm\dump.txt
+Generating directory structure...
+Collecting files...
+Found 22 files to export
+Processing (1/22): :\Users\kushal\source\repos\HelloDotnetTen\.github\workflows\build-and-publish.yml
+Processing (2/22): :\Users\kushal\source\repos\HelloDotnetTen\publish\publish-manifest.json
+Processing (3/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\Directory.Build.props
+Processing (4/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\Directory.Packages.props
+Processing (5/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1.cs
+Processing (6/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1Options.cs
+Processing (7/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2.cs
+Processing (8/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2Options.cs
+Processing (9/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ClassLibrary1Settings.cs
+Processing (10/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\HelloDotnetTen.ClassLibrary1.csproj
+Processing (11/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass1.cs
+Processing (12/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass2.cs
+Processing (13/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ServiceCollectionExtensions.cs
+Processing (14/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\appsettings.json
+Processing (15/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileActivityExporter.cs
+Processing (16/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileExporterExtensions.cs
+Processing (17/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileExporterOptions.cs
+Processing (18/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileLogExporter.cs
+Processing (19/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileMetricExporter.cs
+Processing (20/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\HelloDotnetTen.Console.csproj
+Processing (21/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
+Processing (22/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.slnx
+
+Export completed successfully!
+Output file: .\docs\llm\dump.txt
+Total files exported: 22
+Output file size: 0.07 MB
+2025-12-07 11:32:49
+2025-12-07 11:32:49
+=============================================
+  Self-Contained Executable Publisher
+  (Full Runtime - No Trimming)
+=============================================
+
+Project Path: source\HelloDotnetTen
+Output Directory: publish
+Platforms: 10
+
+
+Publishing: HelloDotnetTen.Console
+= * 50
+  [1/10] win-x64... OK (36.75 MB)
+  [2/10] win-x86... OK (34.12 MB)
+  [3/10] win-arm64... OK (36.1 MB)
+  [4/10] linux-x64... OK (38.27 MB)
+  [5/10] linux-arm64... OK (36.29 MB)
+  [6/10] linux-arm... OK (33.51 MB)
+  [7/10] linux-musl-x64... OK (38.29 MB)
+  [8/10] linux-musl-arm64... OK (36.33 MB)
+  [9/10] osx-x64... OK (37.9 MB)
+  [10/10] osx-arm64... OK (35.64 MB)
+
+=============================================
+  PUBLISH SUMMARY (Full Runtime)
+=============================================
+
+Elapsed Time: 0.73 minutes
+
+Successful: 10
+Failed: 0
+
+Platform Results:
+- * 80
+  win-x64             36.75 MB    Success
+  win-x86             34.12 MB    Success
+  win-arm64           36.1 MB     Success
+  linux-x64           38.27 MB    Success
+  linux-arm64         36.29 MB    Success
+  linux-arm           33.51 MB    Success
+  linux-musl-x64      38.29 MB    Success
+  linux-musl-arm64    36.33 MB    Success
+  osx-x64             37.9 MB     Success
+  osx-arm64           35.64 MB    Success
+
+Output Location: C:\Users\kushal\source\repos\HelloDotnetTen\publish
+
+Manifest saved: publish\publish-manifest.json
+All builds completed successfully!
+2025-12-07 11:33:33
+2025-12-07 11:33:33
+Discovering projects...
+Analyzing project(s)...
+Analyzing dependencies...
+No outdated dependencies were detected
+Elapsed: 00:00:01.8104100
+2025-12-07 11:33:35
+[Telemetry] Writing to: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
+[Telemetry] Run ID: 20251207_163338
+info: Program[0]
+      Starting HelloDotnetTen Console Application
+LogRecord.Timestamp:               2025-12-07T16:33:38.4166858Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Starting HelloDotnetTen Console Application
+LogRecord.Body:                    Starting HelloDotnetTen Console Application
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): Starting HelloDotnetTen Console Application
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      ========================================
+LogRecord.Timestamp:               2025-12-07T16:33:38.4266007Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        ========================================
+LogRecord.Body:                    ========================================
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): ========================================
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      Class1 initialized successfully with InjectedProperty1: Hello from Class 1 Config (Length: 25)
+LogRecord.Timestamp:               2025-12-07T16:33:38.4370436Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Class1 initialized successfully with InjectedProperty1: Hello from Class 1 Config (Length: 25)
+LogRecord.Body:                    Class1 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
+LogRecord.Attributes (Key:Value):
+    Property: Hello from Class 1 Config
+    Length: 25
+    OriginalFormat (a.k.a Body): Class1 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class2[0]
+      Class2 initialized successfully with InjectedProperty1: Greetings from Class 2 (Length: 22)
+LogRecord.Timestamp:               2025-12-07T16:33:38.4386621Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Class2 initialized successfully with InjectedProperty1: Greetings from Class 2 (Length: 22)
+LogRecord.Body:                    Class2 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
+LogRecord.Attributes (Key:Value):
+    Property: Greetings from Class 2
+    Length: 22
+    OriginalFormat (a.k.a Body): Class2 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:33:38.4392765Z
+info: Program[0]
+      --- Scenario 1: Sequential Operations ---
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        --- Scenario 1: Sequential Operations ---
+LogRecord.Body:                    --- Scenario 1: Sequential Operations ---
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): --- Scenario 1: Sequential Operations ---
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Sequential iteration 1
+LogRecord.Timestamp:               2025-12-07T16:33:38.4398331Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Sequential iteration 1
+LogRecord.Body:                    Sequential iteration {Iteration}
+LogRecord.Attributes (Key:Value):
+    Iteration: 1
+    OriginalFormat (a.k.a Body): Sequential iteration {Iteration}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0006ms)
+LogRecord.Timestamp:               2025-12-07T16:33:38.4456757Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0006ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0006
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class1 length: 25
+LogRecord.Timestamp:               2025-12-07T16:33:38.4474633Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
+info: HelloDotnetTen.ClassLibrary1.Class2[0]
+      InjectedProperty1 length is 22 (calculated in 0.0002ms)
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 22 (calculated in 0.0002ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 22
+    DurationMs: 0.0002
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class2 length: 22
+info: Program[0]
+      Sequential iteration 2
+LogRecord.Timestamp:               2025-12-07T16:33:38.9547019Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Sequential iteration 2
+LogRecord.Body:                    Sequential iteration {Iteration}
+LogRecord.Attributes (Key:Value):
+    Iteration: 2
+    OriginalFormat (a.k.a Body): Sequential iteration {Iteration}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Timestamp:               2025-12-07T16:33:38.9558421Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0005
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class1 length: 25
+info: HelloDotnetTen.ClassLibrary1.Class2[0]
+      InjectedProperty1 length is 22 (calculated in 0.0002ms)
+LogRecord.Timestamp:               2025-12-07T16:33:38.9567871Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 22 (calculated in 0.0002ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 22
+    DurationMs: 0.0002
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class2 length: 22
+info: Program[0]
+      Sequential iteration 3
+LogRecord.Timestamp:               2025-12-07T16:33:39.4727673Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Sequential iteration 3
+LogRecord.Body:                    Sequential iteration {Iteration}
+LogRecord.Attributes (Key:Value):
+    Iteration: 3
+    OriginalFormat (a.k.a Body): Sequential iteration {Iteration}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Timestamp:               2025-12-07T16:33:39.4738191Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0005
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class1 length: 25
+LogRecord.Timestamp:               2025-12-07T16:33:39.4747588Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 22 (calculated in 0.0002ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 22
+    DurationMs: 0.0002
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class2 length: 22
+info: HelloDotnetTen.ClassLibrary1.Class2[0]
+      InjectedProperty1 length is 22 (calculated in 0.0002ms)
+info: Program[0]
+      --- Scenario 2: Parallel Operations ---
+LogRecord.Timestamp:               2025-12-07T16:33:39.9900478Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        --- Scenario 2: Parallel Operations ---
+LogRecord.Body:                    --- Scenario 2: Parallel Operations ---
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): --- Scenario 2: Parallel Operations ---
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:33:39.9931833Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 1 starting
+LogRecord.Body:                    Parallel task {TaskId} starting
+LogRecord.Attributes (Key:Value):
+    TaskId: 1
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+info: Program[0]
+      Parallel task 1 starting
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 2 starting
+LogRecord.Timestamp:               2025-12-07T16:33:39.9949876Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 2 starting
+LogRecord.Body:                    Parallel task {TaskId} starting
+LogRecord.Attributes (Key:Value):
+    TaskId: 2
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:33:39.9956036Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 3 starting
+LogRecord.Body:                    Parallel task {TaskId} starting
+LogRecord.Attributes (Key:Value):
+    TaskId: 3
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 3 starting
+info: Program[0]
+      Parallel task 4 starting
+LogRecord.Timestamp:               2025-12-07T16:33:39.9961964Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 4 starting
+LogRecord.Body:                    Parallel task {TaskId} starting
+LogRecord.Attributes (Key:Value):
+    TaskId: 4
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:33:39.9967589Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 5 starting
+LogRecord.Body:                    Parallel task {TaskId} starting
+LogRecord.Attributes (Key:Value):
+    TaskId: 5
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 5 starting
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.001ms)
+LogRecord.Timestamp:               2025-12-07T16:33:40.1007186Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.001ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.001
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:33:40.1014350Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 1 completed with length 25
+LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
+LogRecord.Attributes (Key:Value):
+info: Program[0]
+      Parallel task 1 completed with length 25
+    TaskId: 1
+    Length: 25
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0006ms)
+LogRecord.Timestamp:               2025-12-07T16:33:40.1954944Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0006ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0006
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 2 completed with length 25
+LogRecord.Timestamp:               2025-12-07T16:33:40.1964869Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 2 completed with length 25
+LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
+LogRecord.Attributes (Key:Value):
+    TaskId: 2
+    Length: 25
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Timestamp:               2025-12-07T16:33:40.3066698Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0005
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 3 completed with length 25
+LogRecord.Timestamp:               2025-12-07T16:33:40.3075044Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 3 completed with length 25
+LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
+LogRecord.Attributes (Key:Value):
+    TaskId: 3
+    Length: 25
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0004ms)
+LogRecord.Timestamp:               2025-12-07T16:33:40.4020564Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0004ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0004
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:33:40.4030116Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 4 completed with length 25
+LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
+LogRecord.Attributes (Key:Value):
+info: Program[0]
+      Parallel task 4 completed with length 25
+    TaskId: 4
+    Length: 25
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0006ms)
+LogRecord.Timestamp:               2025-12-07T16:33:40.4966878Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0006ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0006
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:33:40.4979080Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 5 completed with length 25
+LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
+LogRecord.Attributes (Key:Value):
+    TaskId: 5
+    Length: 25
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 5 completed with length 25
+LogRecord.Timestamp:               2025-12-07T16:33:40.4995813Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel results: 25, 25, 25, 25, 25
+LogRecord.Body:                    Parallel results: {Results}
+LogRecord.Attributes (Key:Value):
+    Results: 25, 25, 25, 25, 25
+    OriginalFormat (a.k.a Body): Parallel results: {Results}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:33:40.5001937Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        ========================================
+LogRecord.Body:                    ========================================
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): ========================================
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel results: 25, 25, 25, 25, 25
+info: Program[0]
+      ========================================
+info: Program[0]
+      Application completed. Check Uptrace for telemetry data.
+LogRecord.Timestamp:               2025-12-07T16:33:40.5011492Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Application completed. Check Uptrace for telemetry data.
+LogRecord.Body:                    Application completed. Check Uptrace for telemetry data.
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): Application completed. Check Uptrace for telemetry data.
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:33:40.5018536Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Telemetry files written to: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
+LogRecord.Body:                    Telemetry files written to: {Directory}
+LogRecord.Attributes (Key:Value):
+    Directory: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
+    OriginalFormat (a.k.a Body): Telemetry files written to: {Directory}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: fb95b2f9-fdb4-482f-8fb5-6c6475ead1b0
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Telemetry files written to: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
+
+Waiting for telemetry to flush...
+
+Telemetry files for this run (ID: 20251207_163338):
+Directory: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
+  - logs_20251207_163338.json (28,747 bytes)
+2025-12-07 11:33:45
+2025-12-07 11:33:45
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   docs/llm/dump.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[master 7538948] add all files
+ 1 file changed, 9 insertions(+), 8 deletions(-)
+2025-12-07 11:33:45
+On branch master
+nothing to commit, working tree clean
+2025-12-07 11:33:45
+Enumerating objects: 48, done.
+Counting objects: 100% (48/48), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (31/31), done.
+Writing objects: 100% (39/39), 10.38 KiB | 1.15 MiB/s, done.
+Total 39 (delta 18), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (18/18), completed with 5 local objects.
+To https://github.com/collabskus/HelloDotnetTen.git
+   fff9bf0..7538948  master -> master
+2025-12-07 11:33:46
+PS C:\Users\kushal\source\repos\HelloDotnetTen> Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet --info; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet clean; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet restore; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet build; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet outdated; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; .\export.ps1; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; .\publish.ps1; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet outdated; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet run; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; git add .; git commit --message "add all files"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git push origin --all; Get-Date -Format "yyyy-MM-dd HH:mm:ss";
+2025-12-07 11:46:53
+On branch master
+nothing to commit, working tree clean
+2025-12-07 11:46:53
+.NET SDK:
+ Version:           10.0.100
+ Commit:            b0f34d51fc
+ Workload version:  10.0.100-manifests.5fb86115
+ MSBuild version:   18.0.2+b0f34d51f
+
+Runtime Environment:
+ OS Name:     Windows
+ OS Version:  10.0.26100
+ OS Platform: Windows
+ RID:         win-x64
+ Base Path:   C:\Program Files\dotnet\sdk\10.0.100\
+
+.NET workloads installed:
+There are no installed workloads to display.
+Configured to use workload sets when installing new manifests.
+No workload sets are installed. Run "dotnet workload restore" to install a workload set.
+
+Host:
+  Version:      10.0.0
+  Architecture: x64
+  Commit:       b0f34d51fc
+
+.NET SDKs installed:
+  9.0.308 [C:\Program Files\dotnet\sdk]
+  10.0.100-rc.1.25451.107 [C:\Program Files\dotnet\sdk]
+  10.0.100 [C:\Program Files\dotnet\sdk]
+
+.NET runtimes installed:
+  Microsoft.AspNetCore.App 8.0.22 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 9.0.11 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 10.0.0 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 8.0.22 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 9.0.11 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.NETCore.App 10.0.0 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+  Microsoft.WindowsDesktop.App 8.0.22 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+  Microsoft.WindowsDesktop.App 9.0.11 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+  Microsoft.WindowsDesktop.App 10.0.0 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+
+Other architectures found:
+  x86   [C:\Program Files (x86)\dotnet]
+    registered at [HKLM\SOFTWARE\dotnet\Setup\InstalledVersions\x86\InstallLocation]
+
+Environment variables:
+  Not set
+
+global.json file:
+  Not found
+
+Learn more:
+  https://aka.ms/dotnet/info
+
+Download .NET:
+  https://aka.ms/dotnet/download
+2025-12-07 11:46:53
+
+Build succeeded in 1.2s
+2025-12-07 11:46:55
+Restore complete (0.8s)
+
+Build succeeded in 0.9s
+2025-12-07 11:46:56
+Restore complete (0.5s)
+  HelloDotnetTen.ClassLibrary1 net10.0 succeeded (2.0s) → HelloDotnetTen.ClassLibrary1\bin\Debug\net10.0\HelloDotnetTen.ClassLibrary1.dll
+  HelloDotnetTen.Console net10.0 succeeded (1.0s) → HelloDotnetTen.Console\bin\Debug\net10.0\HelloDotnetTen.Console.dll
+
+Build succeeded in 3.7s
+2025-12-07 11:47:00
+Discovering projects...
+Analyzing project(s)...
+Analyzing dependencies...
+No outdated dependencies were detected
+Elapsed: 00:00:03.6210443
+2025-12-07 11:47:04
+2025-12-07 11:47:04
+Starting project export...
+Project Path: .
+Output File: docs\llm\dump.txt
+Generating directory structure...
+Collecting files...
+Found 22 files to export
+Processing (1/22): :\Users\kushal\source\repos\HelloDotnetTen\.github\workflows\build-and-publish.yml
+Processing (2/22): :\Users\kushal\source\repos\HelloDotnetTen\publish\publish-manifest.json
+Processing (3/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\Directory.Build.props
+Processing (4/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\Directory.Packages.props
+Processing (5/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1.cs
+Processing (6/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1Options.cs
+Processing (7/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2.cs
+Processing (8/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2Options.cs
+Processing (9/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ClassLibrary1Settings.cs
+Processing (10/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\HelloDotnetTen.ClassLibrary1.csproj
+Processing (11/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass1.cs
+Processing (12/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass2.cs
+Processing (13/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ServiceCollectionExtensions.cs
+Processing (14/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\appsettings.json
+Processing (15/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileActivityExporter.cs
+Processing (16/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileExporterExtensions.cs
+Processing (17/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileExporterOptions.cs
+Processing (18/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileLogExporter.cs
+Processing (19/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileMetricExporter.cs
+Processing (20/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\HelloDotnetTen.Console.csproj
+Processing (21/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Program.cs
+Processing (22/22): :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.slnx
+
+Export completed successfully!
+Output file: .\docs\llm\dump.txt
+Total files exported: 22
+Output file size: 0.07 MB
+2025-12-07 11:47:04
+2025-12-07 11:47:04
+=============================================
+  Self-Contained Executable Publisher
+  (Full Runtime - No Trimming)
+=============================================
+
+Project Path: source\HelloDotnetTen
+Output Directory: publish
+Platforms: 10
+
+
+Publishing: HelloDotnetTen.Console
+= * 50
+  [1/10] win-x64... OK (36.75 MB)
+  [2/10] win-x86... OK (34.12 MB)
+  [3/10] win-arm64... OK (36.1 MB)
+  [4/10] linux-x64... OK (38.27 MB)
+  [5/10] linux-arm64... OK (36.29 MB)
+  [6/10] linux-arm... OK (33.51 MB)
+  [7/10] linux-musl-x64... OK (38.29 MB)
+  [8/10] linux-musl-arm64... OK (36.33 MB)
+  [9/10] osx-x64... OK (37.9 MB)
+  [10/10] osx-arm64... OK (35.64 MB)
+
+=============================================
+  PUBLISH SUMMARY (Full Runtime)
+=============================================
+
+Elapsed Time: 0.73 minutes
+
+Successful: 10
+Failed: 0
+
+Platform Results:
+- * 80
+  win-x64             36.75 MB    Success
+  win-x86             34.12 MB    Success
+  win-arm64           36.1 MB     Success
+  linux-x64           38.27 MB    Success
+  linux-arm64         36.29 MB    Success
+  linux-arm           33.51 MB    Success
+  linux-musl-x64      38.29 MB    Success
+  linux-musl-arm64    36.33 MB    Success
+  osx-x64             37.9 MB     Success
+  osx-arm64           35.64 MB    Success
+
+Output Location: C:\Users\kushal\source\repos\HelloDotnetTen\publish
+
+Manifest saved: publish\publish-manifest.json
+All builds completed successfully!
+2025-12-07 11:47:48
+2025-12-07 11:47:48
+Discovering projects...
+Analyzing project(s)...
+Analyzing dependencies...
+No outdated dependencies were detected
+Elapsed: 00:00:01.7329730
+2025-12-07 11:47:50
+[Telemetry] Writing to: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
+[Telemetry] Run ID: 20251207_164752
+info: Program[0]
+      Starting HelloDotnetTen Console Application
+LogRecord.Timestamp:               2025-12-07T16:47:53.2354669Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Starting HelloDotnetTen Console Application
+LogRecord.Body:                    Starting HelloDotnetTen Console Application
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): Starting HelloDotnetTen Console Application
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      ========================================
+LogRecord.Timestamp:               2025-12-07T16:47:53.2457009Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        ========================================
+LogRecord.Body:                    ========================================
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): ========================================
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      Class1 initialized successfully with InjectedProperty1: Hello from Class 1 Config (Length: 25)
+LogRecord.Timestamp:               2025-12-07T16:47:53.2563607Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Class1 initialized successfully with InjectedProperty1: Hello from Class 1 Config (Length: 25)
+LogRecord.Body:                    Class1 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
+LogRecord.Attributes (Key:Value):
+    Property: Hello from Class 1 Config
+    Length: 25
+    OriginalFormat (a.k.a Body): Class1 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class2[0]
+      Class2 initialized successfully with InjectedProperty1: Greetings from Class 2 (Length: 22)
+LogRecord.Timestamp:               2025-12-07T16:47:53.2581810Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Class2 initialized successfully with InjectedProperty1: Greetings from Class 2 (Length: 22)
+LogRecord.Body:                    Class2 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
+LogRecord.Attributes (Key:Value):
+    Property: Greetings from Class 2
+    Length: 22
+    OriginalFormat (a.k.a Body): Class2 initialized successfully with InjectedProperty1: {Property} (Length: {Length})
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      --- Scenario 1: Sequential Operations ---
+LogRecord.Timestamp:               2025-12-07T16:47:53.2588118Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        --- Scenario 1: Sequential Operations ---
+LogRecord.Body:                    --- Scenario 1: Sequential Operations ---
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): --- Scenario 1: Sequential Operations ---
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:47:53.2593540Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Sequential iteration 1
+LogRecord.Body:                    Sequential iteration {Iteration}
+LogRecord.Attributes (Key:Value):
+    Iteration: 1
+    OriginalFormat (a.k.a Body): Sequential iteration {Iteration}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Sequential iteration 1
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0013ms)
+LogRecord.Timestamp:               2025-12-07T16:47:53.2704401Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0013ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0013
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class1 length: 25
+info: HelloDotnetTen.ClassLibrary1.Class2[0]
+      InjectedProperty1 length is 22 (calculated in 0.0004ms)
+LogRecord.Timestamp:               2025-12-07T16:47:53.2727874Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 22 (calculated in 0.0004ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 22
+    DurationMs: 0.0004
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class2 length: 22
+info: Program[0]
+      Sequential iteration 2
+LogRecord.Timestamp:               2025-12-07T16:47:53.7739174Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Sequential iteration 2
+LogRecord.Body:                    Sequential iteration {Iteration}
+LogRecord.Attributes (Key:Value):
+    Iteration: 2
+    OriginalFormat (a.k.a Body): Sequential iteration {Iteration}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0004ms)
+LogRecord.Timestamp:               2025-12-07T16:47:53.7747320Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0004ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0004
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class1 length: 25
+info: HelloDotnetTen.ClassLibrary1.Class2[0]
+      InjectedProperty1 length is 22 (calculated in 0.0002ms)
+LogRecord.Timestamp:               2025-12-07T16:47:53.7753869Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 22 (calculated in 0.0002ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 22
+    DurationMs: 0.0002
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class2 length: 22
+info: Program[0]
+      Sequential iteration 3
+LogRecord.Timestamp:               2025-12-07T16:47:54.2771303Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Sequential iteration 3
+LogRecord.Body:                    Sequential iteration {Iteration}
+LogRecord.Attributes (Key:Value):
+    Iteration: 3
+    OriginalFormat (a.k.a Body): Sequential iteration {Iteration}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Timestamp:               2025-12-07T16:47:54.2780982Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0005
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class1 length: 25
+LogRecord.Timestamp:               2025-12-07T16:47:54.2789566Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class2
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 22 (calculated in 0.0003ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 22
+    DurationMs: 0.0003
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+info: HelloDotnetTen.ClassLibrary1.Class2[0]
+      InjectedProperty1 length is 22 (calculated in 0.0003ms)
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+Class2 length: 22
+info: Program[0]
+      --- Scenario 2: Parallel Operations ---
+LogRecord.Timestamp:               2025-12-07T16:47:54.7953444Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        --- Scenario 2: Parallel Operations ---
+LogRecord.Body:                    --- Scenario 2: Parallel Operations ---
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): --- Scenario 2: Parallel Operations ---
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 1 starting
+LogRecord.Timestamp:               2025-12-07T16:47:54.7979676Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 1 starting
+LogRecord.Body:                    Parallel task {TaskId} starting
+LogRecord.Attributes (Key:Value):
+    TaskId: 1
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 2 starting
+LogRecord.Timestamp:               2025-12-07T16:47:54.8005425Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 2 starting
+LogRecord.Body:                    Parallel task {TaskId} starting
+LogRecord.Attributes (Key:Value):
+    TaskId: 2
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 3 starting
+LogRecord.Timestamp:               2025-12-07T16:47:54.8013174Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 3 starting
+LogRecord.Body:                    Parallel task {TaskId} starting
+LogRecord.Attributes (Key:Value):
+    TaskId: 3
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 4 starting
+LogRecord.Timestamp:               2025-12-07T16:47:54.8020191Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 4 starting
+LogRecord.Body:                    Parallel task {TaskId} starting
+LogRecord.Attributes (Key:Value):
+    TaskId: 4
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 5 starting
+LogRecord.Timestamp:               2025-12-07T16:47:54.8026840Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 5 starting
+LogRecord.Body:                    Parallel task {TaskId} starting
+LogRecord.Attributes (Key:Value):
+    TaskId: 5
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} starting
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0008ms)
+LogRecord.Timestamp:               2025-12-07T16:47:54.9062522Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0008ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0008
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:47:54.9070096Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 1 completed with length 25
+LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
+LogRecord.Attributes (Key:Value):
+    TaskId: 1
+    Length: 25
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 1 completed with length 25
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Timestamp:               2025-12-07T16:47:55.0165295Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0005
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:47:55.0174257Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 2 completed with length 25
+LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
+LogRecord.Attributes (Key:Value):
+    TaskId: 2
+    Length: 25
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
+
+Resource associated with LogRecord:
+info: Program[0]
+      Parallel task 2 completed with length 25
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Timestamp:               2025-12-07T16:47:55.1110944Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0005
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+LogRecord.Timestamp:               2025-12-07T16:47:55.1120376Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 3 completed with length 25
+LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
+LogRecord.Attributes (Key:Value):
+    TaskId: 3
+    Length: 25
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 3 completed with length 25
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Timestamp:               2025-12-07T16:47:55.2048244Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0005
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 4 completed with length 25
+LogRecord.Timestamp:               2025-12-07T16:47:55.2056665Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 4 completed with length 25
+LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
+LogRecord.Attributes (Key:Value):
+    TaskId: 4
+    Length: 25
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: HelloDotnetTen.ClassLibrary1.Class1[0]
+      InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Timestamp:               2025-12-07T16:47:55.3143574Z
+LogRecord.CategoryName:            HelloDotnetTen.ClassLibrary1.Class1
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        InjectedProperty1 length is 25 (calculated in 0.0005ms)
+LogRecord.Body:                    InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+LogRecord.Attributes (Key:Value):
+    Length: 25
+    DurationMs: 0.0005
+    OriginalFormat (a.k.a Body): InjectedProperty1 length is {Length} (calculated in {DurationMs}ms)
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel task 5 completed with length 25
+LogRecord.Timestamp:               2025-12-07T16:47:55.3154083Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel task 5 completed with length 25
+LogRecord.Body:                    Parallel task {TaskId} completed with length {Length}
+LogRecord.Attributes (Key:Value):
+    TaskId: 5
+    Length: 25
+    OriginalFormat (a.k.a Body): Parallel task {TaskId} completed with length {Length}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Parallel results: 25, 25, 25, 25, 25
+LogRecord.Timestamp:               2025-12-07T16:47:55.3169931Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Parallel results: 25, 25, 25, 25, 25
+LogRecord.Body:                    Parallel results: {Results}
+LogRecord.Attributes (Key:Value):
+    Results: 25, 25, 25, 25, 25
+    OriginalFormat (a.k.a Body): Parallel results: {Results}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      ========================================
+LogRecord.Timestamp:               2025-12-07T16:47:55.3189551Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        ========================================
+LogRecord.Body:                    ========================================
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): ========================================
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Application completed. Check Uptrace for telemetry data.
+LogRecord.Timestamp:               2025-12-07T16:47:55.3195055Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Application completed. Check Uptrace for telemetry data.
+LogRecord.Body:                    Application completed. Check Uptrace for telemetry data.
+LogRecord.Attributes (Key:Value):
+    OriginalFormat (a.k.a Body): Application completed. Check Uptrace for telemetry data.
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+info: Program[0]
+      Telemetry files written to: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
+LogRecord.Timestamp:               2025-12-07T16:47:55.3200724Z
+LogRecord.CategoryName:            Program
+LogRecord.Severity:                Info
+LogRecord.SeverityText:            Information
+LogRecord.FormattedMessage:        Telemetry files written to: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
+LogRecord.Body:                    Telemetry files written to: {Directory}
+LogRecord.Attributes (Key:Value):
+    Directory: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
+    OriginalFormat (a.k.a Body): Telemetry files written to: {Directory}
+
+Resource associated with LogRecord:
+service.name: HelloDotnetTen.Console
+service.version: 1.0.0
+service.instance.id: c61fb778-7d2c-4970-86b5-35734d9f65af
+telemetry.sdk.name: opentelemetry
+telemetry.sdk.language: dotnet
+telemetry.sdk.version: 1.14.0
+
+
+Waiting for telemetry to flush...
+
+Telemetry files for this run (ID: 20251207_164752):
+Directory: C:\Users\kushal\AppData\Local\HelloDotnetTen\telemetry
+  - logs_20251207_164752.json (28,749 bytes)
+2025-12-07 11:48:00
+2025-12-07 11:48:00
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   docs/llm/dump.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[master c44ab2e] add all files
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+2025-12-07 11:48:00
+On branch master
+nothing to commit, working tree clean
+2025-12-07 11:48:00
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 446 bytes | 446.00 KiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+To https://github.com/collabskus/HelloDotnetTen.git
+   7538948..c44ab2e  master -> master
+2025-12-07 11:48:01
+PS C:\Users\kushal\source\repos\HelloDotnetTen> Get-Date -Format "yyyy-MM-dd HH:mm:ss";
+2025-12-07 15:23:29
 PS C:\Users\kushal\source\repos\HelloDotnetTen> Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet --info; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet clean; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet restore; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet build; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet outdated; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; .\export.ps1; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; .\publish.ps1; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet outdated; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; dotnet run; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; Set-Location "C:\Users\kushal\source\repos\HelloDotnetTen\"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; git add .; git commit --message "add all files"; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git status; Get-Date -Format "yyyy-MM-dd HH:mm:ss"; git push origin --all; Get-Date -Format "yyyy-MM-dd HH:mm:ss";
