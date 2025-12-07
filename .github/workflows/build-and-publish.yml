@@ -123,4 +123,3 @@ jobs:
           name: publish-manifest
           path: publish/publish-manifest.json
           if-no-files-found: warn
-          
