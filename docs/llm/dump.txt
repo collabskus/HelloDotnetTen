@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/08/2025 11:12:13
+Generated: 12/08/2025 11:23:50
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -595,12 +595,12 @@ MODIFIED: 12/05/2025 18:00:49
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\publish-manifest.json
 SIZE: 4.64 KB
-MODIFIED: 12/08/2025 09:54:43
+MODIFIED: 12/08/2025 11:13:00
 ================================================================================
 
 {
     "Configuration":  "Full Runtime (No Trimming)",
-    "GeneratedAt":  "2025-12-08T09:54:43.9884358-05:00",
+    "GeneratedAt":  "2025-12-08T11:12:59.9834928-05:00",
     "Results":  [
                     {
                         "Size":  "36.75 MB",
@@ -683,7 +683,7 @@ MODIFIED: 12/08/2025 09:54:43
                         "Project":  "HelloDotnetTen.Console"
                     }
                 ],
-    "ElapsedSeconds":  49.97
+    "ElapsedSeconds":  45.51
 }
 
 
@@ -1026,25 +1026,17 @@ public sealed class ClassLibrary1Settings
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\HelloDotnetTen.ClassLibrary1.csproj
-SIZE: 0.53 KB
-MODIFIED: 12/05/2025 16:23:45
+SIZE: 0.36 KB
+MODIFIED: 12/08/2025 11:23:02
 ================================================================================
 
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Options" />
   </ItemGroup>
-
 </Project>
 
 
@@ -2080,17 +2072,14 @@ public class FileMetricExporter : BaseExporter<Metric>
 
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\HelloDotnetTen.Console.csproj
-SIZE: 0.98 KB
-MODIFIED: 12/05/2025 18:03:25
+SIZE: 0.86 KB
+MODIFIED: 12/08/2025 11:22:42
 ================================================================================
 
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -2296,7 +2285,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/08/2025 11:12:14
+EXPORT COMPLETED: 12/08/2025 11:23:51
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
