@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/08/2025 11:23:50
+Generated: 12/08/2025 16:02:09
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -595,12 +595,12 @@ MODIFIED: 12/05/2025 18:00:49
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\publish-manifest.json
 SIZE: 4.64 KB
-MODIFIED: 12/08/2025 11:13:00
+MODIFIED: 12/08/2025 11:24:37
 ================================================================================
 
 {
     "Configuration":  "Full Runtime (No Trimming)",
-    "GeneratedAt":  "2025-12-08T11:12:59.9834928-05:00",
+    "GeneratedAt":  "2025-12-08T11:24:37.3444014-05:00",
     "Results":  [
                     {
                         "Size":  "36.75 MB",
@@ -683,7 +683,7 @@ MODIFIED: 12/08/2025 11:13:00
                         "Project":  "HelloDotnetTen.Console"
                     }
                 ],
-    "ElapsedSeconds":  45.51
+    "ElapsedSeconds":  45.7
 }
 
 
@@ -776,7 +776,7 @@ MODIFIED: 12/05/2025 16:06:38
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1.cs
 SIZE: 3.65 KB
-MODIFIED: 12/06/2025 15:25:27
+MODIFIED: 12/08/2025 11:47:40
 ================================================================================
 
 using System.Diagnostics;
@@ -877,7 +877,7 @@ public class Class1 : IClass1
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class1Options.cs
 SIZE: 0.3 KB
-MODIFIED: 12/05/2025 15:52:28
+MODIFIED: 12/08/2025 11:47:40
 ================================================================================
 
 namespace HelloDotnetTen.ClassLibrary1;
@@ -895,7 +895,7 @@ public class Class1Options
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2.cs
 SIZE: 3.65 KB
-MODIFIED: 12/06/2025 15:25:38
+MODIFIED: 12/08/2025 11:47:40
 ================================================================================
 
 using System.Diagnostics;
@@ -996,7 +996,7 @@ public class Class2 : IClass2
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\Class2Options.cs
 SIZE: 0.18 KB
-MODIFIED: 12/05/2025 15:52:45
+MODIFIED: 12/08/2025 11:47:40
 ================================================================================
 
 namespace HelloDotnetTen.ClassLibrary1;
@@ -1012,7 +1012,7 @@ public class Class2Options
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ClassLibrary1Settings.cs
 SIZE: 0.15 KB
-MODIFIED: 12/05/2025 15:26:51
+MODIFIED: 12/08/2025 11:47:40
 ================================================================================
 
 namespace HelloDotnetTen.ClassLibrary1;
@@ -1044,7 +1044,7 @@ MODIFIED: 12/08/2025 11:23:02
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass1.cs
 SIZE: 0.12 KB
-MODIFIED: 12/05/2025 15:51:47
+MODIFIED: 12/08/2025 11:47:40
 ================================================================================
 
 namespace HelloDotnetTen.ClassLibrary1;
@@ -1059,7 +1059,7 @@ public interface IClass1
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\IClass2.cs
 SIZE: 0.12 KB
-MODIFIED: 12/05/2025 15:52:09
+MODIFIED: 12/08/2025 11:47:40
 ================================================================================
 
 namespace HelloDotnetTen.ClassLibrary1;
@@ -1074,7 +1074,7 @@ public interface IClass2
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.ClassLibrary1\ServiceCollectionExtensions.cs
 SIZE: 1.11 KB
-MODIFIED: 12/05/2025 16:12:37
+MODIFIED: 12/08/2025 11:47:40
 ================================================================================
 
 using Microsoft.Extensions.Configuration;
@@ -1132,7 +1132,7 @@ MODIFIED: 12/05/2025 18:00:49
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileActivityExporter.cs
 SIZE: 6.58 KB
-MODIFIED: 12/07/2025 10:34:42
+MODIFIED: 12/08/2025 11:31:40
 ================================================================================
 
 using System.Diagnostics;
@@ -1351,7 +1351,7 @@ public class FileActivityExporter : BaseExporter<Activity>
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileExporterExtensions.cs
 SIZE: 3.45 KB
-MODIFIED: 12/07/2025 10:34:16
+MODIFIED: 12/08/2025 11:31:40
 ================================================================================
 
 using OpenTelemetry;
@@ -1463,7 +1463,7 @@ public static class FileExporterExtensions
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileExporterOptions.cs
 SIZE: 3.24 KB
-MODIFIED: 12/07/2025 10:35:32
+MODIFIED: 12/08/2025 11:31:40
 ================================================================================
 
 namespace HelloDotnetTen.Console.Exporters;
@@ -1564,7 +1564,7 @@ public class FileExporterOptions
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileLogExporter.cs
 SIZE: 7.13 KB
-MODIFIED: 12/07/2025 10:35:15
+MODIFIED: 12/08/2025 11:31:40
 ================================================================================
 
 using System.Text;
@@ -1800,7 +1800,7 @@ public class FileLogExporter : BaseExporter<LogRecord>
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\source\HelloDotnetTen\HelloDotnetTen.Console\Exporters\FileMetricExporter.cs
 SIZE: 8.26 KB
-MODIFIED: 12/07/2025 10:34:57
+MODIFIED: 12/08/2025 11:31:40
 ================================================================================
 
 using System.Text;
@@ -2285,7 +2285,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/08/2025 11:23:51
+EXPORT COMPLETED: 12/08/2025 16:02:10
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
