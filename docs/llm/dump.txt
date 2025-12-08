@@ -1,7 +1,7 @@
 ﻿
 ===============================================================================
 PROJECT EXPORT
-Generated: 12/08/2025 08:41:47
+Generated: 12/08/2025 08:57:11
 Project Path: C:\Users\kushal\source\repos\HelloDotnetTen
 ===============================================================================
 
@@ -22,6 +22,7 @@ C:\USERS\KUSHAL\SOURCE\REPOS\HELLODOTNETTEN
 |           
 +---docs
 |   \---llm
+|           chatgpt.md
 |           claude.txt
 |           dump.txt
 |           gemini.txt
@@ -594,12 +595,12 @@ MODIFIED: 12/05/2025 18:00:49
 ================================================================================
 FILE: :\Users\kushal\source\repos\HelloDotnetTen\publish\publish-manifest.json
 SIZE: 4.64 KB
-MODIFIED: 12/07/2025 18:52:33
+MODIFIED: 12/08/2025 08:42:37
 ================================================================================
 
 {
     "Configuration":  "Full Runtime (No Trimming)",
-    "GeneratedAt":  "2025-12-07T18:52:33.9042254-05:00",
+    "GeneratedAt":  "2025-12-08T08:42:37.6945535-05:00",
     "Results":  [
                     {
                         "Size":  "36.75 MB",
@@ -682,7 +683,7 @@ MODIFIED: 12/07/2025 18:52:33
                         "Project":  "HelloDotnetTen.Console"
                     }
                 ],
-    "ElapsedSeconds":  44.49
+    "ElapsedSeconds":  49.15
 }
 
 
@@ -2295,7 +2296,7 @@ MODIFIED: 12/05/2025 15:22:18
 
 
 ===============================================================================
-EXPORT COMPLETED: 12/08/2025 08:41:48
+EXPORT COMPLETED: 12/08/2025 08:57:12
 Total Files Exported: 32
 Output File: .\docs\llm\dump.txt
 ===============================================================================
